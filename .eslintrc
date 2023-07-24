@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": "airbnb-base",
+  "rules": {
+    "linebreak-style": "off"
+  },
+  "ignorePatterns": [
+    "dist",
+    "webpack.config.js"
+  ]
+}

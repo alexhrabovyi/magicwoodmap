@@ -1,0 +1,40 @@
+{
+  "plugins": [
+    "stylelint-color-format",
+    "stylelint-declaration-block-no-ignored-properties",
+    "stylelint-order"
+  ],
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-idiomatic-order"
+  ],
+  "rules": {
+    "color-format/format": {
+      "format": "rgb"
+    },
+    "plugin/declaration-block-no-ignored-properties": true,
+    "order/order": [
+      "declarations",
+      {
+        "type": "at-rule",
+        "name": "media"
+      },
+      {
+        "type": "rule",
+        "selector": "^&::(before|after)"
+      },
+      {
+        "type": "rule",
+        "selector": "^&:\\w"
+      },
+      {
+        "type": "rule",
+        "selector": "^&_"
+      },
+      {
+        "type": "rule",
+        "selector": "^."
+      }
+    ]
+  }
+}
