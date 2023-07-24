@@ -1,0 +1,22 @@
+.section-name {
+  position: relative;
+  padding-left: 45px;
+  color: $orange;
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: block;
+    width: 33px;
+    height: 2px;
+    background-color: $orange;
+    content: "";
+    transform: translateY(-50%);
+  }
+}
