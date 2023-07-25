@@ -5,7 +5,8 @@
   },
   "extends": "airbnb-base",
   "rules": {
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "import/extensions": "always"
   },
   "ignorePatterns": [
     "dist",

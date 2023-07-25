@@ -1,0 +1,76 @@
+.header {
+  display: flex;
+  height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(31 31 31);
+
+  &__links-block {
+    display: flex;
+    width: 244px;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-left: 85px;
+  }
+
+  &__link {
+    color: $white;
+    text-decoration: none;
+    transition: all .05s ease-in-out;
+
+    &:hover, &:focus {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      color: $white-active;
+    }
+  }
+
+  &__tel-block {
+    position: relative;
+    border: none;
+    background: none;
+  }
+
+  &__tel {
+    color: $white;
+    font-family: Geometria, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.48px;
+    line-height: normal;
+    transition: all .05s ease-in-out;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $white-active;
+    }
+  }
+
+  &__text {
+    color: rgb(132 132 132);
+    font-family: Geometria, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.28px;
+    line-height: normal;
+    text-align: end;
+    transition: all .3s ease-in-out;
+
+    &_hidden {
+      opacity: 0;
+    }
+
+    &_pos-absolute {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
