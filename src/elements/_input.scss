@@ -1,0 +1,49 @@
+.input {
+  padding-right: 24px;
+  padding-left: 24px;
+  border-color: transparent;
+  border-radius: 3px;
+  background: rgb(239 239 239);
+  color: rgb(188 188 188);
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1.68px;
+  line-height: normal;
+  transition: all .05s ease-in-out;
+
+  &:hover, &:focus {
+    background-color: rgb(219 219 219);
+    color: rgb(108 108 108);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: rgb(188 188 188);
+  }
+
+  /* stylelint-disable-next-line order/order */
+  &:focus::placeholder {
+    color: transparent;
+  }
+
+  &_white {
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    background: $white;
+
+    &:hover, &:focus {
+      background-color: rgb(250 250 250);
+    }
+  }
+
+  &_invalid {
+    background-color: $invalid;
+
+    &:hover, &:focus {
+      background-color: $invalid-active;
+    }
+  }
+}

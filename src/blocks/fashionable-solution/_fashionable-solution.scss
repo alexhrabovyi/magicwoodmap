@@ -1,0 +1,46 @@
+.fashionable-solution {
+  display: grid;
+  justify-content: center;
+  background: linear-gradient(47deg, rgb(111 58 27 / 7%) 0%, rgb(255 255 255 / 0%) 100%);
+  gap: 45px;
+  grid-template-columns: repeat(2, auto);
+
+  &__content {
+    width: 627px;
+    padding-top: 94px;
+  }
+
+  &__section-name {
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    margin-bottom: 50px;
+  }
+
+  &__light-text_bigger {
+    margin-bottom: 50px;
+  }
+
+  &__input-wrapper {
+    position: relative;
+    width: 600px;
+    height: 60px;
+  }
+
+  &__input_white {
+    width: 100%;
+    height: 100%;
+    padding-right: 173px;
+  }
+
+  &__button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 153px;
+    height: 60px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
