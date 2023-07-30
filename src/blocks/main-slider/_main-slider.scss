@@ -1,0 +1,90 @@
+.main-slider {
+  width: 100%;
+  padding-top: 81px;
+  padding-bottom: 206px;
+  background: linear-gradient(47deg, rgb(111 58 27 / 7%) 0%, rgb(255 255 255 / 0%) 100%);
+
+  &__slide_1 {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: auto auto;
+  }
+
+  &__text-content-block {
+    width: 650px;
+  }
+
+  &__title_60-px {
+    margin-bottom: 10px;
+  }
+
+  &__text_20-px {
+    margin-bottom: 75px;
+  }
+
+  &__button_transparent {
+    display: flex;
+    width: 197px;
+    height: 61px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    margin-left: 13px;
+  }
+
+  &__img {
+    width: 703px;
+  }
+
+  &__pagination-block {
+    display: flex;
+    width: 145px;
+    justify-content: space-between;
+    padding-left: 13px;
+    margin-top: 33px;
+  }
+
+  &__pagination-button {
+    position: relative;
+    width: 13px;
+    height: 13px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(190 190 190);
+    cursor: pointer;
+    transition: all .05s ease-in-out;
+
+    &::before {
+      position: absolute;
+      top: -13.5px;
+      left: -13.5px;
+      display: block;
+      width: 40px;
+      height: 40px;
+      border: 1px solid $orange;
+      border-radius: 50%;
+      content: "";
+      opacity: 0;
+      transition: all .3s ease-in-out;
+    }
+
+    &:hover, &:focus {
+      background-color: $orange;
+      outline: none;
+    }
+
+    &:active {
+      background-color: $orange-active;
+    }
+
+    &_active {
+      background-color: $orange;
+
+      &::before {
+        opacity: 1;
+      }
+      }
+  }
+}

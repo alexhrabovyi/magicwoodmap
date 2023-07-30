@@ -5,4 +5,10 @@
   font-style: normal;
   font-weight: 600;
   line-height: 136%;
+
+  &_60-px {
+    font-size: 60px;
+    letter-spacing: -1.2px;
+    line-height: 145%;
+  }
 }

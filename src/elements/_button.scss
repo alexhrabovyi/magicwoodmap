@@ -3,6 +3,7 @@
   border-radius: 10px;
   background-color: $orange;
   color: $white;
+  cursor: pointer;
   font-family: Poppins, sans-serif;
   font-size: 24px;
   font-style: normal;
@@ -22,5 +23,23 @@
     border-color: $orange-active;
     background-color: $white-active;
     color: $orange-active;
+  }
+
+  &_transparent {
+    border: 1px solid $orange;
+    border-radius: 7px;
+    background-color: transparent;
+    color: $orange;
+
+    &:hover, &:focus {
+      background-color: $orange;
+      color: $white;
+    }
+
+    &:active {
+      border-color: $orange-active;
+      background-color: $orange-active;
+      color: $white-active;
+    }
   }
 }
