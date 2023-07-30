@@ -140,6 +140,7 @@ export default class Slider {
       };
 
       const currentTranslateValue = calcCurrentTranslate();
+      this.wrapper.style.cursor = 'grab';
       this.wrapper.style.transform = `translateX(${currentTranslateValue}px)`;
       this.wrapper.style.transition = 'none';
 
@@ -169,6 +170,7 @@ export default class Slider {
         document.removeEventListener('mousemove', mouseMove);
 
         this.wrapper.style.transition = this.transition;
+        this.wrapper.style.cursor = '';
 
         let endX = e.clientX;
         const diff = endX - startX;

@@ -1,0 +1,100 @@
+.categories {
+  display: grid;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  gap: 61px 37px;
+  grid-template-columns: 1fr 606px 1fr;
+  grid-template-rows: repeat(2, 394px);
+
+  &__link-button {
+    position: relative;
+    border-radius: 11px;
+    background-position: center center;
+    background-size: cover;
+    color: $white;
+    font-family: Poppins, sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+
+    &::before {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: end;
+      justify-content: center;
+      padding-bottom: 41px;
+      border-radius: 11px;
+      background: rgb(0 0 0 / 56%);
+      content: "";
+      transition: .3s all ease-in-out;
+    }
+
+    &:hover::before {
+      height: 70px;
+      align-items: center;
+      padding-bottom: 0;
+    }
+
+    &_1 {
+      background-image: url('images/map_1.png');
+
+      &::before {
+        content: "Одношарові мапи →";
+      }
+    }
+
+    &_2 {
+      display: flex;
+      align-items: center;
+      color: $black;
+      font-size: 40px;
+      font-weight: 500;
+      pointer-events: none;
+      text-align: center;
+      
+
+      &::before {
+        background: none;
+      }
+    }
+
+    &_3 {
+      background-image: url('images/map_2.png');
+
+      &::before {
+        content: "Додатки до мап →";
+      }
+    }
+
+    &_4 {
+      background-image: url('images/map_3.png');
+
+      &::before {
+        content: "Багатошарові мапи →";
+      }
+    }
+
+    &_5 {
+      background-image: url('images/map_4.png');
+
+      &::before {
+        content: "Мапи з підсвічуванням →";
+      }
+    }
+
+    &_6 {
+      background-image: url('images/map_1.png');
+
+      &::before {
+        content:  "Додаткова категорія →";
+      }
+    }
+  }
+
+  &__red-word {
+    color: $orange;
+  }
+}
