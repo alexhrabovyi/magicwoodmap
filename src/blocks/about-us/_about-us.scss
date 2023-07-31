@@ -1,0 +1,19 @@
+.about-us {
+  padding-top: 150px;
+  padding-bottom: 150px;
+
+  &__title {
+    margin-bottom: 50px;
+  }
+
+  &__content {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 481px 720px;
+  }
+
+  &__iframe-video {
+    width: 720px;
+    height: 450px;
+  }
+}
