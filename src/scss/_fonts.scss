@@ -316,25 +316,28 @@
 
 // Icons 
 
-$icomoon-font-family: "icons" !default;
+$icomoon-font-family: "Icons" !default;
 $icomoon-font-path: "../assets/fonts/Icons" !default;
-$icon-account: "\e900";
-$icon-arrow-down: "\e901";
-$icon-arrow-right: "\e902";
-$icon-bag: "\e903";
-$icon-blogger: "\e904";
-$icon-calendar: "\e905";
-$icon-check: "\e906";
-$icon-chevron-left: "\e907";
-$icon-facebook: "\e908";
-$icon-instagram: "\e909";
-$icon-like: "\e90a";
-$icon-linkedin: "\e90b";
-$icon-loupe: "\e90c";
-$icon-mark: "\e90d";
-$icon-pen: "\e90e";
-$icon-star: "\e90f";
-$icon-twitter: "\e910";
+$icon-star: "\e900";
+$icon-star-filled: "\e901";
+$icon-account: "\e902";
+$icon-arrow-down: "\e903";
+$icon-arrow-right: "\e904";
+$icon-bag: "\e905";
+$icon-blogger: "\e906";
+$icon-calendar: "\e907";
+$icon-check: "\e908";
+$icon-chevron-left: "\e909";
+$icon-chevron-right: "\e90a";
+$icon-facebook: "\e90b";
+$icon-instagram: "\e90c";
+$icon-like: "\e90d";
+$icon-linkedin: "\e90e";
+$icon-loupe: "\e90f";
+$icon-mark: "\e910";
+$icon-pen: "\e911";
+$icon-twitter: "\e912";
+
 
 
 @font-face {
@@ -342,11 +345,11 @@ $icon-twitter: "\e910";
   font-family: '#{$icomoon-font-family}';
   font-style: normal;
   font-weight: normal;
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?6e5t9y');
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?6e5t9y#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?6e5t9y') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?6e5t9y') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?6e5t9y##{$icomoon-font-family}') format('svg');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t1dwtt');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t1dwtt#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?t1dwtt') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?t1dwtt') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?t1dwtt##{$icomoon-font-family}') format('svg');
 }
 
 i {
@@ -364,6 +367,18 @@ i {
   text-transform: none;
 }
 
+.icon-star {
+  &::before {
+    content: $icon-star; 
+  }
+}
+
+.icon-star-filled {
+  &::before {
+    content: $icon-star_filled; 
+  }
+}
+
 .icon-account {
   &::before {
     content: $icon-account; 
@@ -372,13 +387,13 @@ i {
 
 .icon-arrow-down {
   &::before {
-    content: $icon-arrow-down; 
+    content: $icon-arrow_down; 
   }
 }
 
 .icon-arrow-right {
   &::before {
-    content: $icon-arrow-right; 
+    content: $icon-arrow_right; 
   }
 }
 
@@ -408,7 +423,13 @@ i {
 
 .icon-chevron-left {
   &::before {
-    content: $icon-chevron-left; 
+    content: $icon-chevron_left; 
+  }
+}
+
+.icon-chevron-right {
+  &::before {
+    content: $icon-chevron_right; 
   }
 }
 
@@ -451,12 +472,6 @@ i {
 .icon-pen {
   &::before {
     content: $icon-pen; 
-  }
-}
-
-.icon-star {
-  &::before {
-    content: $icon-star; 
   }
 }
 

@@ -44,7 +44,7 @@ module.exports = (env) => {
   const isProd = env.production;
 
   const jsFilename = isProd ? "[name].[fullhash].bundle.js" : "[name].bundle.js";
-  const assetsFilename = isProd ? "[hash][ext][query]" : "[name][ext]";
+  const assetsFilename = "[hash][ext][query]";
 
   const mode = isProd ? "production" : "development";
 

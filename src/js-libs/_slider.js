@@ -3,14 +3,23 @@
 //   wrapperSelector: '.main-slider__slider-wrapper',
 //   slidesSelector: '.main-slider__slide',
 //   activeSlideId: 0,
+//   slidesPerView: 1,
 //   gap: 20,
 //   transitionDuration: 0.7;
-//   paginationBlockSelector: '.main-slider__pagination-block',
-//   paginationButtonClass: 'main-slider__pagination-button',
-//   paginationButtonActiveClass: 'main-slider__pagination-button_active',
 //   autoTranslateTime: 5000,
-//   buttonPrevSelector: '#prev',
-//   buttonNextSelector: '#next',
+//   pagination: {
+//    paginationBlockSelector: '.main-slider__pagination-block',
+//    paginationButtonClass: 'main-slider__pagination-button',
+//    paginationButtonActiveClass: 'main-slider__pagination-button_active',
+//   }
+//   buttons: {
+//    buttonPrevSelector: '#prev',
+//    buttonNextSelector: '#next',
+//   }
+//  counter: {
+//    currentNumSelector: '.reviews__current-slide-number',
+//    totalNumSelector: '.reviews__total-slide-number',
+//  }
 // }
 
 export default class Slider {
@@ -19,20 +28,22 @@ export default class Slider {
     this.wrapper = document.querySelector(options.wrapperSelector);
     this.slides = document.querySelectorAll(options.slidesSelector);
     this.activeSlideId = options.activeSlideId || 0;
+    this.slidesPerView = options.slidesPerView || 1;
     this.gap = options.gap || 0;
     this.transition = `${options.transitionDuration || 0.7}s all linear`;
     this.autoTranslateTime = options.autoTranslateTime || 0;
 
     this.setup();
 
-    if (options.paginationBlockSelector) this.setupPagination(options);
+    if (options.pagination) this.setupPagination(options);
     if (this.autoTranslateTime) this.setupAutoTranslate();
-    if (options.buttonPrevSelector) this.setupPrevNextButtons(options);
+    if (options.buttons) this.setupPrevNextButtons(options);
+    if (options.counter) this.setupCounter(options);
   }
 
   setup() {
     this.wrapper.style.display = 'grid';
-    this.wrapper.style.gridTemplateColumns = `repeat(${this.slides.length}, 100%)`;
+    this.wrapper.style.gridTemplateColumns = `repeat(${this.slides.length}, ${100 / this.slidesPerView}%)`;
     this.wrapper.style.gap = `${this.gap}px`;
     this.wrapper.style.transition = this.transition;
 
@@ -49,9 +60,9 @@ export default class Slider {
   }
 
   setupPagination(options) {
-    this.paginationBlock = document.querySelector(options.paginationBlockSelector);
-    this.paginationButtonClass = options.paginationButtonClass;
-    this.paginationButtonActiveClass = options.paginationButtonActiveClass;
+    this.paginationBlock = document.querySelector(options.pagination.paginationBlockSelector);
+    this.paginationButtonClass = options.pagination.paginationButtonClass;
+    this.paginationButtonActiveClass = options.pagination.paginationButtonActiveClass;
 
     const paginationsButtons = new DocumentFragment();
 
@@ -77,9 +88,7 @@ export default class Slider {
     const newActiveSlideId = +button.dataset.slideId;
     if (newActiveSlideId === this.activeSlideId) return;
 
-    this.togglePaginationButtons(this.activeSlideId, newActiveSlideId);
-    this.activeSlideId = newActiveSlideId;
-    this.translateSlides();
+    this.translateAndToggle(this.activeSlideId, newActiveSlideId);
   }
 
   togglePaginationButtons(oldId, newId) {
@@ -102,8 +111,8 @@ export default class Slider {
   }
 
   setupPrevNextButtons(options) {
-    const prevButton = document.querySelector(`${options.buttonPrevSelector}`);
-    const nextButton = document.querySelector(`${options.buttonNextSelector}`);
+    const prevButton = document.querySelector(`${options.buttons.buttonPrevSelector}`);
+    const nextButton = document.querySelector(`${options.buttons.buttonNextSelector}`);
 
     prevButton.setAttribute('data-button-type', 'prev');
     nextButton.setAttribute('data-button-type', 'next');
@@ -120,6 +129,14 @@ export default class Slider {
 
     prevButton.addEventListener('click', onClick);
     nextButton.addEventListener('click', onClick);
+  }
+
+  setupCounter(options) {
+    this.currentNum = document.querySelector(options.counter.currentNumSelector);
+    this.totalNum = document.querySelector(options.counter.totalNumSelector);
+
+    this.currentNum.innerHTML = this.formatNum(this.activeSlideId + 1);
+    this.totalNum.innerHTML = this.formatNum(this.slides.length);
   }
 
   setupDragNDrop() {
@@ -154,7 +171,10 @@ export default class Slider {
         let diff = currentX - startX;
 
         if ((Math.abs(currentTranslateValue + diff) > lastSlideTranslateValue)
-          || currentTranslateValue + diff > 0) {
+          || (currentTranslateValue + diff > 0)
+          || (this.slidesPerView > 1
+            && Math.abs(currentTranslateValue + diff)
+            > lastSlideTranslateValue - this.slideWidth / 2)) {
           diff = (diff - prevDiff) / 4 + prevDiff;
           this.wrapper.style.transform = `translateX(${currentTranslateValue + diff}px)`;
 
@@ -185,9 +205,11 @@ export default class Slider {
           if (endX < containerXCoord) endX = containerXCoord + 1;
           if (endX > containerRightCoord) endX = containerRightCoord - 1;
 
-          const slideUnderCursorId = +document.elementFromPoint(endX, containerYCoord + 1)
-            .closest('[data-slide-id]').dataset.slideId;
+          const slideUnderCursor = +document.elementFromPoint(endX, containerYCoord + 1).closest('[data-slide-id]');
 
+          if (!slideUnderCursor) return this.activeSlideId;
+
+          const slideUnderCursorId = slideUnderCursor.dataset.slideId;
           return slideUnderCursorId;
         };
 
@@ -236,15 +258,32 @@ export default class Slider {
   }
 
   translateSlides() {
-    const width = this.activeSlideId * this.slideWidth + this.gap * this.activeSlideId;
+    let width = this.activeSlideId * this.slideWidth + this.gap * this.activeSlideId;
+
+    if (this.activeSlideId === this.slides.length - 1 && this.slidesPerView > 1) {
+      width -= this.slideWidth / 2;
+    }
+
     this.wrapper.style.transform = `translateX(-${width}px)`;
   }
 
   translateAndToggle(oldId, newId) {
-    this.paginationBlock.querySelector(`[data-slide-id='${oldId}']`).blur();
-    this.togglePaginationButtons(oldId, newId);
+    if (this.paginationBlock) {
+      this.paginationBlock.querySelector(`[data-slide-id='${oldId}']`).blur();
+      this.togglePaginationButtons(oldId, newId);
+    }
+
+    if (this.currentNum) {
+      this.currentNum.innerHTML = this.formatNum(newId + 1);
+    }
 
     this.activeSlideId = newId;
     this.translateSlides();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  formatNum(num) {
+    const result = num < 10 ? `0${num}` : num;
+    return result;
   }
 }
