@@ -18,29 +18,6 @@
 
 // flex mixins
 
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-}
-
-@mixin  flex-center-center {
-  @include flex-center;
-
-  align-items: center;
-}
-
-@mixin flex-column-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@mixin flex-column-center-center {
-  @include flex-center-center;
-
-  flex-direction: column;
-}
-
 @mixin flex-builder($direction, $justify, $align) {
   display: flex;
   flex-direction: $direction;

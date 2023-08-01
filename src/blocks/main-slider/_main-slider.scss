@@ -14,20 +14,23 @@
     width: 650px;
   }
 
-  &__title_60-px {
+  &__title {
     margin-bottom: 10px;
+    letter-spacing: -1.2px;
+    line-height: 145%;
   }
 
-  &__text_20-px {
+  &__text {
     margin-bottom: 75px;
+    letter-spacing: 0.2px;
+    line-height: 150%;
   }
 
   &__button_transparent {
-    display: flex;
+    @include flex-builder(row, center, center);
+
     width: 197px;
     height: 61px;
-    align-items: center;
-    justify-content: center;
   }
 
   &__icon {
@@ -39,9 +42,9 @@
   }
 
   &__pagination-block {
-    display: flex;
+    @include flex-builder(row, space-between, none);
+
     width: 145px;
-    justify-content: space-between;
     padding-left: 13px;
     margin-top: 33px;
   }
@@ -63,7 +66,7 @@
       display: block;
       width: 40px;
       height: 40px;
-      border: 1px solid $orange;
+      border: 1px solid rgb(237 85 59);
       border-radius: 50%;
       content: "";
       opacity: 0;
@@ -71,16 +74,16 @@
     }
 
     &:hover, &:focus {
-      background-color: $orange;
+      background-color: rgb(237 85 59);
       outline: none;
     }
 
     &:active {
-      background-color: $orange-active;
+      background-color: rgb(217 65 39);
     }
 
     &_active {
-      background-color: $orange;
+      background-color: rgb(237 85 59);
 
       &::before {
         opacity: 1;

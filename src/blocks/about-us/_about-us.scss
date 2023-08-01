@@ -4,12 +4,17 @@
 
   &__title {
     margin-bottom: 50px;
+    line-height: 170%;
   }
 
   &__content {
     display: grid;
     justify-content: space-between;
     grid-template-columns: 481px 720px;
+  }
+
+  &__text {
+    line-height: 180%;
   }
 
   &__iframe-video {

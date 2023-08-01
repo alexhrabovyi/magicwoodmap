@@ -1,29 +1,28 @@
 .header {
-  display: flex;
+  @include flex-builder(row, space-between, center);
+
   height: 70px;
-  align-items: center;
-  justify-content: space-between;
   background-color: rgb(31 31 31);
 
   &__links-block {
-    display: flex;
+    @include flex-builder(row, space-between, flex-start);
+
     width: 244px;
-    align-items: flex-start;
-    justify-content: space-between;
     margin-left: 85px;
   }
 
   &__link {
-    color: $white;
+    color: rgb(255 255 255);
     text-decoration: none;
     transition: all .05s ease-in-out;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       transform: scale(1.1);
     }
 
     &:active {
-      color: $white-active;
+      color: rgb(221 221 221);
     }
   }
 
@@ -35,7 +34,7 @@
   }
 
   &__tel {
-    color: $white;
+    color: rgb(255 255 255);
     font-family: Geometria, sans-serif;
     font-size: 24px;
     font-style: normal;
@@ -44,12 +43,13 @@
     line-height: normal;
     transition: all .05s ease-in-out;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: underline;
     }
 
     &:active {
-      color: $white-active;
+      color: rgb(221 221 221);
     }
   }
 

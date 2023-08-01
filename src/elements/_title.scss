@@ -1,29 +1,55 @@
 .title {
-  color: $black;
+  color: rgb(0 0 0 / 100%);
   font-family: Poppins, sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 600;
-  line-height: 136%;
 
-  &_60-px {
-    font-size: 60px;
-    letter-spacing: -1.2px;
-    line-height: 145%;
+  &_ff-inter {
+    font-family: Inter, sans-serif;
+  }
+
+  &_ff-montserrat {
+    font-family: Montserrat, sans-serif;
+  }
+
+  &_16-px {
+    font-size: 16px;
+  }
+
+  &_22-px {
+    font-size: 22px;
+  }
+
+  &_23-px {
+    font-size: 23px;
+  }
+
+  &_28-px {
+    font-size: 28px;
+  }
+
+  &_30-px {
+    font-size: 30px;
   }
 
   &_32-px {
     font-size: 32px;
   }
 
-  &_30-px {
-    font-size: 30px;
-    line-height: 170%;
+  &_60-px {
+    font-size: 60px;
   }
 
-  &_23-px {
-    font-size: 23px;
-    letter-spacing: 0.23px;
-    line-height: 177.9%;
+  &_fw-500 {
+    font-weight: 500;
+  }
+
+  &_c-black {
+    color: rgb(31 31 31 / 100%);
+  }
+
+  &_c-black-1 {
+    color: rgb(17 17 17 / 100%);
   }
 }

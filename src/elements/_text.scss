@@ -1,29 +1,81 @@
 .text {
-  color: $dark-grey;
   font-family: Montserrat, sans-serif;
-  font-size: 24px;
-  font-style: normal;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 180%;
 
-  &_20-px {
-    color: rgb(143 143 143);
-    font-size: 20px; 
-    letter-spacing: 0.2px;
-    line-height: 150%;
+  &_ff-poppins {
+    font-family: Poppins, sans-serif;
+  }
+
+  &_ff-inter {
+    font-family: Inter, sans-serif;
+  }
+
+  &_14-px {
+    font-size: 14px;
   }
 
   &_18-px {
-    color: rgb(88 88 88 / 70%);
     font-size: 18px;
-    font-weight: 500;
-    line-height: 32px;
   }
 
-  &_16-px {
-    color: $light-grey;
-    font-size: 16px;
+  &_20-px {
+    font-size: 20px;
+  }
+
+  &_24-px {
+    font-size: 24px;
+  }
+
+  &_fw-500 {
     font-weight: 500;
-    line-height: 25.6px;
+  }
+
+  &_fw-600 {
+    font-weight: 600;
+  }
+
+  &_c-orange {
+    color: rgb(237 85 59 / 100%);
+  }
+
+  &_c-black {
+    color: rgb(0 0 0 / 100%);
+  }
+
+  &_c-grey {
+    color: rgb(143 143 143 / 100%);
+  }
+
+  &_c-grey-1 {
+    color: rgb(26 11 91 / 30%);
+  }
+
+  &_c-grey-2 {
+    color: rgb(88 88 88);
+  }
+
+  &_c-grey-3 {
+    color: rgb(88 88 88 / 70%);
+  }
+
+  &_c-grey-4 {
+    color: rgb(66 66 66 / 100%);
+  }
+
+  &_c-grey-5 {
+    color: rgb(123 123 123 / 100%);
+  }
+
+  &_c-grey-6 {
+    color: rgb(118 112 112 / 100%);
+  }
+
+  &_c-grey-7 {
+    color: rgb(122 122 122 / 100%);
+  }
+
+  &_c-grey-8 {
+    color: rgb(124 124 124 / 100%);
   }
 }

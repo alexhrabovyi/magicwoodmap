@@ -1,27 +1,53 @@
 .link {
-  color: rgb(128 128 128);
-  font-family: Montserrat, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
   text-decoration: none;
   transition: all .05s ease-in-out;
 
   &:hover, &:focus {
-    color: $orange;
+    color: rgb(237 85 59);
     outline: none;
   }
 
   &:active {
-    color: $orange-active;
+    color: rgb(217 65 39);
+  }
+
+  &_ff-poppins {
+    font-family: Poppins, sans-serif;
+  }
+
+  &_ff-montserrat {
+    font-family: Montserrat, sans-serif;
+  }
+
+  &_16-px {
+    font-size: 16px;
+  }
+
+  &_18-px {
+    font-size: 18px;
   }
 
   &_fw-300 {
     font-weight: 300;
   }
 
-  &_lighter {
-    color: rgb(183 183 183 / 100%);
+  &_fw-500 {
+    font-weight: 500;
+  }
+
+  &_c-black {
+    color: rgb(31 31 31 / 100%);;
+  }
+
+  &_c-grey {
+    color: rgb(129 129 129);
+  }
+
+  &_c-grey-1 {
+    color: rgb(128 128 128);
+  }
+
+  &_c-grey-2 {
+    color: rgb(183 183 183);
   }
 }

@@ -11,14 +11,10 @@
 
   &__title {
     grid-row: 1/3;
+    line-height: 48px;
   }
 
   &__text {
-    color: rgb(122 122 122);
-    font-family: Inter, sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
     letter-spacing: 0.4px;
     line-height: 208%;
   }
@@ -31,12 +27,12 @@
       position: absolute;
       top: -25px;
       left: 0;
-      color: $invalid;
+      color: rgb(255 107 107);
       content: attr(data-before);
       font-family: Inter, sans-serif;
       font-size: 16px;
       font-style: normal;
-      font-weight: 400; 
+      font-weight: 400;
       letter-spacing: 1.289px;
       line-height: 18px;
     }
@@ -58,7 +54,8 @@
     line-height: normal;
     transition: .05s all ease-in-out;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       border-bottom: 2px solid rgb(195 195 195 / 100%);
       outline: none;
     }
@@ -68,7 +65,7 @@
     }
 
     &_incorrect {
-      border-color: $invalid;
+      border-color: rgb(255 107 107);
     }
   }
 
@@ -79,7 +76,8 @@
     padding-bottom: 15px;
     border: none;
     background-color: transparent;
-    color: $orange;
+    color: rgb(237 85 59);
+    cursor: pointer;
     font-family: Poppins, sans-serif;
     font-size: 20px;
     font-style: normal;
@@ -89,8 +87,9 @@
     text-transform: uppercase;
     transition: .05s all ease-in-out;
 
-    &:hover, &:focus {
-      color: $orange-active;
+    &:hover,
+    &:focus {
+      color: rgb(217 65 39);
       outline: none;
     }
   }

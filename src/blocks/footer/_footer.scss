@@ -19,12 +19,12 @@
       position: absolute;
       bottom: -25px;
       left: 20px;
-      color: $invalid;
+      color: rgb(255 107 107);
       content: attr(data-before);
       font-family: Inter, sans-serif;
       font-size: 14px;
       font-style: normal;
-      font-weight: 400; 
+      font-weight: 400;
       letter-spacing: 1.289px;
       line-height: 18px;
     }
@@ -38,7 +38,7 @@
     padding-left: 20px;
     border: none;
     border-radius: 3px;
-    background-color: $white;
+    background-color: rgb(255 255 255);
     color: rgb(255 162 146);
     filter: drop-shadow(0 0 6px rgb(237 85 59 / 14%));
     font-family: Montserrat, sans-serif;
@@ -48,7 +48,8 @@
     line-height: normal;
     transition: all .05s ease-in-out;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       filter: drop-shadow(0 0 8px rgb(237 85 59 / 30%));
       outline: none;
     }
@@ -63,8 +64,8 @@
     }
 
     &_invalid {
-        filter: drop-shadow(0 0 8px rgb(255 98 98 / 78.1%));
-      }
+      filter: drop-shadow(0 0 8px rgb(255 98 98 / 78.1%));
+    }
   }
 
   &__button-email {
@@ -82,9 +83,9 @@
   }
 
   &__social-links-block {
-    display: flex;
+    @include flex-builder(row, space-between, none);
+
     width: 203px;
-    justify-content: space-between;
     margin-bottom: 37px;
   }
 
@@ -98,9 +99,8 @@
   }
 
   &__nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-builder(column, none, center);
+
     border-width: 0 1px;
     border-style: solid;
     border-color: rgb(214 214 214 / 100%);
@@ -119,26 +119,17 @@
   }
 
   &__contacts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-builder(column, none, center);
+
     border-right: 1px solid rgb(214 214 214 / 100%);
   }
 
   &__subtitle {
     margin-bottom: 20px;
-    color: rgb(0 0 0);
-    font-family: Montserrat, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
   }
 
   &__additional-pages {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-builder(column, none, center);
   }
 
   &__link_lighter {

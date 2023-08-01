@@ -1,26 +1,26 @@
 .round-button {
-  display: flex;
+  @include flex-builder(row, center, center);
+
   width: 49px;
   height: 49px;
-  align-items: center;
-  justify-content: center;
   border-radius: 50%;
-  background-color: $orange;
-  color: $white;
+  background-color: rgb(237 85 59);
+  color: rgb(255 255 255);
   font-size: 26px;
   text-decoration: none;
   transition: all .05s ease-in-out;
 
-  &:hover, &:focus {
-    border: 1px solid $orange;
-    background-color: $white;
-    color: $orange;
+  &:hover,
+  &:focus {
+    border: 1px solid rgb(237 85 59);
+    background-color: rgb(255 255 255);
+    color: rgb(237 85 59);
     outline: none;
   }
 
   &:active {
-    border-color: $orange-active;
-    background-color: $white-active;
-    color: $orange-active;
+    border-color: rgb(217 65 39);
+    background-color: rgb(221 221 221);
+    color: rgb(217 65 39);
   }
 }

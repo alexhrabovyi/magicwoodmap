@@ -1,8 +1,8 @@
 .button {
   border: none;
   border-radius: 10px;
-  background-color: $orange;
-  color: $white;
+  background-color: rgb(237 85 59);
+  color: rgb(255 255 255);
   cursor: pointer;
   font-family: Poppins, sans-serif;
   font-size: 24px;
@@ -12,34 +12,36 @@
   line-height: normal;
   transition: all .05s ease-in-out;
 
-  &:hover, &:focus {
-    border: 2px solid $orange;
-    background-color: $white;
-    color: $orange;
+  &:hover,
+  &:focus {
+    border: 2px solid rgb(237 85 59);
+    background-color: rgb(255 255 255);
+    color: rgb(237 85 59);
     outline: none;
   }
 
   &:active {
-    border-color: $orange-active;
-    background-color: $white-active;
-    color: $orange-active;
+    border-color: rgb(217 65 39);
+    background-color: rgb(221 221 221);
+    color: rgb(217 65 39);
   }
 
   &_transparent {
-    border: 1px solid $orange;
+    border: 1px solid rgb(237 85 59);
     border-radius: 7px;
     background-color: transparent;
-    color: $orange;
+    color: rgb(237 85 59);
 
-    &:hover, &:focus {
-      background-color: $orange;
-      color: $white;
+    &:hover,
+    &:focus {
+      background-color: rgb(237 85 59);
+      color: rgb(255 255 255);
     }
 
     &:active {
-      border-color: $orange-active;
-      background-color: $orange-active;
-      color: $white-active;
+      border-color: rgb(217 65 39);
+      background-color: rgb(217 65 39);
+      color: rgb(221 221 221);
     }
   }
 }

@@ -11,7 +11,7 @@
     border-radius: 11px;
     background-position: center center;
     background-size: cover;
-    color: $white;
+    color: rgb(255 255 255);
     font-family: Poppins, sans-serif;
     font-size: 28px;
     font-style: normal;
@@ -20,11 +20,11 @@
 
     &::before {
       position: absolute;
-      display: flex;
+
+      @include flex-builder(row, center, end);
+
       width: 100%;
       height: 100%;
-      align-items: end;
-      justify-content: center;
       padding-bottom: 41px;
       border-radius: 11px;
       background: rgb(0 0 0 / 56%);
@@ -46,14 +46,14 @@
     }
 
     &_2 {
-      display: flex;
-      align-items: center;
-      color: $black;
+      @include flex-builder(row, none, center);
+
+      color: rgb(0 0 0);
       font-size: 40px;
       font-weight: 500;
       pointer-events: none;
       text-align: center;
-      
+
 
       &::before {
         background: none;
@@ -88,12 +88,12 @@
       background-image: url('images/map_1.png');
 
       &::before {
-        content:  "Додаткова категорія →";
+        content: "Додаткова категорія →";
       }
     }
   }
 
   &__red-word {
-    color: $orange;
+    color: rgb(237 85 59);
   }
 }
