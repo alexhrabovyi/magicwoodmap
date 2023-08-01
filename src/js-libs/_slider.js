@@ -43,7 +43,7 @@ export default class Slider {
 
   setup() {
     this.wrapper.style.display = 'grid';
-    this.wrapper.style.gridTemplateColumns = `repeat(${this.slides.length}, ${100 / this.slidesPerView}%)`;
+    this.wrapper.style.gridTemplateColumns = `repeat(${this.slides.length}, auto)`;
     this.wrapper.style.gap = `${this.gap}px`;
     this.wrapper.style.transition = this.transition;
 

@@ -59,6 +59,10 @@
     }
   }
 
+  &__slider-small-slide {
+    width: 333px;
+  }
+
   &__slide-small-img {
     width: 100%;
     margin-bottom: 40px;
@@ -121,6 +125,7 @@
 
   &__slider-big-slide {
     display: flex;
+    width: 1434px;
     align-items: center;
     justify-content: space-between;
   }
