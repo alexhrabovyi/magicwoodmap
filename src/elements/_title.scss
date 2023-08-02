@@ -5,8 +5,12 @@
   font-style: normal;
   font-weight: 600;
 
-  @include media-m {
+  @include media-l {
     font-size: 36px;
+  }
+
+  @include media-m {
+    font-size: 34px;
   }
 
   &_ff-inter {
