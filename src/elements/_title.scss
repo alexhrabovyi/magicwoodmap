@@ -5,6 +5,10 @@
   font-style: normal;
   font-weight: 600;
 
+  @include media-m {
+    font-size: 36px;
+  }
+
   &_ff-inter {
     font-family: Inter, sans-serif;
   }

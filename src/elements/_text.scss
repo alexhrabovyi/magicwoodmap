@@ -25,6 +25,10 @@
 
   &_24-px {
     font-size: 24px;
+
+    @include media-m {
+      font-size: 22px;
+    }
   }
 
   &_fw-500 {
