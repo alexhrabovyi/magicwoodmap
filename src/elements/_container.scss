@@ -1,4 +1,32 @@
 .container {
-  padding-right: 276px;
-  padding-left: 210px;
+  // padding-right: 276px;
+  padding-right: 14.375%;
+
+  // padding-left: 210px;
+  padding-left: 10.9375%;
+
+  @media (max-width: 1600px) {
+    padding-right: 12%;
+    padding-left: 9%;
+  }
+
+  @include media-l {
+    padding-right: 10%;
+    padding-left: 7%;
+  }
+
+  @include media-m {
+    padding-right: 7%;
+    padding-left: 7%;
+  }
+
+  @include media-s {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  @include media-xs {
+    padding-right: 2%;
+    padding-left: 2%;
+  }
 }

@@ -13,6 +13,7 @@
       "format": "rgb"
     },
     "plugin/declaration-block-no-ignored-properties": true,
+    "media-feature-range-notation": "prefix",
     "order/order": [
       "declarations",
       {

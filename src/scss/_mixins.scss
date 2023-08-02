@@ -1,19 +1,19 @@
 // media mixins
 
 @mixin media-l {
-  @media (width <= 1360px) { @content; }
+  @media (max-width: 1360px) { @content; }
 }
 
 @mixin media-m {
-  @media (width <= 1024px) { @content; }
+  @media (max-width: 1024px) { @content; }
 }
 
 @mixin media-s {
-  @media (width <= 768px) { @content; }
+  @media (max-width: 768px) { @content; }
 }
 
 @mixin media-xs {
-  @media (width <= 576px) { @content; }
+  @media (max-width: 576px) { @content; }
 }
 
 // flex mixins
