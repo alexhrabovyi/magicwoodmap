@@ -1,4 +1,4 @@
-import { addEmailValidation } from "../../js-libs/_emailMask";
+import { addEmailValidation } from '../../js-libs/_emailMask';
 
 export default function subscribeAddEmailValidation() {
   addEmailValidation(
