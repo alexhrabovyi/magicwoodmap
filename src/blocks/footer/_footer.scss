@@ -3,10 +3,40 @@
   padding-top: 75px;
   padding-bottom: 75px;
   background: rgb(250 250 250 / 100%);
-  grid-template-columns: 497px 317px 400px 217px;
+  grid-template-columns: 34.66% 22.1% 27.89% 15.13%;
+
+  @include media-l {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  @include media-m {
+    padding-top: 65px;
+    padding-bottom: 65px;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
+  }
+
+  @include media-s {
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    grid-template-columns: 80%;
+  }
+
+  @include media-xs {
+    grid-template-columns: 100%;
+    row-gap: 25px;
+  }
 
   &__title_32-px {
     margin-bottom: 21px;
+  }
+
+  &__main-content {
+    @include media-s {
+      order: 1;
+    }
   }
 
   &__input-block {
@@ -14,6 +44,14 @@
     width: 377px;
     height: 44px;
     margin-bottom: 37px;
+
+    @media (max-width: 1450px) {
+      width: 95%;
+    }
+
+    @include media-s {
+      width: 100%;
+    }
 
     &::before {
       position: absolute;
@@ -29,7 +67,6 @@
       line-height: 18px;
     }
   }
-
 
   &__input-email {
     width: 100%;
@@ -47,6 +84,10 @@
     font-weight: 400;
     line-height: normal;
     transition: all .05s ease-in-out;
+
+    @include media-l {
+      padding-right: 115px;
+    }
 
     &:hover,
     &:focus {
@@ -80,6 +121,10 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+
+    @include media-l {
+      width: 110px;
+    }
   }
 
   &__social-links-block {
@@ -87,6 +132,16 @@
 
     width: 203px;
     margin-bottom: 37px;
+
+    @include media-l {
+      width: 191px;
+      margin-bottom: 30px;
+    }
+
+    @include media-m {
+      width: 182px;
+      margin-bottom: 25px;
+    }
   }
 
   &__copyrights {
@@ -104,6 +159,14 @@
     border-width: 0 1px;
     border-style: solid;
     border-color: rgb(214 214 214 / 100%);
+
+    @include media-m {
+      border-right: none;
+    }
+
+    @include media-s {
+      border: none;
+    }
   }
 
   &__lead {
@@ -122,6 +185,10 @@
     @include flex-builder(column, none, center);
 
     border-right: 1px solid rgb(214 214 214 / 100%);
+
+    @include media-s {
+      border:none;
+    }
   }
 
   &__subtitle {
