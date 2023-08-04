@@ -2,23 +2,81 @@
   padding-top: 150px;
   padding-bottom: 150px;
 
+  @include media-l {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  @include media-m {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  @include media-s {
+    padding-top: 85px;
+    padding-bottom: 85px;
+  }
+
+  @include media-xs {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
   &__title {
     margin-bottom: 50px;
     line-height: 170%;
+
+    @include media-m {
+      margin-bottom: 30px;
+    }
+
+    @include media-xs {
+      margin-bottom: 20px;
+    }
   }
 
   &__content {
     display: grid;
     justify-content: space-between;
-    grid-template-columns: 481px 720px;
+    grid-template-columns: 481px 50.2%;
+
+    @include media-l {
+      grid-template-columns: 1fr;
+      row-gap: 40px;
+    }
+
+    @include media-s {
+      row-gap: 30px;
+    }
   }
 
   &__text {
     line-height: 180%;
+
+    @include media-l {
+      width: 80%;
+    }
+
+    @include media-s {
+      width: 100%;
+    }
   }
 
   &__iframe-video {
-    width: 720px;
+    width: 100%;
     height: 450px;
+
+    @include media-l {
+      width: 80%;
+      justify-self: center;
+    }
+
+    @include media-m {
+      width: 90%;
+    }
+
+    @include media-s {
+      width: 100%;
+    }
   }
 }

@@ -17,17 +17,37 @@
 
   &_18-px {
     font-size: 18px;
+
+    @include media-s {
+      font-size: 16px;
+    }
   }
 
   &_20-px {
     font-size: 20px;
+
+    @include media-s {
+      font-size: 18px;
+    }
+
+    @include media-xs {
+      font-size: 16px;
+    }
   }
 
   &_24-px {
     font-size: 24px;
 
-    @include media-m {
+    @include media-l {
       font-size: 22px;
+    }
+
+    @include media-s {
+      font-size: 20px;
+    }
+
+    @include media-xs {
+      font-size: 18px;
     }
   }
 
