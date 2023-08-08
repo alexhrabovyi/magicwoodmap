@@ -47,6 +47,14 @@
 
   &_60-px {
     font-size: 60px;
+
+    @include media-l {
+      font-size: 56px;
+    }
+
+    @include media-m {
+      font-size: 48px;
+    }
   }
 
   &_fw-500 {

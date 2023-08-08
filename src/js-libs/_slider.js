@@ -31,20 +31,19 @@ export default class Slider {
     this.slidesPerView = options.slidesPerView || 1;
     this.gap = options.gap || 0;
     this.transition = `${options.transitionDuration || 0.7}s all linear`;
-    this.autoTranslateTime = options.autoTranslateTime || 0;
 
     this.setup();
 
     if (options.pagination) this.setupPagination(options);
-    if (this.autoTranslateTime) this.setupAutoTranslate();
+    if (options.autoTranslateTime) this.setupAutoTranslate();
     if (options.buttons) this.setupPrevNextButtons(options);
     if (options.counter) this.setupCounter(options);
   }
 
   setup() {
     this.wrapper.style.display = 'grid';
-    this.wrapper.style.gridTemplateColumns = `repeat(${this.slides.length}, auto)`;
-    this.wrapper.style.gap = `${this.gap}px`;
+    this.wrapper.style.gridTemplateColumns = `repeat(${this.slides.length}, ${(100 - this.gap * (this.slidesPerView - 1)) / this.slidesPerView}%)`;
+    this.wrapper.style.columnGap = `${this.gap}%`;
     this.wrapper.style.transition = this.transition;
 
     this.container.style.overflow = 'hidden';
@@ -98,16 +97,18 @@ export default class Slider {
       .classList.add(this.paginationButtonActiveClass);
   }
 
-  setupAutoTranslate() {
+  setupAutoTranslate(options) {
+    const { autoTranslateTime } = options;
+
     const autoTranslate = () => {
       let newActiveSlideId = this.activeSlideId + 1;
       if (newActiveSlideId === this.slides.length) newActiveSlideId = 0;
 
       this.translateAndToggle(this.activeSlideId, newActiveSlideId);
-      setTimeout(autoTranslate, this.autoTranslateTime);
+      setTimeout(autoTranslate, autoTranslateTime);
     };
 
-    setTimeout(autoTranslate, this.autoTranslateTime);
+    setTimeout(autoTranslate, autoTranslateTime);
   }
 
   setupPrevNextButtons(options) {
@@ -140,104 +141,115 @@ export default class Slider {
   }
 
   setupDragNDrop() {
-    this.wrapper.addEventListener('mousedown', (event) => {
-      event.preventDefault();
+    const handler = (isMobile) => {
+      this.wrapper.addEventListener(isMobile ? 'touchstart' : 'mousedown', (event) => {
+        event.preventDefault();
 
-      const calcCurrentTranslate = () => {
-        const currentWrapperXCoord = this.wrapper.getBoundingClientRect().x;
-        const containerXCoord = this.containerCoords.x;
-        let translateValue;
-        if (currentWrapperXCoord > 0) {
-          translateValue = -(containerXCoord - currentWrapperXCoord);
-        } else {
-          translateValue = -(Math.abs(currentWrapperXCoord) + containerXCoord);
-        }
-
-        return translateValue;
-      };
-
-      const currentTranslateValue = calcCurrentTranslate();
-      this.wrapper.style.cursor = 'grab';
-      this.wrapper.style.transform = `translateX(${currentTranslateValue}px)`;
-      this.wrapper.style.transition = 'none';
-
-      const startX = event.clientX;
-      let prevDiff = 0;
-      const lastSlideTranslateValue = (this.slides.length - 1) * this.slideWidth
-        + this.gap * (this.slides.length - 1);
-
-      const mouseMove = (e) => {
-        const currentX = e.clientX;
-        let diff = currentX - startX;
-
-        if ((Math.abs(currentTranslateValue + diff) > lastSlideTranslateValue)
-          || (currentTranslateValue + diff > 0)
-          || (this.slidesPerView > 1
-            && Math.abs(currentTranslateValue + diff)
-            > lastSlideTranslateValue - this.slideWidth / 2)) {
-          diff = (diff - prevDiff) / 4 + prevDiff;
-          this.wrapper.style.transform = `translateX(${currentTranslateValue + diff}px)`;
-
-          return;
-        }
-
-        prevDiff = diff;
-
-        this.wrapper.style.transform = `translateX(${currentTranslateValue + diff}px)`;
-      };
-
-      const mouseUp = (e) => {
-        document.removeEventListener('mousemove', mouseMove);
-
-        this.wrapper.style.transition = this.transition;
-        this.wrapper.style.cursor = '';
-
-        let endX = e.clientX;
-        const diff = endX - startX;
-
-        const getSlideUnderCursorId = () => {
-          const {
-            x: containerXCoord,
-            y: containerYCoord,
-            right: containerRightCoord,
-          } = this.containerCoords;
-
-          if (endX < containerXCoord) endX = containerXCoord + 1;
-          if (endX > containerRightCoord) endX = containerRightCoord - 1;
-
-          const slideUnderCursor = +document.elementFromPoint(endX, containerYCoord + 1).closest('[data-slide-id]');
-
-          if (!slideUnderCursor) return this.activeSlideId;
-
-          const slideUnderCursorId = slideUnderCursor.dataset.slideId;
-          return slideUnderCursorId;
-        };
-
-        const slideUnderCursorId = getSlideUnderCursorId();
-
-        const getNewActiveSlideId = () => {
-          let newActiveSlideId;
-
-          if ((Math.abs(diff) < this.minMoveWidth)
-            || (diff < 0 && slideUnderCursorId === this.slides.length - 1)
-            || (diff > 0 && slideUnderCursorId === 0)) {
-            newActiveSlideId = slideUnderCursorId;
-            return newActiveSlideId;
+        const calcCurrentTranslate = () => {
+          const currentWrapperXCoord = this.wrapper.getBoundingClientRect().x;
+          const containerXCoord = this.containerCoords.x;
+          let translateValue;
+          if (currentWrapperXCoord > 0) {
+            translateValue = -(containerXCoord - currentWrapperXCoord);
+          } else {
+            translateValue = -(Math.abs(currentWrapperXCoord) + containerXCoord);
           }
 
-          newActiveSlideId = diff < 0 ? slideUnderCursorId + 1 : slideUnderCursorId - 1;
-          return newActiveSlideId;
+          return translateValue;
         };
 
-        const newActiveSlideId = getNewActiveSlideId();
-        this.translateAndToggle(this.activeSlideId, newActiveSlideId);
+        const currentTranslateValue = calcCurrentTranslate();
+        this.wrapper.style.cursor = 'grab';
+        this.wrapper.style.transform = `translateX(${currentTranslateValue}px)`;
+        this.wrapper.style.transition = 'none';
 
-        document.removeEventListener('mouseup', mouseUp);
-      };
+        const startX = isMobile ? event.targetTouches[0].clientX : event.clientX;
 
-      document.addEventListener('mousemove', mouseMove);
-      document.addEventListener('mouseup', mouseUp);
-    });
+        let prevDiff = 0;
+        const lastSlideTranslateValue = this.slideWidth * (this.slides.length - 1)
+          + this.gapWidth * (this.slides.length - 1);
+
+        const moveEvent = (e) => {
+          const currentX = isMobile ? e.targetTouches[0].clientX : e.clientX;
+          let diff = currentX - startX;
+
+          if ((Math.abs(currentTranslateValue + diff) > lastSlideTranslateValue)
+            || (currentTranslateValue + diff > 0)
+            || (this.slidesPerView > 1
+              && Math.abs(currentTranslateValue + diff)
+              > lastSlideTranslateValue - this.slideWidth / 2)) {
+            diff = (diff - prevDiff) / 4 + prevDiff;
+            this.wrapper.style.transform = `translateX(${currentTranslateValue + diff}px)`;
+
+            return;
+          }
+
+          prevDiff = diff;
+
+          this.wrapper.style.transform = `translateX(${currentTranslateValue + diff}px)`;
+        };
+
+        const upEvent = (e) => {
+          document.removeEventListener(isMobile ? 'touchmove' : 'mousemove', moveEvent);
+
+          this.wrapper.style.transition = this.transition;
+          this.wrapper.style.cursor = '';
+
+          let endX = isMobile ? e.changedTouches[0].clientX : e.clientX;
+          const diff = endX - startX;
+
+          const getSlideUnderCursorId = () => {
+            const {
+              x: containerXCoord,
+              y: containerYCoord,
+              right: containerRightCoord,
+            } = this.containerCoords;
+
+            if (endX < containerXCoord) endX = containerXCoord + 1;
+            if (endX > containerRightCoord) endX = containerRightCoord - 1;
+
+            const slideUnderCursor = document.elementFromPoint(endX, containerYCoord + 1).closest('[data-slide-id]');
+
+            if (!slideUnderCursor) return this.activeSlideId;
+
+            const slideUnderCursorId = +slideUnderCursor.dataset.slideId;
+            return slideUnderCursorId;
+          };
+
+          const slideUnderCursorId = getSlideUnderCursorId();
+
+          const getNewActiveSlideId = () => {
+            let newActiveSlideId;
+
+            if ((Math.abs(diff) < this.minMoveWidth)
+              || (diff < 0 && slideUnderCursorId === this.slides.length - 1)
+              || (diff > 0 && slideUnderCursorId === 0)
+            ) {
+              newActiveSlideId = slideUnderCursorId;
+              return newActiveSlideId;
+            }
+
+            newActiveSlideId = diff < 0 ? slideUnderCursorId + 1 : slideUnderCursorId - 1;
+            return newActiveSlideId;
+          };
+
+          const newActiveSlideId = getNewActiveSlideId();
+          this.translateAndToggle(this.activeSlideId, newActiveSlideId);
+
+          document.removeEventListener(isMobile ? 'touchend' : 'mouseup', upEvent);
+        };
+
+        document.addEventListener(isMobile ? 'touchmove' : 'mousemove', moveEvent);
+        document.addEventListener(isMobile ? 'touchend' : 'mouseup', upEvent);
+      });
+    };
+
+    handler(false);
+    handler(true);
+  }
+
+  get gapWidth() {
+    return (this.wrapper.offsetWidth * this.gap) / 100;
   }
 
   get slideWidth() {
@@ -254,11 +266,11 @@ export default class Slider {
   }
 
   get minMoveWidth() {
-    return this.slideWidth * 0.07;
+    return this.slideWidth * 0.2;
   }
 
   translateSlides() {
-    let width = this.activeSlideId * this.slideWidth + this.gap * this.activeSlideId;
+    let width = this.activeSlideId * this.slideWidth + this.gapWidth * this.activeSlideId;
 
     if (this.activeSlideId === this.slides.length - 1 && this.slidesPerView > 1) {
       width -= this.slideWidth / 2;
