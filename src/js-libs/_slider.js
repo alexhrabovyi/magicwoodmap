@@ -11,22 +11,22 @@
 //    paginationBlockSelector: '.main-slider__pagination-block',
 //    paginationButtonClass: 'main-slider__pagination-button',
 //    paginationButtonActiveClass: 'main-slider__pagination-button_active',
-//   }
+//   },
 //   buttons: {
 //    buttonPrevSelector: '#prev',
 //    buttonNextSelector: '#next',
-//   }
-//  counter: {
+//   },
+//   counter: {
 //    currentNumSelector: '.reviews__current-slide-number',
 //    totalNumSelector: '.reviews__total-slide-number',
-//  }
+//   },
 // }
 
 export default class Slider {
   constructor(options) {
     this.container = document.querySelector(options.containerSelector);
-    this.wrapper = document.querySelector(options.wrapperSelector);
-    this.slides = document.querySelectorAll(options.slidesSelector);
+    this.wrapper = this.container.querySelector(options.wrapperSelector);
+    this.slides = this.container.querySelectorAll(options.slidesSelector);
     this.activeSlideId = options.activeSlideId || 0;
     this.slidesPerView = options.slidesPerView || 1;
     this.gap = options.gap || 0;
@@ -119,13 +119,16 @@ export default class Slider {
     nextButton.setAttribute('data-button-type', 'next');
 
     const onClick = (e) => {
-      const { buttonType } = e.target.closest('[data-button-type]').dataset;
+      const button = e.target.closest('[data-button-type]');
+      const { buttonType } = button.dataset;
       let newActiveSlideId = buttonType === 'prev' ? this.activeSlideId - 1 : this.activeSlideId + 1;
 
       if (newActiveSlideId < 0) newActiveSlideId = 0;
       if (newActiveSlideId === this.slides.length) return;
 
       this.translateAndToggle(this.activeSlideId, newActiveSlideId);
+
+      button.blur();
     };
 
     prevButton.addEventListener('click', onClick);
