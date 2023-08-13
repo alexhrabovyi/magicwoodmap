@@ -1,38 +1,78 @@
-section(class="main-nav container")
-  .main-nav__account-and-search-block 
-    a(class="main-nav__logo-link" href="#" alt="Magic Wood Map")
+section(class="main-nav")
+  .main-nav__backdrop
+  div(class="main-nav__desktop container")
+    .main-nav__account-and-search-block 
+      a(class="main-nav__logo-link" href="#" alt="Magic Wood Map")
+        img(class="main-nav__logo" src="../../blocks/main-nav/images/logo.svg" alt="Magic Wood Map логотип")
+      .main-nav__input-wrapper
+        input(class="input main-nav__input" type="text" placeholder="Знайти..." name="search")
+        button(class="main-nav__icon-loupe")
+          i.icon-loupe
+      .main-nav__account-buttons-block 
+        a(class="main-nav__account-button" href="#" alt="Аккаунт")
+          i(class="main-nav__account-button-icon icon-account")
+          | Аккаунт
+        span.main-nav__short-line
+        button(class="main-nav__account-button")
+          i(class="main-nav__account-button-icon icon-bag")
+          | Корзина
+        span.main-nav__short-line
+        button(class="main-nav__account-button")
+          i(class="main-nav__account-button-icon icon-like")
+          | Сподобалось
+    nav.main-nav__nav-block 
+      .main-nav__main-links-block 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Головна") Головна
+        span.main-nav__long-line 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Про нас") Про нас
+        span.main-nav__long-line 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Контакти") Контакти
+        span.main-nav__long-line 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Блог") Блог
+        span.main-nav__long-line 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Каталог") Каталог
+      .main-nav__additional-links-block 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-grey main-nav__link" href="#" alt="Оферта") Оферта 
+        span.main-nav__long-line
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-grey main-nav__link" href="#" alt="Доставка") Доставка
+        span.main-nav__long-line 
+        a(class="link link_ff-poppins link_18-px link_fw-500 link_c-grey main-nav__link" href="#" alt="FAQ") FAQ 
+  div(class="main-nav__mobile-panel container")
+    button(class="main-nav__content-open-button")
+      svg(class="main-nav__burger" viewBox="0 0 100 100")
+        path(class="main-nav__burger-line main-nav__burger-line_1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058")
+        path(class="main-nav__burger-line main-nav__burger-line_2" d="M 20,50 H 80")
+        path(class="main-nav__burger-line main-nav__burger-line_3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942")
+      p(class="title title_20-px title_fw-400 title_tt-uppercase main-nav__burger-title") Меню
+    a(class="main-nav__logo-link-block" href="#" alt="Magic Wood Maps")
       img(class="main-nav__logo" src="../../blocks/main-nav/images/logo.svg" alt="Magic Wood Map логотип")
-    .main-nav__input-wrapper
-      input(class="input main-nav__input" type="text" placeholder="Знайти..." name="search")
-      button(class="main-nav__icon-loupe")
-        i.icon-loupe
-    .main-nav__account-buttons-block 
-      a(class="main-nav__account-button" href="#" alt="Аккаунт")
-        i(class="main-nav__account-button-icon icon-account")
-        | Аккаунт
-      span.main-nav__short-line
-      button(class="main-nav__account-button")
-        i(class="main-nav__account-button-icon icon-bag")
-        | Корзина
-      span.main-nav__short-line
-      button(class="main-nav__account-button")
-        i(class="main-nav__account-button-icon icon-like")
-        | Сподобалось
-  nav.main-nav__nav-block 
-    .main-nav__main-links-block 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Головна") Головна
-      span.main-nav__long-line 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Про нас") Про нас
-      span.main-nav__long-line 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Контакти") Контакти
-      span.main-nav__long-line 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Блог") Блог
-      span.main-nav__long-line 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black main-nav__link" href="#" alt="Каталог") Каталог
-    .main-nav__additional-links-block 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-grey main-nav__link" href="#" alt="Оферта") Оферта 
-      span.main-nav__long-line
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-grey main-nav__link" href="#" alt="Доставка") Доставка
-      span.main-nav__long-line 
-      a(class="link link_ff-poppins link_18-px link_fw-500 link_c-grey main-nav__link" href="#" alt="FAQ") FAQ 
-      
+      p(class="title title_24-px title_fw-400 title_c-black main-nav__logo-link-title") Magic Wood Maps
+    .main-nav__order-and-wishlist-buttons 
+      a(class="round-button round-button_big round-button_inactive main-nav__round-button_big" href="#" alt="Кошик") 
+        i.icon-bag
+      a(class="round-button round-button_big round-button_inactive main-nav__round-button_big" href="#" alt="Список бажань") 
+        i.icon-like
+  div(class="main-nav__mobile-content container")
+    button(class="main-nav__tel-button")
+      p(class="main-nav__tel-number") +380 (97) 17 033 21
+      p(class="main-nav__tel-text") Натисніть, щоб скопіювати
+      p(class="main-nav__tel-text main-nav__tel-text_additional main-nav__tel-text_hidden main-nav__tel-text_pos-absolute") Скопійовано
+    .main-nav__mobile-main-links
+      a(class="link link_ff-montserrat link_18-px link_c-black-1 main-nav__mobile-main-link" href="#" alt="Головна сторінка") Головна сторінка
+      a(class="link link_ff-montserrat link_18-px link_c-black-1 main-nav__mobile-main-link" href="#" alt="Про компанію") Про компанію
+      a(class="link link_ff-montserrat link_18-px link_c-black-1 main-nav__mobile-main-link" href="#" alt="Наш блог") Наш блог
+      a(class="link link_ff-montserrat link_18-px link_c-black-1 main-nav__mobile-main-link" href="#" alt="Каталог продукції") Каталог продукції
+      a(class="link link_ff-montserrat link_18-px link_c-black-1 main-nav__mobile-main-link" href="#" alt="Оплата й доставка") Оплата й доставка
+      a(class="link link_ff-montserrat link_18-px link_c-black-1 main-nav__mobile-main-link" href="#" alt="Контакти") Контакти
+    .main-nav__mobile-additional-links 
+      a(class="link link_ff-montserrat link_16-px link_c-grey-3" href="#" alt="Оферта") Оферта
+      a(class="link link_ff-montserrat link_16-px link_c-grey-3" href="#" alt="Доставка") Доставка
+      a(class="link link_ff-montserrat link_16-px link_c-grey-3" href="#" alt="FAQ") FAQ
+    .main-nav__mobile-social-links 
+      a(class="round-button main-nav__round-button" href="#" alt="Facebook") 
+        i.icon-facebook
+      a(class="round-button main-nav__round-button" href="#" alt="Instagram") 
+        i.icon-instagram
+      a(class="round-button main-nav__round-button" href="#" alt="Twitter") 
+        i.icon-twitter
+    p(class="text text_fw-500 text_c-grey-8 main-nav__copyright") ©2022, Magic Wood Map

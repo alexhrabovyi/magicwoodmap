@@ -25,12 +25,24 @@
     font-size: 16px;
   }
 
+  &_20-px {
+    font-size: 20px;
+
+    @include media-xs {
+      font-size: 18px;
+    }
+  }
+
   &_22-px {
     font-size: 22px;
   }
 
   &_23-px {
     font-size: 23px;
+  }
+
+  &_24-px {
+    font-size: 24px;
   }
 
   &_28-px {
@@ -57,8 +69,16 @@
     }
   }
 
+  &_fw-400 {
+    font-weight: 400;
+  }
+
   &_fw-500 {
     font-weight: 500;
+  }
+
+  &_tt-uppercase {
+    text-transform: uppercase;
   }
 
   &_c-black {

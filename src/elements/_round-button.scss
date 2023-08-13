@@ -35,4 +35,39 @@
     background-color: rgb(221 221 221);
     color: rgb(217 65 39);
   }
+
+  &_big {
+    width: 55px;
+    height: 55px;
+
+    @include media-s {
+      width: 50px;
+      height: 50px;
+    }
+
+    @include media-xs {
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  &_inactive {
+    border: 1px solid rgb(237 85 59);
+    background-color: rgb(255 255 255);
+    color: rgb(237 85 59);
+
+    &:hover,
+    &:focus {
+      border: 1px solid rgb(237 85 59);
+      background-color: rgb(237 85 59);
+      color: rgb(255 255 255);
+      outline: none;
+    }
+
+    &:active {
+      border-color: rgb(217 65 39);
+      background-color: rgb(217 65 39);
+      color: rgb(221 221 221);
+    }
+  }
 }
