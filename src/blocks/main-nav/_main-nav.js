@@ -21,10 +21,6 @@ export default function setupMainNav() {
       });
       this.backdrop.addEventListener('click', this.close.bind(this), { passive: true });
       window.addEventListener('orientationchange', this.onOrientationChange.bind(this), { passive: true });
-
-      setTimeout(() => {
-        this.content.style.height = `${this.getVisibleContentHeight()}px`;
-      }, 0);
     }
 
     getVisibleContentHeight() {
@@ -44,10 +40,6 @@ export default function setupMainNav() {
 
     onOrientationChange() {
       if (this.isShown) this.close();
-
-      setTimeout(() => {
-        this.content.style.height = `${this.getVisibleContentHeight()}px`;
-      }, 1);
     }
 
     onClickToggle() {
@@ -61,6 +53,7 @@ export default function setupMainNav() {
     show() {
       this.isShown = true;
       this.content.scrollTop = 0;
+      this.content.style.height = `${this.getVisibleContentHeight()}px`;
 
       this.openButtons.forEach((openButton) => {
         openButton.classList.add(this.buttonActiveClass);

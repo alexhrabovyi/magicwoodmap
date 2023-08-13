@@ -4,11 +4,23 @@
   height: 70px;
   background-color: rgb(31 31 31);
 
-  &__links-block {
-    @include flex-builder(row, space-between, flex-start);
+  @include media-s {
+    display: none;
+  }
 
-    width: 244px;
+  &__links-block {
+    display: grid;
     margin-left: 85px;
+    gap: 43px;
+    grid-template-columns: repeat(5, auto);
+
+    @include media-l {
+      margin-left: 0;
+    }
+
+    @include media-m {
+      gap: 30px;
+    }
   }
 
   &__link {
