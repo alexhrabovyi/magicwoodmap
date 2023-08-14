@@ -1,0 +1,136 @@
+.about-us-main {
+  display: grid;
+  justify-content: space-between;
+  padding-top: 157px;
+  padding-bottom: 150px;
+  grid-template-columns: 44.84% 41.7%;
+  row-gap: 15px;
+
+  @include media-l {
+    align-items:  center;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    grid-template-columns: 48% 45%;
+    row-gap: 30px;
+  }
+
+  @include media-m {
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    grid-template-columns: 80%;
+    row-gap: 40px;
+  }
+
+  @include media-s {
+    padding-top: 85px;
+    padding-bottom: 85px;
+    grid-template-columns: 90%;
+    row-gap: 35px;
+  }
+
+  @include media-xs {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    grid-template-columns: 100%;
+    row-gap: 25px;
+  }
+
+  &__img {
+    width: 100%;
+
+    @include media-m {
+      order: -1;
+    }
+  }
+
+  &__title {
+    margin-bottom: 35px;
+    line-height: 105%;
+
+    @include media-s {
+      margin-bottom: 30px;
+    }
+
+    @include media-xs{
+      margin-bottom: 20px;
+    }
+  }
+
+  &__text {
+    letter-spacing: 0.2px;
+    line-height: 150%;
+  }
+
+  &__contacts {
+    display: grid;
+    grid-column: 1/3;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include media-m {
+      grid-column: auto;
+      grid-template-columns: 100%;
+      row-gap: 30px;
+    }
+
+    @include media-xs {
+      row-gap: 20px;
+    }
+  }
+
+  &__contact-column_left {
+    @include media-m {
+      order: 1;
+    }
+  }
+
+  &__contact-column_center {
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: rgb(194 194 194 / 100%);
+
+    @include flex-builder(row, center, center);
+
+    @include media-m {
+      @include flex-builder(row, flex-start, center);
+
+      border: none;
+    }
+  }
+
+  &__contact-column_right {
+    @include flex-builder(row, flex-end, center);
+
+    @include media-m {
+      @include flex-builder(row, flex-start, center);
+    }
+  }
+
+  &__text-small {
+    margin-bottom: 18px;
+
+    @include media-m {
+      display: none;
+    }
+  }
+
+  &__social-links-block {
+    display: grid;
+    column-gap: 24px;
+    grid-template-columns: repeat(4, 50px);
+
+    @include media-l {
+      column-gap: 20px;
+    }
+
+    @include media-xs {
+      grid-template-columns: repeat(4, 40px);
+    }
+  }
+
+  &__icon {
+    margin-right: 20px;
+    color: rgb(237 85 59 / 100%);
+    font-size: 30px;
+  }
+}

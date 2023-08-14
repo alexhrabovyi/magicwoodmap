@@ -318,38 +318,37 @@
 
 $icomoon-font-family: "Icons" !default;
 $icomoon-font-path: "../assets/fonts/Icons" !default;
-$icon-star: "\e900";
-$icon-star-filled: "\e901";
-$icon-account: "\e902";
-$icon-arrow-down: "\e903";
-$icon-arrow-right: "\e904";
-$icon-bag: "\e905";
-$icon-blogger: "\e906";
-$icon-calendar: "\e907";
-$icon-check: "\e908";
-$icon-chevron-left: "\e909";
-$icon-chevron-right: "\e90a";
-$icon-facebook: "\e90b";
-$icon-instagram: "\e90c";
-$icon-like: "\e90d";
-$icon-linkedin: "\e90e";
-$icon-loupe: "\e90f";
-$icon-mark: "\e910";
-$icon-pen: "\e911";
-$icon-twitter: "\e912";
-
-
+$icon-account: "\e900";
+$icon-arrow-down: "\e901";
+$icon-arrow-right: "\e902";
+$icon-bag: "\e903";
+$icon-blogger: "\e904";
+$icon-calendar: "\e905";
+$icon-check: "\e906";
+$icon-chevron-left: "\e907";
+$icon-chevron-right: "\e908";
+$icon-facebook: "\e909";
+$icon-instagram: "\e90a";
+$icon-like: "\e90b";
+$icon-linkedin: "\e90c";
+$icon-loupe: "\e90d";
+$icon-mark: "\e90e";
+$icon-pen: "\e90f";
+$icon-phone: "\e910";
+$icon-star: "\e911";
+$icon-star-filled: "\e912";
+$icon-twitter: "\e913";
 
 @font-face {
   font-display: block;
   font-family: '#{$icomoon-font-family}';
   font-style: normal;
   font-weight: normal;
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t1dwtt');
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t1dwtt#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?t1dwtt') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?t1dwtt') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?t1dwtt##{$icomoon-font-family}') format('svg');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?w8qv5u');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?w8qv5u#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?w8qv5u') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?w8qv5u') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?w8qv5u##{$icomoon-font-family}') format('svg');
 }
 
 i {
@@ -365,18 +364,6 @@ i {
   line-height: 1;
   speak: never;
   text-transform: none;
-}
-
-.icon-star {
-  &::before {
-    content: $icon-star; 
-  }
-}
-
-.icon-star-filled {
-  &::before {
-    content: $icon-star_filled; 
-  }
 }
 
 .icon-account {
@@ -472,6 +459,24 @@ i {
 .icon-pen {
   &::before {
     content: $icon-pen; 
+  }
+}
+
+.icon-phone {
+  &::before {
+    content: $icon-phone; 
+  }
+}
+
+.icon-star {
+  &::before {
+    content: $icon-star; 
+  }
+}
+
+.icon-star-filled {
+  &::before {
+    content: $icon-star_filled; 
   }
 }
 

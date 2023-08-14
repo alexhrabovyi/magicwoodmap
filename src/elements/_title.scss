@@ -67,6 +67,14 @@
     @include media-m {
       font-size: 48px;
     }
+
+    @include media-s {
+      font-size: 44px;
+    }
+
+    @include media-xs {
+      font-size: 38px;
+    }
   }
 
   &_fw-400 {
