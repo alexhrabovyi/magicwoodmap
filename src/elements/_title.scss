@@ -57,6 +57,22 @@
     font-size: 32px;
   }
 
+  &_36-px {
+    font-size: 36px;
+
+    @include media-m {
+      font-size: 32px;
+    }
+
+    @include media-s {
+      font-size: 28px;
+    }
+
+    @include media-xs {
+      font-size: 24px;
+    }
+  }
+
   &_60-px {
     font-size: 60px;
 
