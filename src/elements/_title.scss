@@ -51,6 +51,18 @@
 
   &_30-px {
     font-size: 30px;
+
+    @include media-m {
+      font-size: 28px;
+    }
+
+    @include media-s {
+      font-size: 26px;
+    }
+
+    @include media-xs {
+      font-size: 24px;
+    }
   }
 
   &_32-px {

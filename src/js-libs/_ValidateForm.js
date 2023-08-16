@@ -11,10 +11,16 @@ export default class ValidateForm {
     this.submitButton = this.form.querySelector('[type="submit"]');
     this.submitButton.addEventListener('click', this.submit.bind(this));
 
-    this.inputs = Array.from(this.form.querySelectorAll('input'));
+    this.inputs = Array.from(this.form.querySelectorAll('.input'));
     this.inputs.forEach((input) => {
       if (input.type === 'tel') new TelMask(input);
     });
+
+    this.inputsAndValidationObjects = [];
+    this.inputs.forEach((input) => {
+      this.inputsAndValidationObjects.push([input, new AddInputValidation(input)]);
+    });
+    console.log(this.inputsAndValidationObjects);
   }
 
   submit(e) {
@@ -22,8 +28,8 @@ export default class ValidateForm {
     const results = {};
 
     try {
-      this.inputs.forEach((input) => {
-        results[input.name] = new AddInputValidation(input).validate();
+      this.inputsAndValidationObjects.forEach(([input, validationObj]) => {
+        results[input.name] = validationObj.validate();
       });
     } catch (err) {
       console.log(err);

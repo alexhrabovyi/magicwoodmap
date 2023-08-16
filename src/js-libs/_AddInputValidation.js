@@ -28,12 +28,16 @@ export default class AddInputValidation {
   }
 
   showErrorMessage(message) {
-    this.createErrorMessage(message);
-    this.input.after(this.errorMessage);
+    if (this.input.nextElementSibling !== this.errorMessage) {
+      this.createErrorMessage(message);
+      this.input.after(this.errorMessage);
+    }
   }
 
   hideErrorMessage() {
-    this.errorMessage.remove();
+    if (this.input.nextElementSibling === this.errorMessage) {
+      this.errorMessage.remove();
+    }
   }
 
   validate() {
