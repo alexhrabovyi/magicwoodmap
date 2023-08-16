@@ -1,4 +1,4 @@
-import CopyTel from '../../js-libs/_copyTelButton';
+import CopyTel from '../../js-libs/_CopyTel';
 
 export default function setupCopyTelButton() {
   new CopyTel({

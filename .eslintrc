@@ -8,7 +8,8 @@
     "linebreak-style": "off",
     "import/extensions": "off",
     "no-new": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "no-shadow": "off"
   },
   "ignorePatterns": [
     "dist",

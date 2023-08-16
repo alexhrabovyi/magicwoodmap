@@ -1,22 +1,11 @@
 export default class TelMask {
-  constructor(el, errorClass) {
-    this.el = el;
-    this.errorClass = errorClass;
+  constructor(input) {
+    this.input = input;
 
-    this.addValidation();
+    this.addMask();
   }
 
-  showError() {
-    this.el.classList.add(this.errorClass);
-    this.el.setAttribute('aria-invalid', true);
-  }
-
-  hideError() {
-    this.el.classList.remove(this.errorClass);
-    this.el.removeAttribute('aria-invalid');
-  }
-
-  addValidation() {
+  addMask() {
     function createTel(str) {
       let tel = str.replace(/\d{1,2}/, '+38($&');
       tel = tel.replace(/(?<=\+38\(\d\d)\d(?=\d)/, '$&)');
@@ -24,21 +13,14 @@ export default class TelMask {
       tel = tel.replace(/(?<=-)\d{2}(?=\d)/, '$&-');
       return tel;
     }
-    this.el.addEventListener('focusin', (e) => {
+
+    this.input.addEventListener('focusin', (e) => {
       if (e.target.value.length < 3) {
         e.target.value = '+38';
       }
     }, { once: true });
 
-    this.el.addEventListener('focusin', () => {
-      this.hideError();
-    });
-
-    this.el.addEventListener('focusout', (e) => {
-      if (e.target.value.length !== 17) this.showError();
-    });
-
-    this.el.addEventListener('input', (e) => {
+    this.input.addEventListener('input', (e) => {
       if (e.target.value.length < 3) {
         e.target.value = '+38';
       }
@@ -53,7 +35,7 @@ export default class TelMask {
       }
     });
 
-    this.el.addEventListener('paste', (e) => {
+    this.input.addEventListener('paste', (e) => {
       e.preventDefault();
 
       let paste = (e.clipboardData || window.clipboardData).getData('text');

@@ -1,10 +1,6 @@
-import { addEmailValidation } from '../../js-libs/_emailMask';
+import ValidateForm from '../../js-libs/_ValidateForm';
 
-export default function subscribeAddEmailValidation() {
-  addEmailValidation(
-    '.subscribe__button',
-    '.subscribe__input',
-    '.subscribe__input-block',
-    'subscribe__input_incorrect',
-  );
+export default function setupSubscribeForm() {
+  const form = document.querySelector('.subscribe__form');
+  new ValidateForm(form);
 }

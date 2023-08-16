@@ -1,10 +1,6 @@
-import { addEmailValidation } from '../../js-libs/_emailMask';
+import ValidateForm from '../../js-libs/_ValidateForm';
 
-export default function footerAddEmailValidation() {
-  addEmailValidation(
-    '.footer__button-email',
-    '.footer__input-email',
-    '.footer__input-block',
-    'footer__input-email_invalid',
-  );
+export default function setupFooterForm() {
+  const form = document.querySelector('.footer__form');
+  new ValidateForm(form);
 }

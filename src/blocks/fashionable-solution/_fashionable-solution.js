@@ -1,7 +1,6 @@
-import TelMask from '../../js-libs/_telMask.js';
+import ValidateForm from '../../js-libs/_ValidateForm';
 
-export default function addTelValidation() {
-  const inputTel = document.querySelector('.fashionable-solution__input_white');
-
-  new TelMask(inputTel, 'input_invalid');
+export default function setupFashionableSolutionForm() {
+  const form = document.querySelector('.fashionable-solution__form ');
+  new ValidateForm(form);
 }

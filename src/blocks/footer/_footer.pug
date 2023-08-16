@@ -1,9 +1,9 @@
 footer(class="footer container")
   .footer__main-content 
     h2(class="title title_32-px footer__title_32-px") Magic Wood Map
-    .footer__input-block 
-      input(class="footer__input-email" type="email" placeholder="Ваш e-mail")
-      button(class="button footer__button-email" type="submit") Надіслати
+    form.footer__form
+      input(class="input footer__input" type="email" placeholder="Ваш e-mail" name="email")
+      button(class="button footer__button-submit" type="submit") Надіслати
     .footer__social-links-block 
       a(class="round-button footer__round-button" href="#" alt="Facebook")
         i.icon-facebook

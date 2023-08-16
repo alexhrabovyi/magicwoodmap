@@ -1,4 +1,4 @@
-import Slider from '../../js-libs/_slider.js';
+import Slider from '../../js-libs/_Slider.js';
 
 export default function createSliders() {
   new Slider({

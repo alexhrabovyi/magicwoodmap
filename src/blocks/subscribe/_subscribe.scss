@@ -51,23 +51,9 @@
     line-height: 208%;
   }
 
-  &__input-block {
+  &__form {
     position: relative;
     width: 100%;
-
-    &::before {
-      position: absolute;
-      top: -25px;
-      left: 0;
-      color: rgb(255 107 107);
-      content: attr(data-before);
-      font-family: Inter, sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      letter-spacing: 1.289px;
-      line-height: 18px;
-    }
   }
 
   &__input {
@@ -80,11 +66,8 @@
     color: rgb(122 122 122);
     font-family: Inter, sans-serif;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     letter-spacing: 0.64px;
-    line-height: normal;
-    transition: .05s all ease-in-out;
 
     @include media-xs {
       padding-right: 98px;
@@ -93,11 +76,6 @@
     &:hover,
     &:focus {
       border-bottom: 2px solid rgb(195 195 195 / 100%);
-      outline: none;
-    }
-
-    &:focus::placeholder {
-      color: transparent;
     }
 
     &_incorrect {

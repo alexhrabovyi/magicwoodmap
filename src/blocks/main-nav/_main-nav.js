@@ -1,4 +1,5 @@
-import CopyTel from '../../js-libs/_copyTelButton';
+import CopyTel from '../../js-libs/_CopyTel';
+import ValidateForm from '../../js-libs/_ValidateForm';
 
 export default function setupMainNav() {
   class OpenMenu {
@@ -94,6 +95,9 @@ export default function setupMainNav() {
     telSelector: '.main-nav__tel-number',
     textHiddenClass: 'main-nav__tel-text_hidden',
   });
+
+  const form = document.querySelector('.main-nav__search-form');
+  new ValidateForm(form);
 }
 
 // {
