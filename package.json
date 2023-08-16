@@ -8,7 +8,7 @@
     "eslint:fix": "eslint src/**/*.js --fix",
     "stylelint": "stylelint **/*.scss",
     "stylelint:fix": "stylelint **/*.scss --fix",
-    "browser": "browser-sync start --server --watch --startPath='dist' --index='about-us.html' --no-notify",
+    "browser": "browser-sync start --server --watch --startPath='dist' --index='our-blog.html' --no-notify",
     "build:dev": "webpack",
     "build:prod": "npm run stylelint:fix && npm run eslint:fix && webpack --env production",
     "build:watch": "webpack watch",
