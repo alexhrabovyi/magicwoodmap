@@ -20,7 +20,6 @@ export default class ValidateForm {
     this.inputs.forEach((input) => {
       this.inputsAndValidationObjects.push([input, new AddInputValidation(input)]);
     });
-    console.log(this.inputsAndValidationObjects);
   }
 
   submit(e) {

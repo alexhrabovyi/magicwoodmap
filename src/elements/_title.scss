@@ -13,6 +13,14 @@
     font-size: 34px;
   }
 
+  @include media-s {
+    font-size: 30px;
+  }
+
+  @include media-xs {
+    font-size: 26px;
+  }
+
   &_ff-inter {
     font-family: Inter, sans-serif;
   }
@@ -43,6 +51,22 @@
 
   &_24-px {
     font-size: 24px;
+  }
+
+  &_26-px {
+    font-size: 26px;
+
+    @include media-m {
+      font-size: 24px;
+    }
+
+    @include media-s {
+      font-size: 22px;
+    }
+
+    @include media-xs {
+      font-size: 20px;
+    }
   }
 
   &_28-px {

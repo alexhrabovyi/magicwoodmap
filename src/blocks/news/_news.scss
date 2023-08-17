@@ -1,0 +1,148 @@
+.news {
+  @include flex-builder(column, none, center);
+
+  padding-top: 150px;
+  padding-bottom: 150px;
+
+  @include media-l {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  @include media-m {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  @include media-s {
+    padding-top: 85px;
+    padding-bottom: 85px;
+  }
+
+  @include media-xs {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  &__title-block {
+    width: 100%;
+
+    @include flex-builder(row, space-between, center);
+
+    margin-bottom: 75px;
+
+    @include media-l {
+      margin-bottom: 65px;
+    }
+
+    @include media-m {
+      margin-bottom: 55px;
+    }
+
+    @include media-s {
+      margin-bottom: 45px;
+    }
+  }
+
+  &__line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: rgb(224 224 224 / 100%);
+  }
+
+  &__title {
+    margin: 0 7.32%;
+  }
+
+  &__cards-block-wrapper {
+    @include flex-builder(row, center, flex-start);
+
+    overflow: hidden;
+    width: 100%;
+    transition: all .5s ease-in-out;
+  }
+
+  &__cards-block {
+    display: grid;
+    width: 100%;
+    justify-content: space-between;
+    grid-template-columns: repeat(3, 29.22%);
+    row-gap: 55px;
+
+    @include media-l {
+      grid-template-columns: repeat(3, 31%);
+    }
+
+    @include media-m {
+      width: 90%;
+      column-gap: 25px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-s {
+      width: 70%;
+      grid-template-columns: 1fr;
+      row-gap: 45px;
+    }
+
+    @include media-xs {
+      width: 100%;
+      max-width: 415px;
+      row-gap: 40px;
+    }
+  }
+
+  &__card {
+    text-decoration: none;
+  }
+
+  &__card-img {
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  &__card-date {
+    margin-bottom: 10px;
+  }
+
+  &__card-title {
+    margin-bottom: 25px;
+
+    @include media-m {
+      margin-bottom: 20px;
+    }
+
+    @include media-s {
+      margin-bottom: 15px;
+    }
+
+    @include media-xs {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__card-link {
+    margin-top: 15px;
+  }
+
+  &__button {
+    display: none;
+
+    @include media-m {
+      display: block;
+      width: 170px;
+      height: 50px;
+      margin-top: 50px;
+      font-size: 18px;
+    }
+
+    @include media-s {
+      margin-top: 45px;
+    }
+
+    @include media-xs {
+      margin-top: 40px;
+    }
+  }
+}
