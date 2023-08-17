@@ -11,6 +11,18 @@
     font-family: Inter, sans-serif;
   }
 
+  &_ff-lato {
+    font-family: Lato, sans-serif;
+  }
+
+  &_ff-josefin {
+    font-family: JosefinSans, sans-serif;
+  }
+
+  &_11-px {
+    font-size: 11px;
+  }
+
   &_13-px {
     font-size: 13px;
   }
@@ -133,5 +145,13 @@
 
   &_c-grey-11 {
     color: rgb(131 131 131 / 100%);
+  }
+
+  &_c-grey-12 {
+    color: rgb(154 154 154);
+  }
+
+  &_c-grey-13 {
+    color: rgb(138 143 185 / 100%);
   }
 }
