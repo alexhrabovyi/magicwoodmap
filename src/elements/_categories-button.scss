@@ -1,0 +1,52 @@
+.categories-button {
+  position: relative;
+  border-radius: 11px;
+  background-position: center center;
+  background-size: cover;
+  color: rgb(255 255 255);
+  font-family: Poppins, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  @include media-l {
+    font-size: 24px;
+  }
+
+  @include media-xs {
+    font-size: 20px;
+  }
+
+  &::before {
+    position: absolute;
+
+    @include flex-builder(row, center, end);
+
+    width: 100%;
+    height: 100%;
+    padding-bottom: 41px;
+    border-radius: 11px;
+    background: rgb(0 0 0 / 56%);
+    content: "";
+    transition: .3s all ease-in-out;
+
+    @include media-l {
+      padding-bottom: 35px;
+    }
+
+    @include media-m {
+      padding-bottom: 30px;
+    }
+
+    @include media-s {
+      padding-bottom: 20px;
+    }
+  }
+
+  &:hover::before {
+    height: 70px;
+    padding-bottom: 22px;
+  }
+
+}
