@@ -1,0 +1,23 @@
+// libs 
+
+@import "../../scss/reset";
+@import "../../scss/fonts";
+@import "../../scss/mixins";
+
+// elements 
+@import "../../elements/container";
+@import "../../elements/input";
+@import "../../elements/button";
+@import "../../elements/section-name";
+@import "../../elements/title";
+@import "../../elements/text";
+@import "../../elements/round-button";
+@import "../../elements/link";
+@import "../../elements/categories-button";
+
+// blocks
+@import "../../blocks/header/header";
+@import "../../blocks/main-nav/main-nav";
+@import "../../blocks/breadcrumbs/breadcrumbs";
+@import "../../blocks/call-back-form/call-back-form";
+@import "../../blocks/footer/footer";
