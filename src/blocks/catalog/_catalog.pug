@@ -1,0 +1,54 @@
+main(class="catalog container")
+  .catalog__amount-and-select-block
+    p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій: 6
+    .catalog__select-block
+      p(class="text text_14-px text_c-black-1 catalog__select-name") Сортувати по:
+      .catalog__select
+        button(class="catalog__select-chosen-block")
+          p(class="catalog__select-chosen-text") За замовчуванням 
+          i(class="icon-chevron-left catalog__select-chosen-icon")
+        .catalog__select-button-block 
+          button(class="catalog__select-button" data-select-type="default") За замовчуванням
+          button(class="catalog__select-button" data-select-type="name-A-Z") За назвою (А - Я)
+          button(class="catalog__select-button" data-select-type="name-Z-A") За назвою (Я - А)
+          button(class="catalog__select-button" data-select-type="price-up") За ціною (зменшення)
+          button(class="catalog__select-button" data-select-type="price-down") За ціною (зростання)
+          button(class="catalog__select-button" data-select-type="rate-up") За рейтингом (зменшення)
+          button(class="catalog__select-button" data-select-type="rate-down") За рейтингом (зростання)
+  .catalog__filter-and-card-block 
+    .catalog__filter-blocks
+      .catalog__filter-block 
+        p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Категорія
+      .catalog__filter-block 
+        p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Акції
+      .catalog__filter-block 
+        p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Виготовлено з:
+      .catalog__filter-block 
+        p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Ціновий діапазон
+    .catalog__card-block 
+      .catalog__card
+        a(class="catalog__card-img-link" href="#" alt="Одношарова мапа") 
+          img(class="catalog__card-img" src="../../blocks/catalog/images/map_1.png" alt="Дерев'яна мапа")
+        .catalog__card-desc-block 
+          a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="#" alt="Одношарова мапа") Одношарова мапа
+          .catalog__card-price-and-rate-block 
+            p(class="text text_ff-poppins text_c-orange catalog__card-current-price") 2 000 UAH
+            p(class="text text_ff-poppins text_c-grey-12 catalog__card-old-price") 3 000
+            .catalog__card-rate-block 
+              i(class="icon-star-filled catalog__star catalog__star_filled")
+              i(class="icon-star-filled catalog__star catalog__star_filled")
+              i(class="icon-star-filled catalog__star catalog__star_filledd")
+              i(class="icon-star-filled catalog__star catalog__star_filled")
+              i(class="icon-star catalog__star")
+          p(class="text text_c-grey-14 catalog__card-desc") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.
+          .catalog__card-button-block 
+            buttton(class="button button_transparent catalog__card-buy-button") Купити в 1 клік
+            button(class="round-button round-button_with-shadow round-button_small catalog__card-bag-button")
+              i.icon-bag
+            button(class="round-button round-button_with-shadow round-button_small catalog__card-like-button")
+              i.icon-like
+            a(class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="#" alt="Переглянути →") Переглянути →
+
+      
+
+

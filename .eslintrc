@@ -9,7 +9,8 @@
     "import/extensions": "off",
     "no-new": "off",
     "class-methods-use-this": "off",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "no-restricted-syntax": "off"
   },
   "ignorePatterns": [
     "dist",

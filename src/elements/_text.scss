@@ -23,6 +23,10 @@
     font-size: 11px;
   }
 
+  &_12-px {
+    font-size: 12px;
+  }
+
   &_13-px {
     font-size: 13px;
   }
@@ -153,5 +157,9 @@
 
   &_c-grey-13 {
     color: rgb(138 143 185 / 100%);
+  }
+
+  &_c-grey-14 {
+    color: rgb(146 149 170 / 100%);
   }
 }

@@ -3,6 +3,7 @@
 
   width: 49px;
   height: 49px;
+  border: none;
   border-radius: 50%;
   background-color: rgb(237 85 59);
   color: rgb(255 255 255);
@@ -34,27 +35,6 @@
     border-color: rgb(217 65 39);
     background-color: rgb(221 221 221);
     color: rgb(217 65 39);
-  }
-
-  &_big {
-    width: 55px;
-    height: 55px;
-
-    @include media-s {
-      width: 50px;
-      height: 50px;
-    }
-
-    @include media-xs {
-      width: 45px;
-      height: 45px;
-    }
-  }
-
-  &_small {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
   }
 
   &_with-shadow {
@@ -95,6 +75,27 @@
       border-color: rgb(217 65 39);
       background-color: rgb(217 65 39);
       color: rgb(221 221 221);
+    }
+  }
+
+  &_small {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  &_big {
+    width: 55px;
+    height: 55px;
+
+    @include media-s {
+      width: 50px;
+      height: 50px;
+    }
+
+    @include media-xs {
+      width: 45px;
+      height: 45px;
     }
   }
 }
