@@ -19,12 +19,36 @@ main(class="catalog container")
     .catalog__filter-blocks
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Категорія
+        span.catalog__line
+        div(class="catalog__checkbox-block" data-checkbox-name="categories")
+          button(class="catalog__checkbox-button" data-checkbox-value="Одношарові мапи")
+            i(class="icon-check catalog__checkbox-icon")
+            | Одношарові мапи
+          button(class="catalog__checkbox-button" data-checkbox-value="Багатошарові мапи")
+            i(class="icon-check catalog__checkbox-icon")
+            | Багатошарові мапи
+          button(class="catalog__checkbox-button" data-checkbox-value="Мапи з підсвідкою")
+            i(class="icon-check catalog__checkbox-icon")
+            | Мапи з підсвідкою
+          button(class="catalog__checkbox-button" data-checkbox-value="Додатки до мап")
+            i(class="icon-check catalog__checkbox-icon")
+            | Додатки до мап
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Акції
-      .catalog__filter-block 
-        p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Виготовлено з:
+        span.catalog__line
+        div(class="catalog__checkbox-block" data-checkbox-name="promotions")
+          button(class="catalog__checkbox-button" data-checkbox-value="Снижка 20%")
+            i(class="icon-check catalog__checkbox-icon")
+            | Снижка 20%
+          button(class="catalog__checkbox-button" data-checkbox-value="Снижка 5%")
+            i(class="icon-check catalog__checkbox-icon")
+            | Снижка 5%
+          button(class="catalog__checkbox-button" data-checkbox-value="Розпродаж")
+            i(class="icon-check catalog__checkbox-icon")
+            | Розпродаж
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Ціновий діапазон
+        span.catalog__line
     .catalog__card-block 
       .catalog__card
         a(class="catalog__card-img-link" href="#" alt="Одношарова мапа") 

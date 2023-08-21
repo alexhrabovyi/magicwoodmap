@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 export default function setupCatalog() {
   class Select {
     constructor(selectSelector, selectedId = 0) {
@@ -80,5 +81,25 @@ export default function setupCatalog() {
     }
   }
 
+  class Checkbox {
+    constructor(checkboxBlockSelector) {
+      this.checkboxBlock = document.querySelector(checkboxBlockSelector);
+      this.buttonActiveClass = 'catalog__checkbox-button_checked';
+
+      this.setup();
+    }
+
+    setup() {
+      this.checkboxBlock.addEventListener('click', this.toggle.bind(this), { passive: true });
+    }
+
+    toggle(e) {
+      const button = e.target.closest('.catalog__checkbox-button');
+      button.classList.toggle(this.buttonActiveClass);
+    }
+  }
+
   new Select('.catalog__select', 0);
+  new Checkbox('[data-checkbox-name="categories"]');
+  new Checkbox('[data-checkbox-name="promotions"]');
 }

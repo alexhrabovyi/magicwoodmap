@@ -123,18 +123,63 @@
 
   &__filter-name {
     position: relative;
-    line-height: 30px;
+    margin-bottom: 6px;
+  }
 
-    &::after {
-      position: absolute;
-      bottom: -7px;
-      left: 0;
-      display: block;
-      width: 40%;
-      height: 1px;
-      background: rgb(200 200 200);
-      content: "";
+  &__line { 
+    display: block;
+    width: 40%;
+    height: 1px;
+    margin-bottom: 16px;
+    background: rgb(200 200 200);
+  }
+
+  &__checkbox-block {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr;
+  }
+
+  &__checkbox-button {
+    border: none;
+    background: none;
+    color: rgb(154 154 154 / 100%);
+    cursor: pointer;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: left;
+    transition: .05s all ease-in-out;
+
+    @include flex-builder(row, none, center);
+
+    &:hover, &:focus {
+      color: rgb(237 85 59 / 100%);
+      outline: none;
     }
+
+    &:active {
+      color: rgb(217 65 39);
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    &_checked .catalog__checkbox-icon {
+      background-color: rgb(237 85 59 / 100%);
+      color: rgb(255 255 255);
+    }
+  } 
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  &__checkbox-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-right: 9px;
+    background-color: rgb(255 224 219 / 100%);
+    color: rgb(237 85 59 / 100%);
+    font-size: 10px;
+
+    @include flex-builder(row, center, center);
   }
 
   &__card {
