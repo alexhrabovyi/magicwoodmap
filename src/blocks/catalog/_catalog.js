@@ -99,7 +99,26 @@ export default function setupCatalog() {
     }
   }
 
+  class Range {
+    constructor(rangeBlockSelector) {
+      this.rangeBlock = document.querySelector(rangeBlockSelector);
+
+      this.setup();
+    }
+
+    setup() {
+      this.buttonLeft = this.rangeBlock.querySelector('[data-range-btn-left]');
+      this.buttonRight = this.rangeBlock.querySelector('[data-range-btn-right]');
+
+      setTimeout(() => {
+        this.lineWidth = this.rangeBlock.offsetWidth;
+        console.log(this.lineWidth);
+      }, 0);
+    }
+  }
+
   new Select('.catalog__select', 0);
   new Checkbox('[data-checkbox-name="categories"]');
   new Checkbox('[data-checkbox-name="promotions"]');
+  new Range('.catalog__range-block');
 }

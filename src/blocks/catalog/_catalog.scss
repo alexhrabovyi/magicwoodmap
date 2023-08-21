@@ -182,6 +182,55 @@
     @include flex-builder(row, center, center);
   }
 
+  &__range-block {
+    width: 100%;
+
+    @include flex-builder(column, none, none);
+
+    gap: 15px;
+  }
+
+  &__range-line-block {
+    @include flex-builder(row, space-between, center);
+
+    position: relative;
+  }
+
+  &__range-button {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border: none;
+    border-radius: 50%;
+    background: rgb(237 85 59 / 100%);
+    cursor: pointer;
+    transition: .05s all ease-in-out;
+
+    &:hover, &:focus {
+      outline: none;
+      transform: scale(1.2);
+    }
+
+    &:active {
+      background: rgb(217 65 39);
+    }
+  }
+
+  &__range-line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: rgb(237 85 59 / 100%);
+  }
+
+  &__range-num-block {
+    @include flex-builder(row, space-between, center);
+
+    color: rgb(154 154 154 / 100%);
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+  }
+
   &__card {
     display: grid;
     padding: 17px 55px;

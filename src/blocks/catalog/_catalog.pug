@@ -49,6 +49,14 @@ main(class="catalog container")
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Ціновий діапазон
         span.catalog__line
+        div(class="catalog__range-block" data-min-price data-max-price)
+          .catalog__range-line-block
+            button(class="catalog__range-button" data-range-btn-left)
+            span(class="catalog__range-line")
+            button(class="catalog__range-button" data-range-btn-right)
+          .catalog__range-num-block
+            p(class="catalog__range-num") 0
+            p(class="cataolog__range-num") 100
     .catalog__card-block 
       .catalog__card
         a(class="catalog__card-img-link" href="#" alt="Одношарова мапа") 
