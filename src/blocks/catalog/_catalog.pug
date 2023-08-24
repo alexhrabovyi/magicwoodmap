@@ -5,7 +5,7 @@ main(class="catalog container")
       p(class="text text_14-px text_c-black-1 catalog__select-name") Сортувати по:
       .catalog__select
         button(class="catalog__select-chosen-block")
-          p(class="catalog__select-chosen-text") За замовчуванням 
+          p(class="catalog__select-chosen-text") 
           i(class="icon-chevron-left catalog__select-chosen-icon")
         .catalog__select-button-block 
           button(class="catalog__select-button" data-select-type="default") За замовчуванням
@@ -51,12 +51,12 @@ main(class="catalog container")
         span.catalog__line
         div(class="catalog__range-block" data-min-price data-max-price)
           .catalog__range-line-block
-            button(class="catalog__range-button" data-range-btn-left)
+            button(class="catalog__range-button" id="range-btn-min")
             span(class="catalog__range-line")
-            button(class="catalog__range-button" data-range-btn-right)
-          .catalog__range-num-block
-            p(class="catalog__range-num") 0
-            p(class="cataolog__range-num") 100
+            button(class="catalog__range-button" id="range-btn-max")
+          .catalog__range-input-block
+            input(class="input catalog__range-input" id="range-input-min" type="number" min="32" max="1434" value="32")
+            input(class="input catalog__range-input" id="range-input-max" type="number" min="32" max="1434" value="1434")
     .catalog__card-block 
       .catalog__card
         a(class="catalog__card-img-link" href="#" alt="Одношарова мапа") 

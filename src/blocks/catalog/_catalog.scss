@@ -187,7 +187,7 @@
 
     @include flex-builder(column, none, none);
 
-    gap: 15px;
+    gap: 25px;
   }
 
   &__range-line-block {
@@ -223,12 +223,22 @@
     background: rgb(237 85 59 / 100%);
   }
 
-  &__range-num-block {
+  &__range-input-block {
     @include flex-builder(row, space-between, center);
+  }
 
+  &__range-input {
+    width: 70px;
+    padding: 2px;
+    border: 1px solid rgb(154 154 154 / 100%);
     color: rgb(154 154 154 / 100%);
     font-family: Montserrat, sans-serif;
     font-size: 16px;
+
+    &:hover, &:focus {
+      border-color: rgb(84 83 83);
+      color: rgb(84 83 83);
+    }
   }
 
   &__card {
