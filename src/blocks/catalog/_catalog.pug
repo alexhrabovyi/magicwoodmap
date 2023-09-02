@@ -1,6 +1,7 @@
 main(class="catalog container")
   .catalog__amount-and-select-block
-    p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій: 6
+    p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій:
+      span(id='card-amount')
     .catalog__select-block
       p(class="text text_14-px text_c-black-1 catalog__select-name") Сортувати по:
       .catalog__select
@@ -11,10 +12,10 @@ main(class="catalog container")
           button(class="catalog__select-button" data-select-type="default") За замовчуванням
           button(class="catalog__select-button" data-select-type="name-A-Z") За назвою (А - Я)
           button(class="catalog__select-button" data-select-type="name-Z-A") За назвою (Я - А)
-          button(class="catalog__select-button" data-select-type="price-up") За ціною (зменшення)
-          button(class="catalog__select-button" data-select-type="price-down") За ціною (зростання)
-          button(class="catalog__select-button" data-select-type="rate-up") За рейтингом (зменшення)
-          button(class="catalog__select-button" data-select-type="rate-down") За рейтингом (зростання)
+          button(class="catalog__select-button" data-select-type="price-down") За ціною (зменшення)
+          button(class="catalog__select-button" data-select-type="price-up") За ціною (зростання)
+          button(class="catalog__select-button" data-select-type="rate-down") За рейтингом (зменшення)
+          button(class="catalog__select-button" data-select-type="rate-up") За рейтингом (зростання)
   .catalog__filter-and-card-block 
     .catalog__filter-blocks
       .catalog__filter-block 
@@ -27,25 +28,25 @@ main(class="catalog container")
           button(class="catalog__checkbox-button" data-checkbox-value="Багатошарові мапи")
             i(class="icon-check catalog__checkbox-icon")
             | Багатошарові мапи
-          button(class="catalog__checkbox-button" data-checkbox-value="Мапи з підсвідкою")
+          button(class="catalog__checkbox-button" data-checkbox-value="Мапи з підсвічуванням")
             i(class="icon-check catalog__checkbox-icon")
-            | Мапи з підсвідкою
+            | Мапи з підсвічуванням
           button(class="catalog__checkbox-button" data-checkbox-value="Додатки до мап")
             i(class="icon-check catalog__checkbox-icon")
             | Додатки до мап
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Акції
         span.catalog__line
-        div(class="catalog__checkbox-block" data-checkbox-name="promotions")
-          button(class="catalog__checkbox-button" data-checkbox-value="Снижка 20%")
+        div(class="catalog__checkbox-block" data-checkbox-name="discount")
+          button(class="catalog__checkbox-button" data-checkbox-value="5")
             i(class="icon-check catalog__checkbox-icon")
-            | Снижка 20%
-          button(class="catalog__checkbox-button" data-checkbox-value="Снижка 5%")
+            | Знижка 5%
+          button(class="catalog__checkbox-button" data-checkbox-value="10")
             i(class="icon-check catalog__checkbox-icon")
-            | Снижка 5%
-          button(class="catalog__checkbox-button" data-checkbox-value="Розпродаж")
+            | Знижка 10%
+          button(class="catalog__checkbox-button" data-checkbox-value="20")
             i(class="icon-check catalog__checkbox-icon")
-            | Розпродаж
+            | Знижка 20%
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Ціновий діапазон
         span.catalog__line
@@ -55,31 +56,18 @@ main(class="catalog container")
             span(class="catalog__range-line")
             button(class="catalog__range-button" id="range-btn-max")
           .catalog__range-input-block
-            input(class="input catalog__range-input" id="range-input-min" type="number" min="32" max="1434" value="32")
-            input(class="input catalog__range-input" id="range-input-max" type="number" min="32" max="1434" value="1434")
-    .catalog__card-block 
-      .catalog__card
-        a(class="catalog__card-img-link" href="#" alt="Одношарова мапа") 
-          img(class="catalog__card-img" src="../../blocks/catalog/images/map_1.png" alt="Дерев'яна мапа")
-        .catalog__card-desc-block 
-          a(class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="#" alt="Одношарова мапа") Одношарова мапа
-          .catalog__card-price-and-rate-block 
-            p(class="text text_ff-poppins text_c-orange catalog__card-current-price") 2 000 UAH
-            p(class="text text_ff-poppins text_c-grey-12 catalog__card-old-price") 3 000
-            .catalog__card-rate-block 
-              i(class="icon-star-filled catalog__star catalog__star_filled")
-              i(class="icon-star-filled catalog__star catalog__star_filled")
-              i(class="icon-star-filled catalog__star catalog__star_filledd")
-              i(class="icon-star-filled catalog__star catalog__star_filled")
-              i(class="icon-star catalog__star")
-          p(class="text text_c-grey-14 catalog__card-desc") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.
-          .catalog__card-button-block 
-            buttton(class="button button_transparent catalog__card-buy-button") Купити в 1 клік
-            button(class="round-button round-button_with-shadow round-button_small catalog__card-bag-button")
-              i.icon-bag
-            button(class="round-button round-button_with-shadow round-button_small catalog__card-like-button")
-              i.icon-like
-            a(class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="#" alt="Переглянути →") Переглянути →
+            input(class="input catalog__range-input" id="range-input-min" type="number" min="" max="" value="")
+            input(class="input catalog__range-input" id="range-input-max" type="number" min="" max="" value="")
+    .catalog__card-block
+    .catalog__pagination-block
+      button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-prev")
+        i.icon-chevron-left
+      .catalog__pagination-buttons
+        //- button(class="catalog__pagination-button" data-pagination-id='0') 1,
+        //- button(class="catalog__pagination-button" data-pagination-id='1') 2,
+      button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-next")
+        i.icon-chevron-right
+    
 
       
 
