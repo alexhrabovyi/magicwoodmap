@@ -1,6 +1,8 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-classes-per-file */
+import SetupMenu from '../../js-libs/_SetupMenu';
+
 import img1 from './images/map_1.png';
 import img2 from './images/map_2.png';
 import img3 from './images/map_3.png';
@@ -899,4 +901,11 @@ export default function setupCatalog() {
   new Checkbox('[data-checkbox-name="categories"]', renderCardsInstance);
   new Checkbox('[data-checkbox-name="discount"]', renderCardsInstance);
   const rangeInstance = new Range('.catalog__range-block', renderCardsInstance);
+  new SetupMenu({
+    buttonsSelector: '#filter-menu-button',
+    contentSelector: '.catalog__filter-blocks',
+    backdropSelector: '.catalog__backdrop',
+    contentActiveClass: 'catalog__filter-blocks_active',
+    backdropActiveClass: 'backdrop_active',
+  });
 }

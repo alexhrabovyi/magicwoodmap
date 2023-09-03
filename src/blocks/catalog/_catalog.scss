@@ -2,10 +2,92 @@
   padding-top: 150px;
   padding-bottom: 150px;
 
+  @include media-l {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  @include media-m {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  @include media-s {
+    padding-top: 85px;
+    padding-bottom: 85px;
+  }
+
+  @include media-xs {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+
   &__amount-and-select-block {
     @include flex-builder(row, space-between, center);
 
     margin-bottom: 75px;
+
+    @include media-m {
+      display: grid;
+      margin-bottom: 60px;
+      gap: 10px;
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
+    }
+    
+    @include media-s {
+      margin-bottom: 50px;
+    }
+
+    @include media-xs {
+      gap: 20px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__open-filters-button {
+    display: none;
+    border: none;
+    background: none;
+    color: rgb(237 85 59 / 100%);
+    cursor: pointer;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all .05s ease-in-out;
+
+    &:hover, &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: rgb(217 65 39);
+    }
+
+    @include media-m {
+      display: block;
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+
+    @include media-xs {
+      grid-column: 1/2;
+      justify-self: flex-start;
+    }
+  }
+
+  &__amount {
+    @include media-m {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+
+    @include media-xs {
+      grid-row: 3/4;
+      justify-self: flex-start;
+    }
   }
 
   &__select-block {
@@ -15,14 +97,24 @@
     gap: 23px;
     grid-template-columns: 1fr 235px;
     grid-template-rows: 34px;
+
+    @include media-m {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+
+    @include media-xs {
+      grid-column: 1/2;
+      justify-self: flex-start;
+    }
   }
 
   &__select {
     position: absolute;
     top: 0;
     overflow: hidden;
-    width: 235px;
-    height: 34px;
+    width: 100%;
+    height: 100%;
     border: 1px solid rgb(231 230 239 / 100%);
     background: rgb(255 255 255);
     grid-column: 2/3;
@@ -112,13 +204,75 @@
   &__filter-and-card-block {
     display: grid;
     gap: 58px;
-    grid-template-columns: 215px 959px;
+    grid-template-columns: 215px 1fr;
+
+    @include media-m {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__filter-blocks {
     @include flex-builder(column, none, none);
-
+    
     gap: 40px;
+
+    @include media-m {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      padding: 50px 151px 85px;
+      border-radius: 0 5px 5px 0;
+      background: rgb(255 255 255);
+      transform: translateX(-100%);
+      transition: all .5s ease-in-out;
+
+      &_active {
+        transform: translateX(0);
+      }
+    }
+
+    @include media-s {
+      width: 100%;
+      padding-right: 5%;
+      padding-bottom: 50px;
+      padding-left: 14.75%;
+      border-radius: 0;
+    }
+
+    @include media-xs {
+      padding-bottom: 20px;
+      padding-left: 8%;
+    }
+  }
+
+  &__backdrop {
+    z-index: 200;
+  }
+
+  &__filter-title {
+    display: none;
+
+    @include media-m {
+      display: block;
+    }
+  }
+
+  &__filter-close-button {
+    display: none;
+
+    @include media-m {
+      position: absolute;
+      top: 30px;
+      right: 30;
+      display: block;
+    }
+  }
+
+  &__filter-block {
+    @include media-m {
+      width: 215px;
+    }
   }
 
   &__filter-name {
@@ -188,8 +342,8 @@
     gap: 25px;
 
     &_disabled {
-      pointer-events: none;
       opacity: 0.5;
+      pointer-events: none;
     }
   }
 
@@ -246,26 +400,60 @@
 
   &__card-block {
     display: grid;
+    align-items: flex-start;
     gap: 40px;
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     transition: all .4s ease-in-out;
-    align-items: flex-start;
+
+    @include media-s {
+      justify-content: center;
+      grid-template-columns: 70%;
+    }
+
+    @include media-xs {
+      grid-template-columns: 100%;
+    }
   }
 
   &__card {
     display: grid;
+    width: 100%;
+    max-width: 960px;
     padding: 17px 55px;
     border-radius: 5px;
     background: rgb(255 255 255);
     box-shadow: 0 0 20px 5px rgb(248 246 253 / 75%);
     gap: 29px;
     grid-template-columns: 284px 1fr;
+
+    @include media-l {
+      align-items:  center;
+      padding: 17px 2.5%;
+      gap: 2.497%;
+      grid-template-columns: 40% 1fr
+    }
+
+    @include media-s {
+      border-radius: 11px;
+      grid-template-columns: 1fr;
+    }
+
+    @include media-xs {
+      width: 100%;
+      max-width: 372px;
+      justify-self: center;
+    }
   }
 
   &__card-img {
     width: 100%;
     height: 197px;
     border-radius: 11px;
+
+    @include media-l {
+      height: auto;
+    }
   }
 
   &__card-title-link {
@@ -295,12 +483,32 @@
   &__card-desc {
     margin-bottom: 40px;
     line-height: 175%;
+
+    @include media-l {
+      margin-bottom: 15px;
+    }
+
+    @include media-m {
+      margin-bottom: 30px;
+    }
+
+    @include media-s {
+      margin-bottom: 15px;
+    }
   }
 
   &__card-button-block {
     @include flex-builder(row, none, center);
 
     gap: 20px;
+
+    @include media-l {
+      gap: 15px;
+    }
+
+    @include media-s {
+      margin-bottom: 17px;
+    }
   }
 
   &__card-buy-button {
@@ -310,19 +518,35 @@
     font-size: 14px;
 
     @include flex-builder(row, center, center);
+
+    @include media-l {
+      width: 120px;
+    }
+
+    @include media-m {
+      width: 140px;
+    }
   }
 
   &__card-more-info-link {
     line-height: 28px;
+
+    @include media-l {
+      font-size: 14px;
+      line-height: 100%;
+    }
   }
 
   &__pagination-block {
     display: none;
+    align-items: center;
+    justify-content: center;
     gap: 30px;
     grid-column: 2/3;
 
-    justify-content: center;
-    align-items: center;
+    @include media-m {
+      grid-column: 1/2;
+    }
   }
 
   &__pagination-round-button_disabled {
@@ -332,9 +556,9 @@
 
   &__pagination-buttons {
     @include flex-builder(row, center, center);
-    transition: all .4s ease-in-out;
 
     gap: 10px;
+    transition: all .4s ease-in-out;
   }
 
   &__pagination-button {

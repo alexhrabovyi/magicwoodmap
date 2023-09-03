@@ -1,0 +1,14 @@
+.close-button {
+  border: none;
+  background: none;
+  color: rgb(0 0 0);
+  font-size: 50px;
+  font-weight: 300;
+  transform: rotate(45deg);
+  transition: all .05s ease-in-out;
+
+  &:hover, &:focus {
+    outline: none;
+    transform: scale(1.2) rotate(45deg);
+  }
+}
