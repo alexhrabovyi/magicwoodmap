@@ -1,147 +1,145 @@
+/* eslint-disable max-classes-per-file */
 export default class SetupMenu {
   constructor(options) {
-    this.openAndCloseButtons = document.querySelectorAll(options.buttonsSelector);
+    this.openButtons = document.querySelectorAll(options.openButtonsSelector);
+    this.closeButtons = document.querySelectorAll(options.closeButtonsSelector);
+    this.toggleButtons = document.querySelectorAll(options.toggleButtonsSelector);
     this.content = document.querySelector(options.contentSelector);
-    this.backdrop = document.querySelector(options.backdropSelector);
-    this.buttonActiveClass = options.buttonActiveClass;
-    this.contentActiveClass = options.contentActiveClass;
-    this.backdropActiveClass = options.backdropActiveClass;
 
-    this.isShown = false;
+    this.openButtonActiveClass = options.openButtonActiveClass;
+    this.closeButtonActiveClass = options.closeButtonActiveClass;
+    this.backdropActiveClass = 'backdrop_active';
+    this.menuClass = 'menu';
+    this.menuActiveClass = 'menu_active';
+
+    if (options.animationFromLeft) {
+      this.menuHideClass = 'menu_animationLeft';
+    } else {
+      this.menuHideClass = 'menu_animationRight';
+    }
+
+    this.isOpen = false;
 
     this.setup();
   }
 
   setup() {
-    this.openAndCloseButtons.forEach((openButton) => {
-      openButton.addEventListener('click', this.onClickToggle.bind(this), { passive: true });
-    });
+    this.mainNavPanel = document.querySelector('.main-nav__mobile-panel');
+    this.backdrop = document.querySelector('.backdrop');
+
+    if (!this.backdrop) {
+      this.backdrop = document.createElement('div');
+      this.backdrop.classList.add('backdrop');
+      document.body.prepend(this.backdrop);
+    }
+
+    this.content.classList.add(this.menuClass, this.menuHideClass);
+
     this.backdrop.addEventListener('click', this.close.bind(this), { passive: true });
     window.addEventListener('orientationchange', this.onOrientationChange.bind(this), { passive: true });
-  }
 
-  getVisibleContentHeight() {
-    const clientHeight = window.innerHeight;
-
-    if (this.content.classList.contains('main-nav__mobile-content')) {
-      const menuPanelHeight = document.querySelector('.main-nav__mobile-panel').offsetHeight;
-      return clientHeight - menuPanelHeight;
+    if (this.toggleButtons) {
+      this.toggleButtons.forEach((button) => {
+        button.addEventListener('click', this.toggle.bind(this), { passive: true });
+      });
     }
-    return clientHeight;
+
+    if (this.openButtons) {
+      this.openButtons.forEach((button) => {
+        button.addEventListener('click', this.open.bind(this), { passive: true });
+      });
+    }
+
+    if (this.closeButtons) {
+      this.closeButtons.forEach((button) => {
+        button.addEventListener('click', this.close.bind(this), { passive: true });
+      });
+    }
   }
 
-  isContentOverflow() {
-    const contentScrollHeight = this.content.scrollHeight;
-    return contentScrollHeight > this.getVisibleContentHeight();
-  }
-
-  onOrientationChange() {
-    if (this.isShown) this.close();
-  }
-
-  onClickToggle() {
-    if (this.isShown) {
-      this.close();
+  toggle() {
+    if (!this.isOpen) {
+      this.open();
     } else {
-      this.show();
+      this.close();
     }
   }
 
-  show() {
-    this.isShown = true;
-    this.content.scrollTop = 0;
-    this.content.style.height = `${this.getVisibleContentHeight()}px`;
+  open() {
+    if (this.isOpen) return;
+    this.isOpen = true;
 
-    this.openAndCloseButtons.forEach((openButton) => {
-      openButton.classList.add(this.buttonActiveClass);
+    this.openButtons.forEach((button) => {
+      button.classList.add(this.openButtonActiveClass);
     });
-    this.backdrop.classList.add(this.backdropActiveClass);
-    this.content.classList.add(this.contentActiveClass);
+    this.closeButtons.forEach((button) => {
+      button.classList.remove(this.closeButtonActiveClass);
+    });
 
+    const openMenus = document.querySelectorAll(`.${this.menuActiveClass}`);
+    openMenus.forEach((menu) => {
+      menu.classList.remove(this.menuActiveClass);
+    });
+
+    this.content.style.top = `${this.contentTop}px`;
+    this.content.style.height = `${this.visibleContentHeight}px`;
+    this.content.classList.add(this.menuActiveClass);
+
+    if (this.isContentOverflow) {
+      this.content.style.overflowY = 'scroll';
+    }
+
+    this.backdrop.classList.add(this.backdropActiveClass);
     document.body.style.overflow = 'hidden';
-    if (this.isContentOverflow()) this.content.style.overflowY = 'scroll';
   }
 
   close() {
-    this.isShown = false;
+    if (!this.isOpen) return;
+    this.isOpen = false;
 
-    this.openAndCloseButtons.forEach((openButton) => {
-      openButton.classList.remove(this.buttonActiveClass);
+    this.openButtons.forEach((button) => {
+      button.classList.remove(this.openButtonActiveClass);
     });
-    this.backdrop.classList.remove(this.backdropActiveClass);
-    this.content.classList.remove(this.contentActiveClass);
+    this.closeButtons.forEach((button) => {
+      button.classList.add(this.closeButtonActiveClass);
+    });
 
+    if (this.isContentOverflow) {
+      this.content.style.overflowY = '';
+    }
+    this.content.classList.remove(this.menuActiveClass);
+
+    this.backdrop.classList.remove(this.backdropActiveClass);
     document.body.style.overflow = '';
   }
+
+  onOrientationChange() {
+    if (this.isOpen) this.close();
+  }
+
+  get contentTop() {
+    let top = this.mainNavPanel.offsetHeight;
+
+    if (window.innerWidth > 768 && window.pageYOffset <= 70) {
+      top = this.mainNavPanel.getBoundingClientRect().bottom;
+    }
+
+    return top;
+  }
+
+  get visibleContentHeight() {
+    const clientHeight = window.innerHeight;
+    let menuPanelHeight = this.mainNavPanel.offsetHeight;
+
+    if (window.innerWidth > 768 && window.pageYOffset <= 70) {
+      menuPanelHeight = this.mainNavPanel.getBoundingClientRect().bottom;
+    }
+
+    return clientHeight - menuPanelHeight;
+  }
+
+  get isContentOverflow() {
+    const contentScrollHeight = this.content.scrollHeight;
+    return contentScrollHeight > this.visibleContentHeight;
+  }
 }
-
-// export default function setupMenu() {
-//   class SetupMenu {
-//     constructor(options) {
-//       this.openButtons = document.querySelectorAll(options.openButtonsSelector);
-//       this.closeButtons = document.querySelectorAll(options.closeButtonsSelector);
-//       this.content = document.querySelector(options.contentSelector);
-//       this.backdrop = document.querySelector(options.backdropSelector);
-
-//       this.openButtonActiveClass = options.openButtonActiveClass;
-//       this.closeButtonActiveClass = options.closeButtonActiveClass;
-//       this.contentActiveClass = options.contentActiveClass;
-//       this.backdropActiveClass = options.backdropActiveClass;
-
-//       this.setup();
-//     }
-
-//     setup() {
-//       this.openButtons.forEach((button) => {
-//         button.addEventListener('click', this.show.bind(this), { passive: true });
-//       });
-//       this.closeButtons.forEach((button) => {
-//         button.addEventListener('click', this.close.bind(this), { passive: true });
-//       });
-//       this.backdrop.addEventListener('click', this.close.bind(this), { passive: true });
-//       window.addEventListener('orientationchange', this.close.bind(this), { passive: true });
-//     }
-
-//     get clientHeight() {
-//       const { clientHeight } = document.documentElement;
-//       return clientHeight;
-//     }
-
-//     isContentOverflow() {
-//       const contentScrollHeight = this.content.scrollHeight;
-//       return contentScrollHeight > this.clientHeight;
-//     }
-
-//     show() {
-//       this.content.scrollTop = 0;
-//       this.content.style.height = `${this.clientHeight}px`;
-
-//       this.openButtons.forEach((openButton) => {
-//         openButton.classList.add(this.openButtonActiveClass);
-//       });
-//       this.closeButtons.forEach((closeButton) => {
-//         closeButton.classList.remove(this.closeButtonActiveClass);
-//       });
-
-//       this.backdrop.classList.add(this.backdropActiveClass);
-//       this.content.classList.add(this.contentActiveClass);
-
-//       document.body.style.overflow = 'hidden';
-//       if (this.isContentOverflow()) this.content.style.overflowY = 'scroll';
-//     }
-
-//     close() {
-//       this.openButtons.forEach((openButton) => {
-//         openButton.classList.remove(this.openButtonActiveClass);
-//       });
-//       this.closeButtons.forEach((closeButton) => {
-//         closeButton.classList.add(this.closeButtonActiveClass);
-//       });
-
-//       this.backdrop.classList.remove(this.backdropActiveClass);
-//       this.content.classList.remove(this.contentActiveClass);
-
-//       document.body.style.overflow = '';
-//     }
-//   }
-// }

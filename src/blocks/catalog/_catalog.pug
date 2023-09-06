@@ -1,7 +1,6 @@
 main(class="catalog container")
-  div(class='backdrop catalog__backdrop')
   .catalog__amount-and-select-block
-    button(class="catalog__open-filters-button" id="filter-menu-button") Відкрити фільтр
+    button(class="catalog__open-filters-button") Відкрити фільтр
     p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій:
       span(id='card-amount')
     .catalog__select-block
@@ -21,7 +20,7 @@ main(class="catalog container")
   .catalog__filter-and-card-block 
     .catalog__filter-blocks
       p(class='title title_30-px catalog__filter-title') Фільтр
-      button(class="close-button catalog__filter-close-button" id="filter-menu-button") +
+      button(class="close-button catalog__filter-close-button") +
       .catalog__filter-block 
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Категорія
         span.catalog__line
@@ -69,8 +68,3 @@ main(class="catalog container")
       .catalog__pagination-buttons
       button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-next")
         i.icon-chevron-right
-    
-
-      
-
-

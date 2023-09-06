@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-classes-per-file */
+import generateRateStars from '../../js-libs/_generateRateStars';
 import SetupMenu from '../../js-libs/_SetupMenu';
 
 import img1 from './images/map_1.png';
@@ -19,7 +20,7 @@ export default function setupCatalog() {
     titleLinkText: 'Одношарова мапа',
     currentPrice: 3000,
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4,
+    rate: 3.5,
     categories: 'Одношарові мапи',
   },
   {
@@ -31,7 +32,7 @@ export default function setupCatalog() {
     currentPrice: 3515,
     oldPrice: 3700,
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4,
+    rate: 3.7,
     categories: 'Багатошарові мапи',
   },
   {
@@ -43,7 +44,7 @@ export default function setupCatalog() {
     currentPrice: 4050,
     oldPrice: 4500,
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4,
+    rate: 4.1,
     categories: 'Мапи з підсвічуванням',
   },
   {
@@ -55,7 +56,7 @@ export default function setupCatalog() {
     currentPrice: 4500,
     oldPrice: 5000,
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4,
+    rate: 5,
     categories: 'Багатошарові мапи',
   },
   {
@@ -67,7 +68,7 @@ export default function setupCatalog() {
     currentPrice: 5130,
     oldPrice: 5700,
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4,
+    rate: 4.4,
     categories: 'Мапи з підсвічуванням',
   },
   {
@@ -166,13 +167,7 @@ export default function setupCatalog() {
           <div class="catalog__card-price-and-rate-block">
             <p class="text text_ff-poppins text_c-orange catalog__card-current-price">${formatPrice(options.currentPrice)} UAH</p>
             <p class="text text_ff-poppins text_c-grey-12 catalog__card-old-price">${formatPrice(options.oldPrice) || ''}</p>
-            <div class="catalog__card-rate-block">
-              <i class="icon-star-filled catalog__star catalog__star_filled"></i>
-              <i class="icon-star-filled catalog__star catalog__star_filled"></i>
-              <i class="icon-star-filled catalog__star catalog__star_filled"></i>
-              <i class="icon-star-filled catalog__star catalog__star_filled"></i>
-              <i class="icon-star catalog__star"></i>
-            </div>
+            <div class="catalog__card-rate-block"></div>
           </div>
           <p class="text text_c-grey-14 catalog__card-desc">${options.descText}</p>
           <div class="catalog__card-button-block">
@@ -192,11 +187,15 @@ export default function setupCatalog() {
         card.innerHTML = inner;
         return card;
       }
-
       const cards = new DocumentFragment();
 
       arrOfCardOptions.forEach((option) => {
         const card = createCard(option);
+
+        const cardRateBlock = card.querySelector('.catalog__card-rate-block');
+        const { rate } = option;
+        generateRateStars(rate, cardRateBlock);
+
         cards.append(card);
       });
 
@@ -520,9 +519,7 @@ export default function setupCatalog() {
         const diff = lastShownButton - buttonAmount;
         firstShownButton = this.selectedButtonId - (middleButton - 1) - diff;
 
-        if (firstShownButton < 1) {
-          firstShownButton = 1;
-        }
+        if (firstShownButton < 1) firstShownButton = 1;
       }
 
       this.setupButtons(firstShownButton, this.selectedButtonId);
@@ -760,8 +757,8 @@ export default function setupCatalog() {
       this.setupInput();
 
       setTimeout(() => {
-        this.buttonMin.style.left = '0';
-        this.buttonMax.style.left = `${this.rangeLineWidth - this.buttonWidth}px`;
+        this.buttonMin.style.left = '0%';
+        this.buttonMax.style.left = `${100 - this.buttonWidth}%`;
       }, 0);
     }
 
@@ -812,25 +809,26 @@ export default function setupCatalog() {
       const rangeLineLeftCoord = this.getElementLeftCoord(this.rangeLine);
 
       let buttonShiftLeft = event.clientX - rangeLineLeftCoord - shiftX;
+      buttonShiftLeft = +((buttonShiftLeft / this.rangeLineWidth) * 100).toFixed(2);
 
       if (type === 'min') {
         const buttonMaxLeftShift = this.getElementStyleLeft(this.buttonMax);
 
-        if (buttonShiftLeft <= 0) {
+        if (buttonShiftLeft < 0) {
           buttonShiftLeft = 0;
-        } else if (buttonShiftLeft >= buttonMaxLeftShift - this.buttonWidth) {
+        } else if (buttonShiftLeft > buttonMaxLeftShift - this.buttonWidth) {
           buttonShiftLeft = buttonMaxLeftShift - this.buttonWidth;
         }
       } else if (type === 'max') {
         const buttonMinLeftShift = this.getElementStyleLeft(this.buttonMin);
 
-        if (buttonShiftLeft >= this.rangeLineWidth - this.buttonWidth) {
-          buttonShiftLeft = this.rangeLineWidth - this.buttonWidth;
-        } else if (buttonShiftLeft <= buttonMinLeftShift + this.buttonWidth) {
+        if (buttonShiftLeft > 100 - this.buttonWidth) {
+          buttonShiftLeft = 100 - this.buttonWidth;
+        } else if (buttonShiftLeft < buttonMinLeftShift + this.buttonWidth) {
           buttonShiftLeft = buttonMinLeftShift + this.buttonWidth;
         }
       }
-      button.style.left = `${buttonShiftLeft}px`;
+      button.style.left = `${buttonShiftLeft}%`;
       this.calcInputs(buttonShiftLeft, type);
     }
 
@@ -848,12 +846,12 @@ export default function setupCatalog() {
       let percent;
 
       if (type === 'min') {
-        percent = shiftLeft / (this.rangeLineWidth - this.buttonWidth * 2);
+        percent = shiftLeft / (100 - this.buttonWidth * 2);
       } else if (type === 'max') {
-        percent = (shiftLeft - this.buttonWidth) / (this.rangeLineWidth - this.buttonWidth * 2);
+        percent = (shiftLeft - this.buttonWidth) / (100 - this.buttonWidth * 2);
       }
 
-      percent = +percent.toFixed(2);
+      percent = +(percent.toFixed(2));
       const inputValue = (((maxValue - minValue) * percent) + minValue).toFixed(0);
 
       if (type === 'min') {
@@ -869,12 +867,12 @@ export default function setupCatalog() {
       const percent = +((value - minValue) / (maxValue - minValue)).toFixed(2);
 
       if (inputType === 'min') {
-        const leftShift = (this.rangeLineWidth - this.buttonWidth * 2) * percent;
-        this.buttonMin.style.left = `${leftShift}px`;
+        const leftShift = (100 - this.buttonWidth * 2) * percent;
+        this.buttonMin.style.left = `${leftShift}%`;
       } else if (inputType === 'max') {
-        let leftShift = (this.rangeLineWidth - this.buttonWidth * 2) * percent;
+        let leftShift = (100 - this.buttonWidth * 2) * percent;
         leftShift += this.buttonWidth;
-        this.buttonMax.style.left = `${leftShift}px`;
+        this.buttonMax.style.left = `${leftShift}%`;
       }
     }
 
@@ -888,7 +886,7 @@ export default function setupCatalog() {
     }
 
     get buttonWidth() {
-      return this.buttonMin.offsetWidth;
+      return +((this.buttonMin.offsetWidth / this.rangeLineWidth) * 100).toFixed(2);
     }
 
     get rangeLineWidth() {
@@ -902,10 +900,9 @@ export default function setupCatalog() {
   new Checkbox('[data-checkbox-name="discount"]', renderCardsInstance);
   const rangeInstance = new Range('.catalog__range-block', renderCardsInstance);
   new SetupMenu({
-    buttonsSelector: '#filter-menu-button',
+    openButtonsSelector: '.catalog__open-filters-button',
+    closeButtonsSelector: '.catalog__filter-close-button',
     contentSelector: '.catalog__filter-blocks',
-    backdropSelector: '.catalog__backdrop',
-    contentActiveClass: 'catalog__filter-blocks_active',
-    backdropActiveClass: 'backdrop_active',
+    animationFromLeft: false,
   });
 }

@@ -40,10 +40,7 @@ export default class TelMask {
 
       let paste = (e.clipboardData || window.clipboardData).getData('text');
 
-      if (paste.match(/\D/g)) {
-        this.el.blur();
-        return;
-      }
+      if (paste.match(/\D/g)) return;
 
       if (paste.startsWith('38')) {
         paste = paste.slice(2);

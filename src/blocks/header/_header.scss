@@ -3,6 +3,8 @@
 
   height: 70px;
   background-color: rgb(31 31 31);
+  position: relative;
+  z-index: 100;
 
   @include media-s {
     display: none;

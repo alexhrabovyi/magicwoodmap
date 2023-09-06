@@ -4,12 +4,10 @@ import ValidateForm from '../../js-libs/_ValidateForm';
 
 export default function setupMainNav() {
   new SetupMenu({
-    buttonsSelector: '.main-nav__content-open-button',
+    toggleButtonsSelector: '.main-nav__content-open-button',
     contentSelector: '.main-nav__mobile-content',
-    backdropSelector: '.main-nav__backdrop',
-    buttonActiveClass: 'main-nav__content-open-button_active',
-    contentActiveClass: 'main-nav__mobile-content_active',
-    backdropActiveClass: 'backdrop_active',
+    openButtonActiveClass: 'main-nav__content-open-button_active',
+    animationFromLeft: true,
   });
 
   new CopyTel({

@@ -5,6 +5,7 @@
 @import "../../scss/mixins";
 
 // elements 
+@import "../../elements/menu";
 @import "../../elements/backdrop";
 @import "../../elements/close-button";
 @import "../../elements/container";
@@ -16,6 +17,7 @@
 @import "../../elements/round-button";
 @import "../../elements/link";
 @import "../../elements/categories-button";
+@import "../../elements/icon-star-block";
 
 // blocks
 @import "../../blocks/header/header";

@@ -217,23 +217,12 @@
     gap: 40px;
 
     @include media-m {
-      position: fixed;
-      z-index: 1000;
-      top: 0;
-      left: 0;
       padding: 50px 151px 85px;
       border-radius: 0 5px 5px 0;
       background: rgb(255 255 255);
-      transform: translateX(-100%);
-      transition: all .5s ease-in-out;
-
-      &_active {
-        transform: translateX(0);
-      }
     }
 
     @include media-s {
-      width: 100%;
       padding-right: 5%;
       padding-bottom: 50px;
       padding-left: 14.75%;
@@ -244,10 +233,6 @@
       padding-bottom: 20px;
       padding-left: 8%;
     }
-  }
-
-  &__backdrop {
-    z-index: 200;
   }
 
   &__filter-title {
@@ -473,8 +458,6 @@
 
   &__card-rate-block {
     margin-bottom: 15px;
-    color: rgb(255 196 22 / 100%);
-    font-size: 14px;
     gap: 3px;
 
     @include flex-builder(row, none, none);

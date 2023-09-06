@@ -1,0 +1,13 @@
+.icon-star-block {
+  position: relative;
+  width: 15.75px;
+  color: rgb(255 196 22 / 100%);
+  font-size: 14px;
+
+  &-additional {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+}

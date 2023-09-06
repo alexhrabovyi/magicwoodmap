@@ -316,17 +316,12 @@
     @include media-m {
       @include flex-builder(column, none, none);
 
-      position: absolute;
-      left: 0;
       padding: 50px 151px 85px;
       border-radius: 0 5px 5px 0;
       background: rgb(255 255 255);
-      transform: translateX(-100%);
-      transition: all .5s ease-in-out;
     }
 
     @include media-s {
-      width: 100%;
       padding-right: 5%;
       padding-bottom: 50px;
       padding-left: 14.75%;
@@ -336,10 +331,6 @@
     @include media-xs {
       padding-bottom: 20px;
       padding-left: 8%;
-    }
-
-    &_active {
-      transform: translateX(0);
     }
   }
 
