@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 export default class SetupMenu {
   constructor(options) {
     this.openButtons = document.querySelectorAll(options.openButtonsSelector);
