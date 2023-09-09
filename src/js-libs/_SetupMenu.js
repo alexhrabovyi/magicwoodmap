@@ -68,6 +68,9 @@ export default class SetupMenu {
     if (this.isOpen) return;
     this.isOpen = true;
 
+    this.toggleButtons.forEach((button) => {
+      button.classList.add(this.openButtonActiveClass);
+    });
     this.openButtons.forEach((button) => {
       button.classList.add(this.openButtonActiveClass);
     });
@@ -96,6 +99,9 @@ export default class SetupMenu {
     if (!this.isOpen) return;
     this.isOpen = false;
 
+    this.toggleButtons.forEach((button) => {
+      button.classList.remove(this.openButtonActiveClass);
+    });
     this.openButtons.forEach((button) => {
       button.classList.remove(this.openButtonActiveClass);
     });
