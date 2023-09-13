@@ -1,4 +1,8 @@
 main(class="catalog container")
+  .catalog__option-form-popup-window 
+    .catalog__option-form
+      button(class="close-button catalog__option-form-close-button") +
+      include ../option-form/_option-form.pug
   .catalog__amount-and-select-block
     button(class="catalog__open-filters-button") Відкрити фільтр
     p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій:

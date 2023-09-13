@@ -17,8 +17,6 @@ export default class SetupMenu {
       this.menuHideClass = 'menu_animationRight';
     }
 
-    this.isOpen = false;
-
     this.setup();
   }
 
@@ -35,7 +33,7 @@ export default class SetupMenu {
     this.content.classList.add(this.menuClass, this.menuHideClass);
 
     this.backdrop.addEventListener('click', this.close.bind(this), { passive: true });
-    window.addEventListener('orientationchange', this.onOrientationChange.bind(this), { passive: true });
+    window.addEventListener('resize', this.onOrientationChange.bind(this), { passive: true });
 
     if (this.toggleButtons) {
       this.toggleButtons.forEach((button) => {
@@ -57,7 +55,7 @@ export default class SetupMenu {
   }
 
   toggle() {
-    if (!this.isOpen) {
+    if (!this.isMenuOpen) {
       this.open();
     } else {
       this.close();
@@ -65,8 +63,7 @@ export default class SetupMenu {
   }
 
   open() {
-    if (this.isOpen) return;
-    this.isOpen = true;
+    if (this.isMenuOpen) return;
 
     this.toggleButtons.forEach((button) => {
       button.classList.add(this.openButtonActiveClass);
@@ -96,8 +93,7 @@ export default class SetupMenu {
   }
 
   close() {
-    if (!this.isOpen) return;
-    this.isOpen = false;
+    if (!this.isMenuOpen) return;
 
     this.toggleButtons.forEach((button) => {
       button.classList.remove(this.openButtonActiveClass);
@@ -119,7 +115,7 @@ export default class SetupMenu {
   }
 
   onOrientationChange() {
-    if (this.isOpen) this.close();
+    if (this.isMenuOpen) this.close();
   }
 
   get contentTop() {
@@ -146,5 +142,9 @@ export default class SetupMenu {
   get isContentOverflow() {
     const contentScrollHeight = this.content.scrollHeight;
     return contentScrollHeight > this.visibleContentHeight;
+  }
+
+  get isMenuOpen() {
+    return this.content.classList.contains(this.menuActiveClass);
   }
 }

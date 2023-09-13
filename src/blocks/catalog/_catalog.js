@@ -3,6 +3,7 @@
 /* eslint-disable max-classes-per-file */
 import generateRateStars from '../../js-libs/_generateRateStars';
 import SetupMenu from '../../js-libs/_SetupMenu';
+import SetupPopup from '../../js-libs/_SetupPopup';
 
 import img1 from './images/map_1.png';
 import img2 from './images/map_2.png';
@@ -648,7 +649,7 @@ export default function setupCatalog() {
       }
 
       this.select.addEventListener('click', this.clickHandle.bind(this), { passive: true });
-      window.addEventListener('orientationchange', this.onOrientationChange.bind(this));
+      window.addEventListener('resize', this.onOrientationChange.bind(this));
     }
 
     clickHandle(e) {
@@ -894,15 +895,34 @@ export default function setupCatalog() {
     }
   }
 
+  function setupFilterMenu() {
+    const content = document.querySelector('.catalog__filter-blocks');
+
+    if (window.innerWidth <= 1024) {
+      new SetupMenu({
+        openButtonsSelector: '.catalog__open-filters-button',
+        closeButtonsSelector: '.catalog__filter-close-button',
+        contentSelector: '.catalog__filter-blocks',
+        animationFromLeft: false,
+      });
+    } else {
+      content.classList.remove('menu', 'menu_animationRight', 'menu_animationLeft');
+      content.style.cssText = '';
+    }
+  }
+
   const renderCardsInstance = new RenderCards(arr, 5);
   new Select('.catalog__select', renderCardsInstance, 0);
   new Checkbox('[data-checkbox-name="categories"]', renderCardsInstance);
   new Checkbox('[data-checkbox-name="discount"]', renderCardsInstance);
   const rangeInstance = new Range('.catalog__range-block', renderCardsInstance);
-  new SetupMenu({
-    openButtonsSelector: '.catalog__open-filters-button',
-    closeButtonsSelector: '.catalog__filter-close-button',
-    contentSelector: '.catalog__filter-blocks',
-    animationFromLeft: false,
+  new SetupPopup({
+    contentWrapperSelector: '.catalog__option-form-popup-window ',
+    contentSelector: '.catalog__option-form',
+    openButtonSelector: '.catalog__card-bag-button',
+    closeButtonSelector: '.catalog__option-form-close-button',
   });
+
+  setupFilterMenu();
+  window.addEventListener('resize', setupFilterMenu, { passive: true });
 }

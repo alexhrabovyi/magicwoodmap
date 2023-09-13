@@ -14,7 +14,7 @@ export default function setupNewsAccordion() {
       setTimeout(() => this.setupHeight(), 0);
 
       this.button.addEventListener('click', this.toggle.bind(this));
-      window.addEventListener('orientationchange', () => {
+      window.addEventListener('resize', () => {
         setTimeout(this.close.bind(this), 0);
       });
     }

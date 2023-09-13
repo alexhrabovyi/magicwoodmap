@@ -22,6 +22,22 @@
     padding-bottom: 70px;
   }
 
+  &__option-form {
+    position: relative;
+    padding: 60px 30px 20px;
+    border-radius: 20px;
+    background: rgb(255 255 255);
+
+    @include media-xs {
+      padding: 60px 10px 20px;
+    }
+  }
+
+  &__option-form-close-button {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+  }
 
   &__amount-and-select-block {
     @include flex-builder(row, space-between, center);
