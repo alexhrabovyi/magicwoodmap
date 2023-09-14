@@ -14,6 +14,12 @@ export default class SetupPopup {
   setup() {
     this.contentWrapper.classList.add(this.contentWrapperClass);
 
+    setTimeout(() => {
+      this.contentWrapper.style.transitionProperty = 'all';
+      this.contentWrapper.style.transitionDuration = '.5s';
+      this.contentWrapper.style.transitionTimingFunction = 'ease-in-out';
+    });
+
     this.openButtons.forEach((button) => {
       button.addEventListener('click', this.open.bind(this), { passive: true });
     });

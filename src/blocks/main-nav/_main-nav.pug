@@ -12,11 +12,11 @@ section(class="main-nav")
           i(class="main-nav__account-button-icon icon-account")
           | Аккаунт
         span.main-nav__short-line
-        button(class="main-nav__account-button")
+        button(class="main-nav__account-button" data-button-bag)
           i(class="main-nav__account-button-icon icon-bag")
-          | Корзина
+          | Кошик
         span.main-nav__short-line
-        button(class="main-nav__account-button")
+        button(class="main-nav__account-button" data-button-wishlist)
           i(class="main-nav__account-button-icon icon-like")
           | Сподобалось
     nav.main-nav__nav-block 
@@ -47,9 +47,9 @@ section(class="main-nav")
       img(class="main-nav__logo" src="../../blocks/main-nav/images/logo.svg" alt="Magic Wood Map логотип")
       p(class="title title_24-px title_fw-400 title_c-black main-nav__logo-link-title") Magic Wood Maps
     .main-nav__order-and-wishlist-buttons 
-      a(class="round-button round-button_big round-button_inactive main-nav__round-button_big" href="#" alt="Кошик") 
+      a(class="round-button round-button_big round-button_inactive main-nav__round-button_big" data-button-bag href="#" alt="Кошик") 
         i.icon-bag
-      a(class="round-button round-button_big round-button_inactive main-nav__round-button_big" href="#" alt="Список бажань") 
+      a(class="round-button round-button_big round-button_inactive main-nav__round-button_big" data-button-wishlist href="#" alt="Список бажань") 
         i.icon-like
   div(class="main-nav__mobile-content container")
     button(class="main-nav__tel-button")

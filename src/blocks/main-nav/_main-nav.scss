@@ -422,4 +422,13 @@
       bottom: 0;
     }
   }
+
+  &__bag-and-wishlist-buttons-active {
+    color: rgb(237 85 59);
+  }
+
+  &__bag-and-wishlist-buttons-active:not(.main-nav__account-button) {
+    background: rgb(237 85 59);
+    color: rgb(255 255 255);
+  }
 }

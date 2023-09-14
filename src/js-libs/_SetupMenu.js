@@ -21,7 +21,8 @@ export default class SetupMenu {
   }
 
   setup() {
-    this.mainNavPanel = document.querySelector('.main-nav__mobile-panel');
+    this.mobileNavPanel = document.querySelector('.main-nav__mobile-panel');
+    this.desktopNavPanel = document.querySelector('.main-nav__desktop');
     this.backdrop = document.querySelector('.backdrop');
 
     if (!this.backdrop) {
@@ -31,6 +32,16 @@ export default class SetupMenu {
     }
 
     this.content.classList.add(this.menuClass, this.menuHideClass);
+
+    setTimeout(() => {
+      this.content.style.transitionProperty = 'all';
+      this.content.style.transitionDuration = '.5s';
+      this.content.style.transitionTimingFunction = 'ease-in-out';
+
+      this.backdrop.style.transitionProperty = 'all';
+      this.backdrop.style.transitionDuration = '.5s';
+      this.backdrop.style.transitionTimingFunction = 'ease-in-out';
+    });
 
     this.backdrop.addEventListener('click', this.close.bind(this), { passive: true });
     window.addEventListener('resize', this.onOrientationChange.bind(this), { passive: true });
@@ -119,10 +130,11 @@ export default class SetupMenu {
   }
 
   get contentTop() {
-    let top = this.mainNavPanel.offsetHeight;
+    let top = this.mobileNavPanel.offsetHeight || this.desktopNavPanel.offsetHeight;
 
-    if (window.innerWidth > 768 && window.pageYOffset <= 70) {
-      top = this.mainNavPanel.getBoundingClientRect().bottom;
+    if (window.innerWidth > 768 && window.scrollY <= 70) {
+      top = this.mobileNavPanel.getBoundingClientRect().bottom
+        || this.desktopNavPanel.getBoundingClientRect().bottom;
     }
 
     return top;
@@ -130,10 +142,11 @@ export default class SetupMenu {
 
   get visibleContentHeight() {
     const clientHeight = window.innerHeight;
-    let menuPanelHeight = this.mainNavPanel.offsetHeight;
+    let menuPanelHeight = this.mobileNavPanel.offsetHeight || this.desktopNavPanel.offsetHeight;
 
     if (window.innerWidth > 768 && window.pageYOffset <= 70) {
-      menuPanelHeight = this.mainNavPanel.getBoundingClientRect().bottom;
+      menuPanelHeight = this.mobileNavPanel.getBoundingClientRect().bottom
+        || this.desktopNavPanel.getBoundingClientRect().bottom;
     }
 
     return clientHeight - menuPanelHeight;

@@ -22,8 +22,30 @@ main(class="product-desc container")
         p(class="text text_ff-poppins text_18-px text_c-blue product-desc__review-amount") 6 відгуків
       h1(class="title title_36-px title_fw-500 title_c-black product-desc__title") Одношарова мапа
       p(class="text text_ff-poppins text_c-grey-15 product-desc__vendor-code") Модель: 3DMBL
-      .product-desc__checkout-form
-        include ../option-form/_option-form.pug
+      form(class="product-desc__checkout-form")
+        p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Розмір мапи
+        .product-desc__button-block 
+          button(class="button product-desc__filter-button product-desc__filter-button_active") М: 100х60см
+          button(class="button product-desc__filter-button") L: 150х90см
+          button(class="button product-desc__filter-button") XL: 200х120см
+        p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Тип мапи
+        .product-desc__button-block 
+          button(class="button product-desc__filter-button product-desc__filter-button_active") Prime
+          button(class="button product-desc__filter-button") Prime planes
+          button(class="button product-desc__filter-button") Prime flags
+        p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Мова гравіювання
+        .product-desc__button-block 
+          button(class="button product-desc__filter-button product-desc__filter-button_active") Українська
+          button(class="button product-desc__filter-button") Англійська
+        .product-desc__price-block
+          p(class="title title_28-px title_fw-400 title_c-orange product-desc__current-price") 1 000 ₴
+          p(class="title title_24-px title_fw-400 title_c-grey product-desc__old-price") 2 000 ₴ 
+          button(class="product-desc__discount-notificate-button") Сповістити про знижки
+        .product-desc__checkout-button-block
+          button(class="button product-desc__checkout-button") Додати в кошик
+          button(class="button button_transparent product-desc__checkout-button") Купити в 1 клік
+          button(class="round-button round-button_with-shadow round-button_medium product-desc__favourite-button")
+            i.icon-like
       .product-desc__payment-methods-block 
         img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/mastercard.svg" alt="Mastercard")
         img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/visa.svg" alt="Visa")
