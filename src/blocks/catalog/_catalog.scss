@@ -654,6 +654,18 @@
     }
   }
 
+  &__card-round-button {
+    &_selected {
+      background-color: rgb(237 85 59);
+      color: rgb(255 255 255);
+
+      &:hover {
+        background-color: rgb(237 85 59);
+        color: rgb(255 255 255);
+      }
+    }
+  }
+
   &__card-more-info-link {
     line-height: 28px;
 

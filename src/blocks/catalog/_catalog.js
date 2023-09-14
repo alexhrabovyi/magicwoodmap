@@ -1,9 +1,12 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-classes-per-file */
+import formatPrice from '../../js-libs/_formatPrice';
 import generateRateStars from '../../js-libs/_generateRateStars';
 import SetupMenu from '../../js-libs/_SetupMenu';
 import SetupPopup from '../../js-libs/_SetupPopup';
+import productObjects from '../../js-libs/_productObjects';
+import { SetupWishlistMenu } from '../bag-and-wishlist-menu/_bag-and-wishlist';
 
 import img1 from './images/map_1.png';
 import img2 from './images/map_2.png';
@@ -23,6 +26,7 @@ export default function setupCatalog() {
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
     rate: 3.5,
     categories: 'Одношарові мапи',
+    productId: 0,
   },
   {
     linkHref: '#',
@@ -35,6 +39,7 @@ export default function setupCatalog() {
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
     rate: 3.7,
     categories: 'Багатошарові мапи',
+    productId: 1,
   },
   {
     linkHref: '#',
@@ -47,6 +52,7 @@ export default function setupCatalog() {
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
     rate: 4.1,
     categories: 'Мапи з підсвічуванням',
+    productId: 2,
   },
   {
     linkHref: '#',
@@ -59,6 +65,7 @@ export default function setupCatalog() {
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
     rate: 5,
     categories: 'Багатошарові мапи',
+    productId: 3,
   },
   {
     linkHref: '#',
@@ -71,6 +78,7 @@ export default function setupCatalog() {
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
     rate: 4.4,
     categories: 'Мапи з підсвічуванням',
+    productId: 4,
   },
   {
     linkHref: '#',
@@ -83,6 +91,7 @@ export default function setupCatalog() {
     descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
     rate: 4,
     categories: 'Додатки до мап',
+    productId: 5,
   },
   ];
 
@@ -136,26 +145,20 @@ export default function setupCatalog() {
     }
 
     createCards(arrOfCardOptions) {
+      let wishlistIds = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
+      wishlistIds = wishlistIds.map((item) => item.id);
+
       function createCard(options) {
-        function formatPrice(price) {
-          if (price === undefined) return undefined;
-
-          let result = Array.from(price.toString()).reverse();
-          let count = 0;
-
-          for (let i = 0; i < result.length; i += 1) {
-            if (i % 3 === 0) {
-              result.splice(i + count, 0, ' ');
-              count += 1;
-            }
+        function setupRoundButtons() {
+          if (wishlistIds.includes(options.productId)) {
+            const wishlistButton = card.querySelector('[data-button-wishlist-add]');
+            wishlistButton.classList.add('catalog__card-round-button_selected');
           }
-
-          result = result.reverse().join('');
-          return result;
         }
 
         const card = document.createElement('div');
         card.classList.add('catalog__card');
+        card.dataset.productId = options.productId;
 
         const inner = `
         <a class="catalog__card-img-link" href="${options.linkHref}" alt="${options.linkAlt}">
@@ -173,10 +176,10 @@ export default function setupCatalog() {
           <p class="text text_c-grey-14 catalog__card-desc">${options.descText}</p>
           <div class="catalog__card-button-block">
             <button class="button button_transparent catalog__card-buy-button">Купити в 1 клік</button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-bag-button">
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button">
               <i class="icon-bag"></i>
             </button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-like-button">
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add>
               <i class="icon-like"></i>
             </button>
             <a class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="${options.linkHref}" alt="Переглянути →">
@@ -186,6 +189,9 @@ export default function setupCatalog() {
         </div>
         `;
         card.innerHTML = inner;
+
+        setupRoundButtons();
+
         return card;
       }
       const cards = new DocumentFragment();
@@ -911,6 +917,40 @@ export default function setupCatalog() {
     }
   }
 
+  function setupAddToWishlistButtons() {
+    function addToWishlist(e) {
+      const button = e.target.closest('[data-button-wishlist-add]');
+      if (!button) return;
+
+      const card = button.closest('.catalog__card');
+      const productId = +card.dataset.productId;
+      const productObj = productObjects[productId];
+
+      let wishlistProductsInStorage = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
+
+      button.classList.toggle('catalog__card-round-button_selected');
+
+      if (button.classList.contains('catalog__card-round-button_selected')) {
+        wishlistProductsInStorage.push(productObj);
+        wishlistProductsInStorage.sort((a, b) => a.id - b.id);
+        wishlistProductsInStorage = JSON.stringify(wishlistProductsInStorage);
+
+        localStorage.setItem('wishlistProducts', wishlistProductsInStorage);
+      } else {
+        const index = wishlistProductsInStorage.findIndex((item) => item.id === productObj.id);
+        wishlistProductsInStorage.splice(index, 1);
+        wishlistProductsInStorage = JSON.stringify(wishlistProductsInStorage);
+
+        localStorage.setItem('wishlistProducts', wishlistProductsInStorage);
+      }
+
+      console.log(localStorage.getItem('wishlistProducts'));
+      wishlistMenu.generateAndAddCards();
+    }
+
+    document.addEventListener('click', addToWishlist, { passive: true });
+  }
+
   const renderCardsInstance = new RenderCards(arr, 5);
   new Select('.catalog__select', renderCardsInstance, 0);
   new Checkbox('[data-checkbox-name="categories"]', renderCardsInstance);
@@ -925,4 +965,7 @@ export default function setupCatalog() {
 
   setupFilterMenu();
   window.addEventListener('resize', setupFilterMenu, { passive: true });
+
+  const wishlistMenu = new SetupWishlistMenu();
+  setupAddToWishlistButtons();
 }

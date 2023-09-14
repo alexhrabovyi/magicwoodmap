@@ -10,7 +10,8 @@
     "no-new": "off",
     "class-methods-use-this": "off",
     "no-shadow": "off",
-    "no-restricted-syntax": "off"
+    "no-restricted-syntax": "off",
+    "no-unused-expressions:": "off"
   },
   "ignorePatterns": [
     "dist",
