@@ -81,11 +81,26 @@
     row-gap: 15px;
   }
 
-  &__bag-link {
-    width: 200px;
+  &__button-block {
+    @include flex-builder(row, space-between, center);
+
+    gap: 20px;
+  }
+
+  &__bag-button {
+    width: 100%;
+    max-width: 200px;
     height: 45px;
     font-size: 18px;
-    text-decoration: none;
+
+    @include flex-builder(row, center, center);
+  }
+
+  &__wishlist-delete-button {
+    width: 100%;
+    max-width: 100px;
+    height: 45px;
+    font-size: 18px;
 
     @include flex-builder(row, center, center);
   }
@@ -94,5 +109,15 @@
     margin-top: 30px;
 
     @include flex-builder(row, space-between, center);
+  }
+
+  &__round-button-selected {
+    background-color: rgb(237 85 59);
+    color: rgb(255 255 255);
+
+    &:hover {
+      background-color: rgb(237 85 59);
+      color: rgb(255 255 255);
+    }
   }
 }
