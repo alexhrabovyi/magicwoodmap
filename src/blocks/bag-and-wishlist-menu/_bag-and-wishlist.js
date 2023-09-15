@@ -119,6 +119,8 @@ export default function setupBagAndWishlistMenu() {
     }
 
     addToWishlistButtonOnClick(button) {
+      button.blur();
+
       const productId = +button.dataset.productId;
       const productObj = productObjects[productId];
 

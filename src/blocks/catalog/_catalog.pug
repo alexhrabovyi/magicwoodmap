@@ -3,28 +3,31 @@ main(class="catalog container")
     form(class="catalog__option-form")
       button(class="close-button catalog__option-form-close-button") +
       p(class="title title_16-px title_fw-400 title_c-black catalog__button-title") Розмір мапи
-      .catalog__button-block 
-        button(class="button catalog__filter-button catalog__filter-button_active") М: 100х60см
-        button(class="button catalog__filter-button") L: 150х90см
-        button(class="button catalog__filter-button") XL: 200х120см
+      div(class="catalog__button-block" data-size-buttons)
+        button(class="button catalog__filter-button" data-size-button="M") М: 100х60см
+        button(class="button catalog__filter-button" data-size-button="L") L: 150х90см
+        button(class="button catalog__filter-button" data-size-button="XL") XL: 200х120см
       p(class="title title_16-px title_fw-400 title_c-black catalog__button-title") Тип мапи
-      .catalog__button-block 
-        button(class="button catalog__filter-button catalog__filter-button_active") Prime
-        button(class="button catalog__filter-button") Prime planes
-        button(class="button catalog__filter-button") Prime flags
+      div(class="catalog__button-block" data-type-buttons) 
+        button(class="button catalog__filter-button" data-type-button="Prime") Prime
+        button(class="button catalog__filter-button" data-type-button="Prime planes") Prime planes
+        button(class="button catalog__filter-button" data-type-button="Prime flags") Prime flags
       p(class="title title_16-px title_fw-400 title_c-black catalog__button-title") Мова гравіювання
-      .catalog__button-block 
-        button(class="button catalog__filter-button catalog__filter-button_active") Українська
-        button(class="button catalog__filter-button") Англійська
+      div(class="catalog__button-block" data-lang-buttons) 
+        button(class="button catalog__filter-button" data-lang-button="ukr") Українська
+        button(class="button catalog__filter-button" data-lang-button="en") Англійська
       .catalog__price-block
-        p(class="title title_28-px title_fw-400 title_c-orange catalog__current-price") 1 000 ₴
-        p(class="title title_24-px title_fw-400 title_c-grey catalog__old-price") 2 000 ₴ 
-        button(class="catalog__discount-notificate-button") Сповістити про знижки
+        p(class="title title_28-px title_fw-400 title_c-orange catalog__current-price" data-current-price)
+        p(class="title title_24-px title_fw-400 title_c-grey catalog__old-price" data-old-price) 
+      .catalog__amount-block
+        button(class="catalog__amount-button catalog__amount-button_left" data-amount-button="minus") -
+        .catalog__amount-display
+        button(class="catalog__amount-button catalog__amount-button_right" data-amount-button="plus") +
+      .catalog__total-price-block 
+        p(class="title title_24-px title_fw-400 title_c-black") Загальна ціна:
+        p(class="title title_28-px title_fw-400 title_c-orange catalog__total-price" data-total-price)
       .catalog__checkout-button-block
         button(class="button catalog__checkout-button") Додати в кошик
-        button(class="button button_transparent catalog__checkout-button") Купити в 1 клік
-        button(class="round-button round-button_with-shadow round-button_medium catalog__favourite-button")
-          i.icon-like
   .catalog__amount-and-select-block
     button(class="catalog__open-filters-button") Відкрити фільтр
     p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій:

@@ -5,6 +5,7 @@ import formatPrice from '../../js-libs/_formatPrice';
 import generateRateStars from '../../js-libs/_generateRateStars';
 import SetupMenu from '../../js-libs/_SetupMenu';
 import SetupPopup from '../../js-libs/_SetupPopup';
+import productObjects from '../../js-libs/_productObjects';
 
 import img1 from './images/map_1.png';
 import img2 from './images/map_2.png';
@@ -173,7 +174,7 @@ export default function setupCatalog() {
           <p class="text text_c-grey-14 catalog__card-desc">${options.descText}</p>
           <div class="catalog__card-button-block">
             <button class="button button_transparent catalog__card-buy-button">Купити в 1 клік</button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button">
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-add data-product-id="${options.productId}">
               <i class="icon-bag"></i>
             </button>
             <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add data-product-id="${options.productId}">
@@ -914,6 +915,180 @@ export default function setupCatalog() {
     }
   }
 
+  class SetupAddToBagForm {
+    constructor() {
+      this.form = document.querySelector('.catalog__option-form');
+      this.buttonActiveClass = 'catalog__filter-button_active';
+
+      this.setup();
+    }
+
+    setup() {
+      this.setupAmount();
+
+      this.sizeButtonBlock = this.form.querySelector('[data-size-buttons]');
+      this.typeButtonBlock = this.form.querySelector('[data-type-buttons]');
+      this.langButtonBlock = this.form.querySelector('[data-lang-buttons]');
+
+      this.currentPrice = this.form.querySelector('[data-current-price]');
+      this.oldPrice = this.form.querySelector('[data-old-price]');
+      this.totalPrice = this.form.querySelector('[data-total-price]');
+
+      document.addEventListener('click', this.addToBagButtonOnClick.bind(this), { passive: true });
+      this.sizeButtonBlock.addEventListener('click', this.sizeButtonBlockOnClick.bind(this));
+      this.typeButtonBlock.addEventListener('click', this.typeButtonBlockOnClick.bind(this));
+      this.langButtonBlock.addEventListener('click', this.langButtonBlockOnClick.bind(this));
+    }
+
+    setupAmount() {
+      this.amountBlock = this.form.querySelector('.catalog__amount-block');
+      this.amountDisplay = this.amountBlock.querySelector('.catalog__amount-display');
+
+      this.amountBlock.addEventListener('click', this.amountBlockOnClick.bind(this));
+    }
+
+    amountBlockOnClick(e) {
+      e.preventDefault();
+      const button = e.target.closest('[data-amount-button]');
+      if (!button) return;
+
+      const buttonType = button.dataset.amountButton;
+
+      if (buttonType === 'plus') {
+        this.result.amount += 1;
+      } else if (buttonType === 'minus') {
+        this.result.amount -= 1;
+      }
+
+      if (this.result.amount < 1) {
+        this.result.amount = 1;
+      }
+
+      this.amountDisplay.innerHTML = this.result.amount;
+      this.calcPriceAndShow();
+    }
+
+    initialSetup() {
+      this.result = {};
+
+      this.sizeButtonBlock.querySelectorAll('button').forEach((button) => {
+        button.classList.remove(this.buttonActiveClass);
+      });
+      this.typeButtonBlock.querySelectorAll('button').forEach((button) => {
+        button.classList.remove(this.buttonActiveClass);
+      });
+      this.langButtonBlock.querySelectorAll('button').forEach((button) => {
+        button.classList.remove(this.buttonActiveClass);
+      });
+
+      this.sizeButtonBlock.querySelector('[data-size-button="M"]').classList.add(this.buttonActiveClass);
+      this.typeButtonBlock.querySelector('[data-type-button="Prime"]').classList.add(this.buttonActiveClass);
+      this.langButtonBlock.querySelector('[data-lang-button="ukr"]').classList.add(this.buttonActiveClass);
+
+      this.amountDisplay.innerHTML = 1;
+
+      this.result.productObj = this.productObj;
+      this.result.mapSize = 'M';
+      this.result.mapType = 'Prime';
+      this.result.mapLang = 'ukr';
+      this.result.amount = 1;
+
+      this.calcPriceAndShow();
+    }
+
+    calcPrice() {
+      let { basicPrice, basicOldPrice } = this.productObj;
+      basicPrice += this.productObj.sizePrices[this.result.mapSize];
+      basicPrice += this.productObj.typePrices[this.result.mapType];
+
+      const totalPrice = basicPrice * this.result.amount;
+
+      if (basicOldPrice) {
+        basicOldPrice += this.productObj.sizePrices[this.result.mapSize];
+        basicOldPrice += this.productObj.typePrices[this.result.mapType];
+      }
+
+      this.result.basicPrice = basicPrice;
+      this.result.totalPrice = totalPrice;
+
+      return { basicPrice, basicOldPrice, totalPrice };
+    }
+
+    calcPriceAndShow() {
+      let { basicPrice, basicOldPrice, totalPrice } = this.calcPrice();
+
+      basicPrice = formatPrice(basicPrice);
+      this.currentPrice.textContent = `${basicPrice} ₴`;
+
+      totalPrice = formatPrice(totalPrice);
+      this.totalPrice.textContent = `${totalPrice} ₴`;
+
+      if (basicOldPrice) {
+        basicOldPrice = formatPrice(basicOldPrice);
+        this.oldPrice.textContent = `${basicOldPrice} ₴`;
+      }
+    }
+
+    addToBagButtonOnClick(e) {
+      const button = e.target.closest('[data-button-bag-add]');
+      if (!button) return;
+
+      const productId = +button.dataset.productId;
+      this.productObj = productObjects[productId];
+
+      this.initialSetup();
+    }
+
+    sizeButtonBlockOnClick(e) {
+      e.preventDefault();
+      const button = e.target.closest('[data-size-button]');
+      if (!button) return;
+
+      button.blur();
+
+      this.sizeButtonBlock.querySelectorAll('button').forEach((button) => {
+        button.classList.remove(this.buttonActiveClass);
+      });
+      button.classList.add(this.buttonActiveClass);
+
+      this.result.mapSize = button.dataset.sizeButton;
+
+      this.calcPriceAndShow();
+    }
+
+    typeButtonBlockOnClick(e) {
+      e.preventDefault();
+      const button = e.target.closest('[data-type-button]');
+      if (!button) return;
+
+      button.blur();
+
+      this.typeButtonBlock.querySelectorAll('button').forEach((button) => {
+        button.classList.remove(this.buttonActiveClass);
+      });
+      button.classList.add(this.buttonActiveClass);
+
+      this.result.mapType = button.dataset.typeButton;
+
+      this.calcPriceAndShow();
+    }
+
+    langButtonBlockOnClick(e) {
+      e.preventDefault();
+      const button = e.target.closest('[data-lang-button]');
+      if (!button) return;
+
+      button.blur();
+
+      this.langButtonBlock.querySelectorAll('button').forEach((button) => {
+        button.classList.remove(this.buttonActiveClass);
+      });
+      button.classList.add(this.buttonActiveClass);
+
+      this.result.mapLang = button.dataset.langButton;
+    }
+  }
+
   const renderCardsInstance = new RenderCards(arr, 5);
   new Select('.catalog__select', renderCardsInstance, 0);
   new Checkbox('[data-checkbox-name="categories"]', renderCardsInstance);
@@ -922,10 +1097,11 @@ export default function setupCatalog() {
   new SetupPopup({
     contentWrapperSelector: '.catalog__option-form-popup-window ',
     contentSelector: '.catalog__option-form',
-    openButtonSelector: '.catalog__card-bag-button',
+    openButtonSelector: '[data-button-bag-add]',
     closeButtonSelector: '.catalog__option-form-close-button',
   });
 
   setupFilterMenu();
   window.addEventListener('resize', setupFilterMenu, { passive: true });
+  new SetupAddToBagForm();
 }
