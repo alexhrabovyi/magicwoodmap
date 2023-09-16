@@ -145,13 +145,21 @@ export default function setupCatalog() {
 
     createCards(arrOfCardOptions) {
       let wishlistIds = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
-      wishlistIds = wishlistIds.map((item) => item.id);
+      wishlistIds = wishlistIds.map((product) => product.id);
+
+      let bagIds = JSON.parse(localStorage.getItem('bagProducts')) || [];
+      bagIds = bagIds.map((product) => product.productObj.id);
 
       function createCard(options) {
         function setupRoundButtons() {
           if (wishlistIds.includes(options.productId)) {
             const wishlistButton = card.querySelector('[data-button-wishlist-add]');
             wishlistButton.classList.add('bag-and-wishlist-menu__round-button-selected');
+          }
+
+          if (bagIds.includes(options.productId)) {
+            const bagButton = card.querySelector('[data-button-bag-form-open]');
+            bagButton.classList.add('bag-and-wishlist-menu__round-button-selected');
           }
         }
 
@@ -174,7 +182,7 @@ export default function setupCatalog() {
           <p class="text text_c-grey-14 catalog__card-desc">${options.descText}</p>
           <div class="catalog__card-button-block">
             <button class="button button_transparent catalog__card-buy-button">Купити в 1 клік</button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-add data-product-id="${options.productId}">
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-form-open data-product-id="${options.productId}">
               <i class="icon-bag"></i>
             </button>
             <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add data-product-id="${options.productId}">
@@ -920,11 +928,13 @@ export default function setupCatalog() {
       this.form = document.querySelector('.catalog__option-form');
       this.buttonActiveClass = 'catalog__filter-button_active';
 
-      this.setup();
+      this.initialSetup();
     }
 
-    setup() {
+    initialSetup() {
       this.setupAmount();
+
+      this.checkoutButton = this.form.querySelector('[data-button-bag-add]');
 
       this.sizeButtonBlock = this.form.querySelector('[data-size-buttons]');
       this.typeButtonBlock = this.form.querySelector('[data-type-buttons]');
@@ -935,6 +945,7 @@ export default function setupCatalog() {
       this.totalPrice = this.form.querySelector('[data-total-price]');
 
       document.addEventListener('click', this.addToBagButtonOnClick.bind(this), { passive: true });
+      this.checkoutButton.addEventListener('click', this.checkoutButtonOnClick.bind(this));
       this.sizeButtonBlock.addEventListener('click', this.sizeButtonBlockOnClick.bind(this));
       this.typeButtonBlock.addEventListener('click', this.typeButtonBlockOnClick.bind(this));
       this.langButtonBlock.addEventListener('click', this.langButtonBlockOnClick.bind(this));
@@ -968,7 +979,7 @@ export default function setupCatalog() {
       this.calcPriceAndShow();
     }
 
-    initialSetup() {
+    setup() {
       this.result = {};
 
       this.sizeButtonBlock.querySelectorAll('button').forEach((button) => {
@@ -1030,13 +1041,13 @@ export default function setupCatalog() {
     }
 
     addToBagButtonOnClick(e) {
-      const button = e.target.closest('[data-button-bag-add]');
+      const button = e.target.closest('[data-button-bag-form-open]');
       if (!button) return;
 
       const productId = +button.dataset.productId;
       this.productObj = productObjects[productId];
 
-      this.initialSetup();
+      this.setup();
     }
 
     sizeButtonBlockOnClick(e) {
@@ -1087,6 +1098,34 @@ export default function setupCatalog() {
 
       this.result.mapLang = button.dataset.langButton;
     }
+
+    checkoutButtonOnClick(e) {
+      e.preventDefault();
+
+      const bagProductsInStorage = JSON.parse(localStorage.getItem('bagProducts')) || [];
+
+      let duplicate = false;
+
+      for (const product of bagProductsInStorage) {
+        if (product.productObj.id === this.result.productObj.id
+          && product.mapSize === this.result.mapSize
+          && product.mapType === this.result.mapType
+          && product.mapLang === this.result.mapLang) {
+          product.amount += this.result.amount;
+          product.totalPrice += this.result.totalPrice;
+          duplicate = true;
+          break;
+        }
+      }
+
+      if (!duplicate) {
+        bagProductsInStorage.push(this.result);
+        bagProductsInStorage.sort((a, b) => a.productObj.id - b.productObj.id);
+      }
+
+      localStorage.setItem('bagProducts', JSON.stringify(bagProductsInStorage));
+      popupMenu.close();
+    }
   }
 
   const renderCardsInstance = new RenderCards(arr, 5);
@@ -1094,10 +1133,10 @@ export default function setupCatalog() {
   new Checkbox('[data-checkbox-name="categories"]', renderCardsInstance);
   new Checkbox('[data-checkbox-name="discount"]', renderCardsInstance);
   const rangeInstance = new Range('.catalog__range-block', renderCardsInstance);
-  new SetupPopup({
+  const popupMenu = new SetupPopup({
     contentWrapperSelector: '.catalog__option-form-popup-window ',
     contentSelector: '.catalog__option-form',
-    openButtonSelector: '[data-button-bag-add]',
+    openButtonSelector: '[data-button-bag-form-open]',
     closeButtonSelector: '.catalog__option-form-close-button',
   });
 

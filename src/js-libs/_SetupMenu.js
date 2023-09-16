@@ -34,7 +34,7 @@ export default class SetupMenu {
     this.content.classList.add(this.menuClass, this.menuHideClass);
 
     setTimeout(() => {
-      this.content.style.transitionProperty = 'all';
+      this.content.style.transitionProperty = 'transform';
       this.content.style.transitionDuration = '.5s';
       this.content.style.transitionTimingFunction = 'ease-in-out';
 
@@ -97,6 +97,9 @@ export default class SetupMenu {
 
     if (this.isContentOverflow) {
       this.content.style.overflowY = 'scroll';
+      this.content.scrollTop = 0;
+    } else {
+      this.content.style.overflowY = '';
     }
 
     this.backdrop.classList.add(this.backdropActiveClass);
@@ -116,9 +119,6 @@ export default class SetupMenu {
       button.classList.add(this.closeButtonActiveClass);
     });
 
-    if (this.isContentOverflow) {
-      this.content.style.overflowY = '';
-    }
     this.content.classList.remove(this.menuActiveClass);
 
     this.backdrop.classList.remove(this.backdropActiveClass);
