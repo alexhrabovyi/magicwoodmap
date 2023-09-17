@@ -1,33 +1,4 @@
 main(class="catalog container")
-  .catalog__option-form-popup-window 
-    form(class="catalog__option-form")
-      button(class="close-button catalog__option-form-close-button") +
-      p(class="title title_16-px title_fw-400 title_c-black catalog__button-title") Розмір мапи
-      div(class="catalog__button-block" data-size-buttons)
-        button(class="button catalog__filter-button" data-size-button="M") М: 100х60см
-        button(class="button catalog__filter-button" data-size-button="L") L: 150х90см
-        button(class="button catalog__filter-button" data-size-button="XL") XL: 200х120см
-      p(class="title title_16-px title_fw-400 title_c-black catalog__button-title") Тип мапи
-      div(class="catalog__button-block" data-type-buttons) 
-        button(class="button catalog__filter-button" data-type-button="Prime") Prime
-        button(class="button catalog__filter-button" data-type-button="Prime planes") Prime planes
-        button(class="button catalog__filter-button" data-type-button="Prime flags") Prime flags
-      p(class="title title_16-px title_fw-400 title_c-black catalog__button-title") Мова гравіювання
-      div(class="catalog__button-block" data-lang-buttons) 
-        button(class="button catalog__filter-button" data-lang-button="ukr") Українська
-        button(class="button catalog__filter-button" data-lang-button="en") Англійська
-      .catalog__price-block
-        p(class="title title_28-px title_fw-400 title_c-orange catalog__current-price" data-current-price)
-        p(class="title title_24-px title_fw-400 title_c-grey catalog__old-price" data-old-price) 
-      .catalog__amount-block
-        button(class="catalog__amount-button catalog__amount-button_left" data-amount-button="minus") -
-        .catalog__amount-display
-        button(class="catalog__amount-button catalog__amount-button_right" data-amount-button="plus") +
-      .catalog__total-price-block 
-        p(class="title title_24-px title_fw-400 title_c-black") Загальна ціна:
-        p(class="title title_28-px title_fw-400 title_c-orange catalog__total-price" data-total-price)
-      .catalog__checkout-button-block
-        button(class="button catalog__checkout-button" data-button-bag-add) Додати в кошик
   .catalog__amount-and-select-block
     button(class="catalog__open-filters-button") Відкрити фільтр
     p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій:

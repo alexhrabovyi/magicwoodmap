@@ -309,28 +309,6 @@
     gap: 15px;
   }
 
-  &__round-button-big {
-    &_with-circle {
-      position: relative;
-
-      &::before {
-        position: absolute;
-        right: -5px;
-        bottom: -5px;
-        display: block;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: rgb(237 85 59);
-        color: rgb(255 255 255);
-        content: attr(data-product-amount);
-        font-size: 14px;
-
-        @include flex-builder(row, center, center);
-      }
-    }
-  }
-
   &__mobile-content {
     display: none;
 

@@ -2,8 +2,8 @@ export default class SetupPopup {
   constructor(options) {
     this.contentWrapper = document.querySelector(options.contentWrapperSelector);
     this.content = document.querySelector(options.contentSelector);
-    this.openButtons = document.querySelectorAll(options.openButtonSelector);
-    this.closeButtons = document.querySelectorAll(options.closeButtonSelector);
+    this.openButtonSelector = options.openButtonSelector;
+    this.closeButtonSelector = options.closeButtonSelector;
 
     this.contentWrapperClass = 'popup';
     this.contentWrapperActiveClass = 'popup_active';
@@ -20,30 +20,40 @@ export default class SetupPopup {
       this.contentWrapper.style.transitionTimingFunction = 'ease-in-out';
     });
 
-    this.openButtons.forEach((button) => {
-      button.addEventListener('click', this.open.bind(this), { passive: true });
-    });
+    document.addEventListener('click', this.toggle.bind(this));
+    this.contentWrapper.addEventListener('click', this.wrapperOnClick.bind(this));
+    window.addEventListener('resize', this.onResize.bind(this));
+  }
 
-    this.closeButtons.forEach((button) => {
-      button.addEventListener('click', this.close.bind(this), { passive: true });
-    });
+  toggle(e) {
+    let button = e.target.closest(`${this.openButtonSelector}`);
 
-    this.contentWrapper.addEventListener('click', this.wrapperOnClick.bind(this), { passive: true });
-    window.addEventListener('resize', this.onResize.bind(this), { passive: true });
+    if (button) {
+      this.open(e);
+      return;
+    }
+
+    button = e.target.closest(`${this.closeButtonSelector}`);
+
+    if (button) {
+      this.close(e);
+    }
   }
 
   wrapperOnClick(e) {
     if (e.target !== this.contentWrapper) return;
-    this.close();
+    this.close(e);
   }
 
-  onResize() {
+  onResize(e) {
     if (this.isOpen) {
-      this.close();
+      this.close(e);
     }
   }
 
-  open() {
+  open(e) {
+    e.preventDefault();
+
     if (this.isOpen) return;
 
     if (this.isContentOverflow) {
@@ -56,7 +66,9 @@ export default class SetupPopup {
     this.contentWrapper.classList.add(this.contentWrapperActiveClass);
   }
 
-  close() {
+  close(e) {
+    e.preventDefault();
+
     if (!this.isOpen) return;
 
     this.contentWrapper.style.alignItems = '';
