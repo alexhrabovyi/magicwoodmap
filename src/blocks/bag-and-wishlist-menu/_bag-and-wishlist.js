@@ -138,7 +138,7 @@ export default function setupBagAndWishlistMenu() {
               <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price">${formatPrice(product.basicPrice)} ₴</p>
             </div>
             <div class="bag-and-wishlist-menu__button-block">
-              <button class="button bag-and-wishlist-menu__bag-button">Додати до кошика</button>
+              <button class="button bag-and-wishlist-menu__bag-button" data-button-bag-form-open data-product-id="${product.id}">Додати до кошика</button>
               <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-wishlist-delete data-product-id="${product.id}">Видалити</button>
             </div>
           `;
@@ -184,7 +184,7 @@ export default function setupBagAndWishlistMenu() {
     constructor() {
       this.popupMenu = new SetupPopup({
         contentWrapperSelector: '.bag-and-wishlist-menu__option-form-popup-window ',
-        contentSelector: '.bag-and-wishlist-menu__option-form',
+        contentSelector: '[data-bag-option-form]',
         openButtonSelector: '[data-button-bag-form-open]',
         closeButtonSelector: '.bag-and-wishlist-menu__option-form-close-button',
       });
@@ -217,6 +217,7 @@ export default function setupBagAndWishlistMenu() {
       this.optionFormSizeButtons = this.optionForm.querySelectorAll('[data-size-button]');
       this.optionFormTypeButtons = this.optionForm.querySelectorAll('[data-type-button]');
       this.optionFormLangButtons = this.optionForm.querySelectorAll('[data-lang-button]');
+      this.optionFormButtonTitles = this.optionForm.querySelectorAll('.bag-and-wishlist-menu__button-title');
 
       this.optionFormAmountBlock = this.optionForm.querySelector('.bag-and-wishlist-menu__amount-block');
       this.optionFormAmountDisplay = this.optionForm.querySelector('.bag-and-wishlist-menu__amount-display');
@@ -237,65 +238,97 @@ export default function setupBagAndWishlistMenu() {
     }
 
     optionFormSetup() {
-      this.optionFormSizeButtons.forEach((button) => {
-        button.classList.remove(this.optionButtonActiveClass);
-      });
-      this.optionFormTypeButtons.forEach((button) => {
-        button.classList.remove(this.optionButtonActiveClass);
-      });
-      this.optionFormLangButtons.forEach((button) => {
-        button.classList.remove(this.optionButtonActiveClass);
-      });
-
-      if (this.changeOptions) {
+      if (this.optionFormAddToBagButton.product.productObj.productType === 'accessories') {
         this.optionFormSizeButtons.forEach((button) => {
-          if (button.dataset.sizeButton === this.changeOptions.mapSize) {
-            button.classList.add(this.optionButtonActiveClass);
-          }
+          button.style.display = 'none';
         });
         this.optionFormTypeButtons.forEach((button) => {
-          if (button.dataset.typeButton === this.changeOptions.mapType) {
-            button.classList.add(this.optionButtonActiveClass);
-          }
+          button.style.display = 'none';
         });
         this.optionFormLangButtons.forEach((button) => {
-          if (button.dataset.langButton === this.changeOptions.mapLang) {
-            button.classList.add(this.optionButtonActiveClass);
-          }
+          button.style.display = 'none';
+        });
+        this.optionFormButtonTitles.forEach((title) => {
+          title.style.display = 'none';
         });
 
-        this.optionFormAmountDisplay.innerHTML = this.changeOptions.amount;
+        if (this.changeOptions) {
+          this.optionFormAmountDisplay.innerHTML = this.changeOptions.amount;
 
-        this.optionFormAddToBagButton.product.productObj = productObjects[this.changeOptions.id];
-        this.optionFormAddToBagButton.product.mapSize = this.changeOptions.mapSize;
-        this.optionFormAddToBagButton.product.mapType = this.changeOptions.mapType;
-        this.optionFormAddToBagButton.product.mapLang = this.changeOptions.langType;
-        this.optionFormAddToBagButton.product.amount = this.changeOptions.amount;
-        this.optionFormAddToBagButton.product.changeOptions = true;
+          this.optionFormAddToBagButton.product.amount = this.changeOptions.amount;
+          this.optionFormAddToBagButton.product.changeOptions = true;
+        } else {
+          this.optionFormAmountDisplay.innerHTML = 1;
+
+          this.optionFormAddToBagButton.product.amount = 1;
+          this.optionFormAddToBagButton.product.changeOptions = false;
+        }
       } else {
         this.optionFormSizeButtons.forEach((button) => {
-          if (button.dataset.sizeButton === 'M') {
-            button.classList.add(this.optionButtonActiveClass);
-          }
+          button.classList.remove(this.optionButtonActiveClass);
+          button.style.display = '';
         });
         this.optionFormTypeButtons.forEach((button) => {
-          if (button.dataset.typeButton === 'Prime') {
-            button.classList.add(this.optionButtonActiveClass);
-          }
+          button.classList.remove(this.optionButtonActiveClass);
+          button.style.display = '';
         });
         this.optionFormLangButtons.forEach((button) => {
-          if (button.dataset.langButton === 'ukr') {
-            button.classList.add(this.optionButtonActiveClass);
-          }
+          button.classList.remove(this.optionButtonActiveClass);
+          button.style.display = '';
+        });
+        this.optionFormButtonTitles.forEach((title) => {
+          title.style.display = '';
         });
 
-        this.optionFormAmountDisplay.innerHTML = 1;
+        if (this.changeOptions) {
+          this.optionFormSizeButtons.forEach((button) => {
+            if (button.dataset.sizeButton === this.changeOptions.mapSize) {
+              button.classList.add(this.optionButtonActiveClass);
+            }
+          });
+          this.optionFormTypeButtons.forEach((button) => {
+            if (button.dataset.typeButton === this.changeOptions.mapType) {
+              button.classList.add(this.optionButtonActiveClass);
+            }
+          });
+          this.optionFormLangButtons.forEach((button) => {
+            if (button.dataset.langButton === this.changeOptions.mapLang) {
+              button.classList.add(this.optionButtonActiveClass);
+            }
+          });
 
-        this.optionFormAddToBagButton.product.mapSize = 'M';
-        this.optionFormAddToBagButton.product.mapType = 'Prime';
-        this.optionFormAddToBagButton.product.mapLang = 'ukr';
-        this.optionFormAddToBagButton.product.amount = 1;
-        this.optionFormAddToBagButton.product.changeOptions = false;
+          this.optionFormAmountDisplay.innerHTML = this.changeOptions.amount;
+
+          this.optionFormAddToBagButton.product.mapSize = this.changeOptions.mapSize;
+          this.optionFormAddToBagButton.product.mapType = this.changeOptions.mapType;
+          this.optionFormAddToBagButton.product.mapLang = this.changeOptions.langType;
+          this.optionFormAddToBagButton.product.amount = this.changeOptions.amount;
+          this.optionFormAddToBagButton.product.changeOptions = true;
+        } else {
+          this.optionFormSizeButtons.forEach((button) => {
+            if (button.dataset.sizeButton === 'M') {
+              button.classList.add(this.optionButtonActiveClass);
+            }
+          });
+          this.optionFormTypeButtons.forEach((button) => {
+            if (button.dataset.typeButton === 'Prime') {
+              button.classList.add(this.optionButtonActiveClass);
+            }
+          });
+          this.optionFormLangButtons.forEach((button) => {
+            if (button.dataset.langButton === 'ukr') {
+              button.classList.add(this.optionButtonActiveClass);
+            }
+          });
+
+          this.optionFormAmountDisplay.innerHTML = 1;
+
+          this.optionFormAddToBagButton.product.mapSize = 'M';
+          this.optionFormAddToBagButton.product.mapType = 'Prime';
+          this.optionFormAddToBagButton.product.mapLang = 'ukr';
+          this.optionFormAddToBagButton.product.amount = 1;
+          this.optionFormAddToBagButton.product.changeOptions = false;
+        }
       }
 
       this.optionFormCalcPriceAndShow();
@@ -313,24 +346,29 @@ export default function setupBagAndWishlistMenu() {
       if (basicOldPrice) {
         basicOldPrice = formatPrice(basicOldPrice);
         this.optionFormOldPrice.textContent = `${basicOldPrice} ₴`;
+      } else {
+        this.optionFormOldPrice.textContent = '';
       }
     }
 
     optionFormCalcPrice() {
       let { basicPrice, basicOldPrice } = this.optionFormAddToBagButton.product.productObj;
-      basicPrice += this.optionFormAddToBagButton
-        .product.productObj.sizePrices[this.optionFormAddToBagButton.product.mapSize];
-      basicPrice += this.optionFormAddToBagButton
-        .product.productObj.typePrices[this.optionFormAddToBagButton.product.mapType];
+
+      if (this.optionFormAddToBagButton.product.productObj.productType !== 'accessories') {
+        basicPrice += this.optionFormAddToBagButton
+          .product.productObj.sizePrices[this.optionFormAddToBagButton.product.mapSize];
+        basicPrice += this.optionFormAddToBagButton
+          .product.productObj.typePrices[this.optionFormAddToBagButton.product.mapType];
+
+        if (basicOldPrice) {
+          basicOldPrice += this.optionFormAddToBagButton
+            .product.productObj.sizePrices[this.optionFormAddToBagButton.product.mapSize];
+          basicOldPrice += this.optionFormAddToBagButton
+            .product.productObj.typePrices[this.optionFormAddToBagButton.product.mapType];
+        }
+      }
 
       const totalPrice = basicPrice * this.optionFormAddToBagButton.product.amount;
-
-      if (basicOldPrice) {
-        basicOldPrice += this.optionFormAddToBagButton
-          .product.productObj.sizePrices[this.optionFormAddToBagButton.product.mapSize];
-        basicOldPrice += this.optionFormAddToBagButton
-          .product.productObj.typePrices[this.optionFormAddToBagButton.product.mapType];
-      }
 
       this.optionFormAddToBagButton.product.basicPrice = basicPrice;
       this.optionFormAddToBagButton.product.totalPrice = totalPrice;
@@ -467,16 +505,26 @@ export default function setupBagAndWishlistMenu() {
         const id = +button.dataset.productId;
         const productObject = productObjects[id];
 
-        button.product = {
-          productObj: productObject,
-          mapSize: 'M',
-          mapType: 'Prime',
-          mapLang: 'ukr',
-          amount: 1,
-          basicPrice: productObject.basicPrice,
-          totalPrice: productObject.basicPrice,
-          changeOptions: false,
-        };
+        if (productObject.productType === 'accessories') {
+          button.product = {
+            productObj: productObject,
+            amount: 1,
+            basicPrice: productObject.basicPrice,
+            totalPrice: productObject.basicPrice,
+            changeOptions: false,
+          };
+        } else {
+          button.product = {
+            productObj: productObject,
+            mapSize: 'M',
+            mapType: 'Prime',
+            mapLang: 'ukr',
+            amount: 1,
+            basicPrice: productObject.basicPrice,
+            totalPrice: productObject.basicPrice,
+            changeOptions: false,
+          };
+        }
       }
 
       if (button.product.changeOptions) {
@@ -533,8 +581,7 @@ export default function setupBagAndWishlistMenu() {
         const result = product.productObj.id === button.product.id
           && product.mapSize === button.product.mapSize
           && product.mapType === button.product.mapType
-          && product.mapLang === button.product.mapLang
-          && product.amount === button.product.amount;
+          && product.mapLang === button.product.mapLang;
 
         return result;
       });
@@ -600,14 +647,14 @@ export default function setupBagAndWishlistMenu() {
           const card = document.createElement('div');
           card.classList.add('bag-and-wishlist-menu__card');
 
-          const inner = `
-            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="Дерев\`яна мапа"}>
+          let inner;
+
+          if (product.productObj.productType === 'accessories') {
+            inner = `
+            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="Різнокольорові піни з прапорами країн">
             <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
             <div class="bag-and-wishlist-menu__card-params">
-              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Розмір мапи: ${product.mapSize}: ${mapSize}</p>
-              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Тип мапи: ${product.mapType}</p>
-              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Мова гравіювання: ${mapLang}</p>
-              <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open>Змінити опції</button>
+              <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}">Змінити опції</button>
             </div>
             <div class="bag-and-wishlist-menu__amount-and-price-block">
               <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
@@ -620,21 +667,44 @@ export default function setupBagAndWishlistMenu() {
             <div class="bag-and-wishlist-menu__button-block">
               <button class="button bag-and-wishlist-menu__bag-button">Перейти до кошика</button>
               <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
+            </div>`;
+          } else {
+            inner = `
+            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="Дерев\`яна мапа">
+            <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
+            <div class="bag-and-wishlist-menu__card-params">
+              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Розмір мапи: ${product.mapSize}: ${mapSize}</p>
+              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Тип мапи: ${product.mapType}</p>
+              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Мова гравіювання: ${mapLang}</p>
+              <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}">Змінити опції</button>
             </div>
-          `;
+            <div class="bag-and-wishlist-menu__amount-and-price-block">
+              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
+              <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-amount">x ${product.amount}</p>
+              <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price-name">Сума</p>
+              <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price">${formatPrice(product.basicPrice)} ₴</p>
+              <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price-name">Разом</p>
+              <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price">${formatPrice(product.totalPrice)} ₴</p>
+            </div>
+            <div class="bag-and-wishlist-menu__button-block">
+              <button class="button bag-and-wishlist-menu__bag-button">Перейти до кошика</button>
+              <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
+            </div>`;
+          }
 
           card.innerHTML = inner;
 
           const deleteButton = card.querySelector('[data-button-bag-delete]');
+
           deleteButton.product = {
             id: product.productObj.id,
             mapSize: product.mapSize,
             mapType: product.mapType,
             mapLang: product.mapLang,
-            amount: product.amount,
           };
 
           const changeOptionButton = card.querySelector('[data-button-bag-form-open]');
+
           changeOptionButton.changeOptions = {
             id: product.productObj.id,
             mapSize: product.mapSize,

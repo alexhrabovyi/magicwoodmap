@@ -4,6 +4,7 @@
 import formatPrice from '../../js-libs/_formatPrice';
 import generateRateStars from '../../js-libs/_generateRateStars';
 import SetupMenu from '../../js-libs/_SetupMenu';
+import productObjects from '../../js-libs/_productObjects';
 
 import img1 from './images/map_1.png';
 import img2 from './images/map_2.png';
@@ -12,89 +13,12 @@ import img4 from './images/map_4.png';
 import img5 from './images/map_5.png';
 import img6 from './images/map_6.png';
 
-export default function setupCatalog() {
-  const arr = [{
-    linkHref: '#',
-    linkAlt: 'Одношарова мапа',
-    imgSrc: img1,
-    imgAlt: 'Дерев\'яна мапа',
-    titleLinkText: 'Одношарова мапа',
-    currentPrice: 3000,
-    descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 3.5,
-    categories: 'Одношарові мапи',
-    productId: 0,
-  },
-  {
-    linkHref: '#',
-    linkAlt: 'Двошарова мапа',
-    imgSrc: img5,
-    imgAlt: 'Дерев\'яна мапа',
-    titleLinkText: 'Двошарова мапа',
-    currentPrice: 3515,
-    oldPrice: 3700,
-    descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 3.7,
-    categories: 'Багатошарові мапи',
-    productId: 1,
-  },
-  {
-    linkHref: '#',
-    linkAlt: 'Двошарова мапа з підсвічуванням',
-    imgSrc: img2,
-    imgAlt: 'Дерев\'яна мапа з підсвічуванням',
-    titleLinkText: 'Двошарова мапа з підсвічуванням',
-    currentPrice: 4050,
-    oldPrice: 4500,
-    descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4.1,
-    categories: 'Мапи з підсвічуванням',
-    productId: 2,
-  },
-  {
-    linkHref: '#',
-    linkAlt: 'Тришарова мапа',
-    imgSrc: img4,
-    imgAlt: 'Дерев\'яна мапа',
-    titleLinkText: 'Тришарова мапа',
-    currentPrice: 4500,
-    oldPrice: 5000,
-    descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 5,
-    categories: 'Багатошарові мапи',
-    productId: 3,
-  },
-  {
-    linkHref: '#',
-    linkAlt: 'Тришарова мапа з підсвічуванням',
-    imgSrc: img3,
-    imgAlt: 'Дерев\'яна мапа з підсвічуванням',
-    titleLinkText: 'Тришарова мапа з підсвічуванням',
-    currentPrice: 5130,
-    oldPrice: 5700,
-    descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4.4,
-    categories: 'Мапи з підсвічуванням',
-    productId: 4,
-  },
-  {
-    linkHref: '#',
-    linkAlt: 'Додатки до мап',
-    imgSrc: img6,
-    imgAlt: 'Піни з прапорами країн світу',
-    titleLinkText: 'Додатки до мап',
-    currentPrice: 800,
-    oldPrice: 1000,
-    descText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.',
-    rate: 4,
-    categories: 'Додатки до мап',
-    productId: 5,
-  },
-  ];
+const imgs = [img1, img2, img3, img4, img5, img6];
 
+export default function setupCatalog() {
   class RenderCards {
-    constructor(arrOfCardOptions, cardsPerView = 5) {
-      this.originalArr = arrOfCardOptions.slice();
+    constructor(productObjects, cardsPerView = 5) {
+      this.originalArr = productObjects.slice();
       this.modifiedArr = this.originalArr.slice();
       this.cardsPerView = cardsPerView;
       this.buttonsPerView = 5;
@@ -122,8 +46,8 @@ export default function setupCatalog() {
       this.updateCardAmount();
     }
 
-    hideAndShowCards(arrOfCardOptions) {
-      const cards = this.createCards(arrOfCardOptions);
+    hideAndShowCards(productObjects) {
+      const cards = this.createCards(productObjects);
 
       const cardBlockHeight = this.cardBlock.offsetHeight;
       this.cardBlock.style.height = `${cardBlockHeight}px`;
@@ -141,52 +65,40 @@ export default function setupCatalog() {
       }, { once: true });
     }
 
-    createCards(arrOfCardOptions) {
+    createCards(productObjects) {
       let wishlistIds = JSON.parse(localStorage.getItem('wishlistProducts')) || [];
       wishlistIds = wishlistIds.map((product) => product.id);
 
       let bagIds = JSON.parse(localStorage.getItem('bagProducts')) || [];
       bagIds = bagIds.map((product) => product.productObj.id);
 
-      function createCard(options) {
-        function setupRoundButtons() {
-          if (wishlistIds.includes(options.productId)) {
-            const wishlistButton = card.querySelector('[data-button-wishlist-add]');
-            wishlistButton.classList.add('bag-and-wishlist-menu__round-button-selected');
-          }
-
-          if (bagIds.includes(options.productId)) {
-            const bagButton = card.querySelector('[data-button-bag-form-open]');
-            bagButton.classList.add('bag-and-wishlist-menu__round-button-selected');
-          }
-        }
-
+      function createCard(productObj) {
         const card = document.createElement('div');
         card.classList.add('catalog__card');
 
         const inner = `
-        <a class="catalog__card-img-link" href="${options.linkHref}" alt="${options.linkAlt}">
-          <img class="catalog__card-img" src="${options.imgSrc}" alt="${options.imgAlt}">
+        <a class="catalog__card-img-link" href="${productObj.pageLink}" alt="${productObj.name}">
+          <img class="catalog__card-img" src="${imgs[productObj.id]}" alt="${productObj.imgAlt}">
         </a>
         <div class="catalog__card-desc-block">
-          <a class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="${options.linkHref}" alt="${options.linkAlt}">
-            ${options.titleLinkText}
+          <a class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="${productObj.pageLink}" alt="${productObj.name}">
+            ${productObj.name}
           </a>
           <div class="catalog__card-price-and-rate-block">
-            <p class="text text_ff-poppins text_c-orange catalog__card-current-price">${formatPrice(options.currentPrice)} UAH</p>
-            <p class="text text_ff-poppins text_c-grey-12 catalog__card-old-price">${formatPrice(options.oldPrice) || ''}</p>
+            <p class="text text_ff-poppins text_c-orange catalog__card-current-price">${formatPrice(productObj.basicPrice)} UAH</p>
+            <p class="text text_ff-poppins text_c-grey-12 catalog__card-old-price">${formatPrice(productObj.basicOldPrice) || ''}</p>
             <div class="catalog__card-rate-block"></div>
           </div>
-          <p class="text text_c-grey-14 catalog__card-desc">${options.descText}</p>
+          <p class="text text_c-grey-14 catalog__card-desc">${productObj.descText}</p>
           <div class="catalog__card-button-block">
-            <button class="button button_transparent catalog__card-buy-button" data-button-bag-add data-product-id="${options.productId}">Купити в 1 клік</button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-form-open data-product-id="${options.productId}">
+            <button class="button button_transparent catalog__card-buy-button" data-button-bag-add data-product-id="${productObj.id}">Купити в 1 клік</button>
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-form-open data-product-id="${productObj.id}">
               <i class="icon-bag"></i>
             </button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add data-product-id="${options.productId}">
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add data-product-id="${productObj.id}">
               <i class="icon-like"></i>
             </button>
-            <a class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="${options.linkHref}" alt="Переглянути →">
+            <a class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="${productObj.pageLink}" alt="Переглянути →">
               Переглянути →
             </a>
           </div>
@@ -194,17 +106,25 @@ export default function setupCatalog() {
         `;
         card.innerHTML = inner;
 
-        setupRoundButtons();
+        if (wishlistIds.includes(productObj.id)) {
+          const wishlistButton = card.querySelector('[data-button-wishlist-add]');
+          wishlistButton.classList.add('bag-and-wishlist-menu__round-button-selected');
+        }
+
+        if (bagIds.includes(productObj.id)) {
+          const bagButton = card.querySelector('[data-button-bag-form-open]');
+          bagButton.classList.add('bag-and-wishlist-menu__round-button-selected');
+        }
 
         return card;
       }
       const cards = new DocumentFragment();
 
-      arrOfCardOptions.forEach((option) => {
-        const card = createCard(option);
+      productObjects.forEach((productObj) => {
+        const card = createCard(productObj);
 
         const cardRateBlock = card.querySelector('.catalog__card-rate-block');
-        const { rate } = option;
+        const { rate } = productObj;
         generateRateStars(rate, cardRateBlock);
 
         cards.append(card);
@@ -225,17 +145,17 @@ export default function setupCatalog() {
       this.sortType = sortBy;
 
       if (sortBy === 'price-down') {
-        this.modifiedArr.sort((a, b) => b.currentPrice - a.currentPrice);
+        this.modifiedArr.sort((a, b) => b.basicPrice - a.basicPrice);
       } else if (sortBy === 'price-up') {
-        this.modifiedArr.sort((a, b) => a.currentPrice - b.currentPrice);
+        this.modifiedArr.sort((a, b) => a.basicPrice - b.basicPrice);
       } else if (sortBy === 'rate-down') {
         this.modifiedArr.sort((a, b) => b.rate - a.rate);
       } else if (sortBy === 'rate-up') {
         this.modifiedArr.sort((a, b) => a.rate - b.rate);
       } else if (sortBy === 'name-A-Z') {
-        this.modifiedArr.sort((a, b) => a.titleLinkText.localeCompare(b.titleLinkText));
+        this.modifiedArr.sort((a, b) => a.name.localeCompare(b.name));
       } else if (sortBy === 'name-Z-A') {
-        this.modifiedArr.sort((a, b) => -a.titleLinkText.localeCompare(b.titleLinkText));
+        this.modifiedArr.sort((a, b) => -a.name.localeCompare(b.name));
       } else if (sortBy === 'default') {
         this.filterOut();
         this.sortByRangePrice();
@@ -297,8 +217,8 @@ export default function setupCatalog() {
         const discountArr = [];
 
         modifiedArr.forEach((card) => {
-          if (!card.oldPrice) return;
-          const percent = ((1 - (card.currentPrice / card.oldPrice)) * 100).toFixed(0);
+          if (!card.basicOldPrice) return;
+          const percent = ((1 - (card.basicPrice / card.basicOldPrice)) * 100).toFixed(0);
 
           if (discount.includes(percent)) {
             discountArr.push(card);
@@ -329,9 +249,9 @@ export default function setupCatalog() {
       if (!this.modifiedArr.length) return;
 
       const copyArr = this.modifiedArr.slice();
-      copyArr.sort((a, b) => a.currentPrice - b.currentPrice);
-      const minValue = copyArr[0].currentPrice;
-      const maxValue = copyArr[copyArr.length - 1].currentPrice;
+      copyArr.sort((a, b) => a.basicPrice - b.basicPrice);
+      const minValue = copyArr[0].basicPrice;
+      const maxValue = copyArr[copyArr.length - 1].basicPrice;
 
       this.rangeInputMin.min = minValue;
       this.rangeInputMax.min = minValue;
@@ -388,7 +308,7 @@ export default function setupCatalog() {
 
       // eslint-disable-next-line arrow-body-style
       this.modifiedArr = this.modifiedArr.filter((card) => {
-        return card.currentPrice >= currentMinValue && card.currentPrice <= currentMaxValue;
+        return card.basicPrice >= currentMinValue && card.basicPrice <= currentMaxValue;
       });
     }
 
@@ -921,7 +841,7 @@ export default function setupCatalog() {
     }
   }
 
-  const renderCardsInstance = new RenderCards(arr, 5);
+  const renderCardsInstance = new RenderCards(productObjects, 5);
   new Select('.catalog__select', renderCardsInstance, 0);
   new Checkbox('[data-checkbox-name="categories"]', renderCardsInstance);
   new Checkbox('[data-checkbox-name="discount"]', renderCardsInstance);
