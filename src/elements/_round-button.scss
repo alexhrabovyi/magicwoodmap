@@ -79,6 +79,16 @@
     }
   }
 
+  &_disabled {
+    background-color: rgb(233 233 233);
+    pointer-events: none;
+
+    &:hover {
+      background-color: rgb(233 233 233);
+      pointer-events: none;
+    }
+  }
+
   &_small {
     width: 30px;
     height: 30px;

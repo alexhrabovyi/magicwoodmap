@@ -168,6 +168,11 @@
     &_active {
       background: rgb(237 85 59 / 100%);
       color: rgb(255 255 255);
+
+      &:hover, &:focus {
+        background: rgb(237 85 59 / 100%);
+        color: rgb(255 255 255);
+      }
     }
   }
 
@@ -509,17 +514,13 @@
     }
   }
 
-  &__recommendation-slider-slide {
-    text-decoration:  none;
-  }
-
   &__recommendation-slider-img {
     width: 100%;
     border-radius: 11px;
     margin-bottom: 15px;
   }
 
-  &__recommendation-slider-title {
+  &__recommendation-slider-title-link {
     margin-bottom: 4px;
   }
 

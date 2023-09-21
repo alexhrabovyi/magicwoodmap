@@ -61,20 +61,6 @@
     }
   }
 
-  &__slider-small-container {
-    @include media-m {
-      display: none;
-    }
-  }
-
-  &__slider-small-mobile-container {
-    display: none;
-
-    @include media-m {
-      display: block;
-    }
-  }
-
   &__slider-small-button-block {
     @include flex-builder(row, space-between, none);
 
@@ -82,31 +68,6 @@
     top: -65px;
     right: 0;
     width: 95px;
-  }
-
-  &__slider-button {
-    @include flex-builder(row, center, center);
-
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background-color: rgb(255 255 255);
-    box-shadow: 0 0 12px 0 rgb(0 0 0 / 13%);
-    color: rgb(237 85 59);
-    cursor: pointer;
-    font-size: 20px;
-    transition: .05s all ease-in-out;
-
-    &:hover {
-      box-shadow: 0 0 12px 0 rgb(0 0 0 / 40%);
-    }
-
-    &:active, &:focus {
-      background-color: rgb(221 221 221);
-      color: rgb(217 65 39);
-      outline: none;
-    }
   }
 
   &__slide-small-img {

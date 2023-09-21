@@ -535,11 +535,6 @@
     }
   }
 
-  &__pagination-round-button_disabled {
-    background-color: rgb(245 245 245);
-    pointer-events: none;
-  }
-
   &__pagination-buttons {
     @include flex-builder(row, center, center);
 

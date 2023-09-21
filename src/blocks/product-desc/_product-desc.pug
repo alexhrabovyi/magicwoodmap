@@ -25,25 +25,25 @@ main(class="product-desc container")
       form(class="product-desc__checkout-form")
         p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Розмір мапи
         .product-desc__button-block 
-          button(class="button product-desc__filter-button product-desc__filter-button_active") М: 100х60см
-          button(class="button product-desc__filter-button") L: 150х90см
-          button(class="button product-desc__filter-button") XL: 200х120см
+          button(class="button product-desc__filter-button" data-checkout-size-button="M") М: 100х60см
+          button(class="button product-desc__filter-button" data-checkout-size-button="L") L: 150х90см
+          button(class="button product-desc__filter-button" data-checkout-size-button="XL") XL: 200х120см
         p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Тип мапи
         .product-desc__button-block 
-          button(class="button product-desc__filter-button product-desc__filter-button_active") Prime
-          button(class="button product-desc__filter-button") Prime planes
-          button(class="button product-desc__filter-button") Prime flags
+          button(class="button product-desc__filter-button" data-checkout-type-button="Prime") Prime
+          button(class="button product-desc__filter-button" data-checkout-type-button="Prime planes") Prime planes
+          button(class="button product-desc__filter-button" data-checkout-type-button="Prime flags") Prime flags
         p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Мова гравіювання
         .product-desc__button-block 
-          button(class="button product-desc__filter-button product-desc__filter-button_active") Українська
-          button(class="button product-desc__filter-button") Англійська
+          button(class="button product-desc__filter-button" data-checkout-lang-button="ukr") Українська
+          button(class="button product-desc__filter-button" data-checkout-lang-button="en") Англійська
         .product-desc__price-block
-          p(class="title title_28-px title_fw-400 title_c-orange product-desc__current-price") 1 000 ₴
-          p(class="title title_24-px title_fw-400 title_c-grey product-desc__old-price") 2 000 ₴ 
+          p(class="title title_28-px title_fw-400 title_c-orange product-desc__current-price" data-checkout-current-price) 1 000 ₴
+          p(class="title title_24-px title_fw-400 title_c-grey product-desc__old-price" data-checkout-old-price) 2 000 ₴ 
           button(class="product-desc__discount-notificate-button") Сповістити про знижки
         .product-desc__checkout-button-block
-          button(class="button product-desc__checkout-button") Додати в кошик
-          button(class="button button_transparent product-desc__checkout-button") Купити в 1 клік
+          button(class="button product-desc__checkout-button" data-button-bag-add) Додати в кошик
+          button(class="button button_transparent product-desc__checkout-button" data-button-bag-add data-product-id="0") Купити в 1 клік
           button(class="round-button round-button_with-shadow round-button_medium" data-button-wishlist-add data-product-id="0")
             i.icon-like
       .product-desc__payment-methods-block 
@@ -102,72 +102,72 @@ main(class="product-desc container")
     .product-desc__recommendation-slider
       .product-desc__recommendation-slider-container
         .product-desc__recommendation-slider-wrapper 
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Одношарова мапа")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Одношарова мапа
+          div(class="product-desc__recommendation-slider-slide" alt="Одношарова мапа")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Одношарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3000 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price")
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Двошарова мапа")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_2.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Двошарова мапа
+          div(class="product-desc__recommendation-slider-slide" alt="Двошарова мапа")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_2.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Двошарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3515 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 3700 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Двошарова мапа з підсвічуванням")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_3.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Двошарова мапа з підсвічуванням
+          div(class="product-desc__recommendation-slider-slide" alt="Двошарова мапа з підсвічуванням")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_3.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Двошарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4050 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 4500 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Тришарова мапа ")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_4.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Тришарова мапа 
+          div(class="product-desc__recommendation-slider-slide" alt="Тришарова мапа ")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_4.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Тришарова мапа 
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4500 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5000 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Тришарова мапа з підсвічуванням")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Тришарова мапа з підсвічуванням
+          div(class="product-desc__recommendation-slider-slide" alt="Тришарова мапа з підсвічуванням")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Тришарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 5130 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5700 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Одношарова мапа")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Одношарова мапа
+          div(class="product-desc__recommendation-slider-slide" alt="Одношарова мапа")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Одношарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3000 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price")
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Двошарова мапа")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_2.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Двошарова мапа
+          div(class="product-desc__recommendation-slider-slide" alt="Двошарова мапа")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_2.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Двошарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3515 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 3700 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Двошарова мапа з підсвічуванням")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_3.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Двошарова мапа з підсвічуванням
+          div(class="product-desc__recommendation-slider-slide" alt="Двошарова мапа з підсвічуванням")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_3.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Двошарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4050 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 4500 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Тришарова мапа ")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_4.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Тришарова мапа 
+          div(class="product-desc__recommendation-slider-slide" alt="Тришарова мапа ")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_4.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Тришарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4500 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5000 ₴
-          a(class="product-desc__recommendation-slider-slide" href="#" alt="Тришарова мапа з підсвічуванням")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png", alt="Дерев'яна мапа")
-            p(class="title title_20-px title_fw-400 product-desc__recommendation-slider-title") Тришарова мапа з підсвічуванням
+          div(class="product-desc__recommendation-slider-slide" alt="Тришарова мапа з підсвічуванням")
+            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png")
+            a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href="#" alt="Дерев'яна мапа") Тришарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 5130 ₴

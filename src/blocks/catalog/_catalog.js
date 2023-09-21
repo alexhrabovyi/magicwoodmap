@@ -340,7 +340,7 @@ export default function setupCatalog() {
       this.paginationButtonBlock = document.querySelector('.catalog__pagination-buttons');
 
       this.paginationButtonSelectedClass = 'catalog__pagination-button_selected';
-      this.buttonDisabledClass = 'catalog__pagination-round-button_disabled';
+      this.buttonDisabledClass = 'round-button_disabled';
 
       this.paginationButtonBlock.addEventListener('click', this.paginationButtonOnClick.bind(this));
 

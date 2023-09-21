@@ -10,17 +10,13 @@ export default function createSliders() {
     buttons: {
       buttonPrevSelector: '#slider-small-prev',
       buttonNextSelector: '#slider-small-next',
+      disabledClass: 'round-button_disabled',
     },
-  });
-
-  new Slider({
-    containerSelector: '.reviews__slider-small-mobile-container',
-    wrapperSelector: '.reviews__slider-small-mobile-wrapper',
-    slidesSelector: '.reviews__slider-small-slide',
-    gap: 20,
-    buttons: {
-      buttonPrevSelector: '#slider-small-prev',
-      buttonNextSelector: '#slider-small-next',
+    breakpoints: {
+      1024: {
+        slidesPerView: 1,
+        gap: 20,
+      },
     },
   });
 
@@ -32,6 +28,7 @@ export default function createSliders() {
     buttons: {
       buttonPrevSelector: '#slider-big-prev',
       buttonNextSelector: '#slider-big-next',
+      disabledClass: 'round-button_disabled',
     },
     counter: {
       currentNumSelector: '.reviews__current-slide-number',

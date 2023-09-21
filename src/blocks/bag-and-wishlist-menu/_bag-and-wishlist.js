@@ -131,7 +131,7 @@ export default function setupBagAndWishlistMenu() {
           card.classList.add('bag-and-wishlist-menu__card');
 
           const inner = `
-            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.id]}" alt="Дерев\`яна мапа"}>
+            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.id]}" alt="${product.imgAlt}"}>
             <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.pageLink}" alt="${product.name}">${product.name}</a>
             <div class="bag-and-wishlist-menu__amount-and-price-block">
               <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price-name">Ціна</p>
@@ -651,7 +651,7 @@ export default function setupBagAndWishlistMenu() {
 
           if (product.productObj.productType === 'accessories') {
             inner = `
-            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="Різнокольорові піни з прапорами країн">
+            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
             <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
             <div class="bag-and-wishlist-menu__card-params">
               <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}">Змінити опції</button>
@@ -670,7 +670,7 @@ export default function setupBagAndWishlistMenu() {
             </div>`;
           } else {
             inner = `
-            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="Дерев\`яна мапа">
+            <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
             <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
             <div class="bag-and-wishlist-menu__card-params">
               <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Розмір мапи: ${product.mapSize}: ${mapSize}</p>
