@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable no-descending-specificity */
 .main-bag {
   display: grid;
   align-items: flex-start;
@@ -77,6 +79,25 @@
 
   &__product-table-cards  {
     width: 100%;
+  }
+
+  &__empty-bag-notice-block {
+    width: 100%;
+    height: 100%;
+
+    @include flex-builder(column, center, center);
+
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &__grey-title {
+    margin-bottom: 15px;
+    color: 818181;
+  }
+
+  &__grey-text {
+    color: rgb(146 149 170 / 100%);
   }
 
   &__product-table-card {
@@ -332,8 +353,14 @@
     font-weight: 500;
     gap: 9px;
     text-align: left;
+    transition: all .05s ease-in-out;
 
     @include flex-builder(row, flex-start, flex-start);
+
+    &_checked  .main-bag__check-icon{
+      background-color: rgb(237 85 59);
+      color: rgb(255 255 255);
+    }
   }
 
   &__check-icon {
@@ -344,11 +371,11 @@
     font-size: 10px;
 
     @include flex-builder(row, center, center);
+  }
 
-    &_checked {
-      background-color: rgb(237 85 59);
-      color: rgb(255 255 255);
-    }
+  &__payment-method-notice {
+    margin-top: 10px;
+    color: rgb(255 107 107);
   }
 
   &__label {
@@ -422,5 +449,19 @@
     margin-bottom: 25px;
     grid-template-columns: auto auto;
     row-gap: 9px;
+  }
+
+  &__terms-agree-button {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 120%;
+      left: 21.5px;
+      display: block;
+      color: rgb(255 107 107);
+      content: attr(data-button-terms-agree);
+      font-size: 16px;
+    }
   }
 }
