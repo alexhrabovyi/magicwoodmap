@@ -5,7 +5,9 @@
 @import "../../scss/mixins";
 
 // elements 
+@import "../../elements/menu";
 @import "../../elements/backdrop";
+@import "../../elements/close-button";
 @import "../../elements/container";
 @import "../../elements/input";
 @import "../../elements/button";
@@ -14,11 +16,15 @@
 @import "../../elements/text";
 @import "../../elements/round-button";
 @import "../../elements/link";
+@import "../../elements/categories-button";
+@import "../../elements/icon-star-block";
+@import "../../elements/popup";
 
 // blocks
 @import "../../blocks/header/header";
 @import "../../blocks/main-nav/main-nav";
 @import "../../blocks/breadcrumbs/breadcrumbs";
+@import "../../blocks/bag-and-wishlist-menu/bag-and-wishlist";
 @import "../../blocks/blog-article/blog-article";
 @import "../../blocks/call-back-form/call-back-form";
 @import "../../blocks/footer/footer";
