@@ -29,7 +29,6 @@
 //  }
 // }
 
-// eslint-disable-next-line max-classes-per-file
 export default class Slider {
   constructor(options) {
     if (options.breakpoints) {
@@ -183,28 +182,19 @@ export default class Slider {
     this.prevButton.setAttribute('data-button-type', 'prev');
     this.nextButton.setAttribute('data-button-type', 'next');
 
-    if (this.activeSlideId === 0) {
-      this.prevButton.classList.add(this.buttonDisabledClass);
-    } else if (this.activeSlideId === this.slides.length - 1) {
-      this.nextButton.classList.add(this.buttonDisabledClass);
-    }
+    this.checkPrevNextButtons();
 
     this.prevNextButtonOnClick = (e) => {
       const button = e.target.closest('[data-button-type]');
       const { buttonType } = button.dataset;
-
-      this.prevButton.classList.remove(this.buttonDisabledClass);
-      this.nextButton.classList.remove(this.buttonDisabledClass);
 
       if (this.slidesPerView === 1) {
         this.activeSlideId = buttonType === 'prev' ? this.activeSlideId - 1 : this.activeSlideId + 1;
 
         if (this.activeSlideId <= 0) {
           this.activeSlideId = 0;
-          this.prevButton.classList.add(this.buttonDisabledClass);
         } else if (this.activeSlideId >= this.slides.length - 1) {
           this.activeSlideId = this.slides.length - 1;
-          this.nextButton.classList.add(this.buttonDisabledClass);
         }
       } else if (this.slidesPerView > 1) {
         const firstSlides = Math.floor(this.slidesPerView / 2);
@@ -217,12 +207,6 @@ export default class Slider {
         }
 
         this.activeSlideId = buttonType === 'prev' ? this.activeSlideId - 1 : this.activeSlideId + 1;
-
-        if (this.activeSlideId <= firstSlides) {
-          this.prevButton.classList.add(this.buttonDisabledClass);
-        } else if (this.activeSlideId >= lastSlides - 1) {
-          this.nextButton.classList.add(this.buttonDisabledClass);
-        }
       }
 
       this.translateAndToggle(this.activeSlideId);
@@ -266,14 +250,14 @@ export default class Slider {
   }
 
   setupDragNDrop() {
-    this.onMouseDownDesktopModified = this.onMouseDown.bind(this, false);
-    this.onMouseDownMobileModified = this.onMouseDown.bind(this, true);
+    this.onMouseDownMobileModified = this.onDownEvent.bind(this, true);
+    this.onMouseDownDesktopModified = this.onDownEvent.bind(this, false);
 
     this.wrapper.addEventListener('touchstart', this.onMouseDownMobileModified);
     this.wrapper.addEventListener('mousedown', this.onMouseDownDesktopModified);
   }
 
-  onMouseDown(isMobile, event) {
+  onDownEvent(isMobile, event) {
     event.preventDefault();
 
     const calcCurrentTranslate = () => {
@@ -424,6 +408,10 @@ export default class Slider {
       this.togglePaginationButtons(id);
     }
 
+    if (this.prevButton) {
+      this.checkPrevNextButtons();
+    }
+
     if (this.currentNum) {
       this.currentNum.innerHTML = this.formatNum(id + 1);
     }
@@ -467,6 +455,28 @@ export default class Slider {
         button.classList.remove(this.paginationButtonActiveClass);
       }
     });
+  }
+
+  checkPrevNextButtons() {
+    this.prevButton.classList.remove(this.buttonDisabledClass);
+    this.nextButton.classList.remove(this.buttonDisabledClass);
+
+    if (this.slidesPerView <= 2) {
+      if (this.activeSlideId === 0) {
+        this.prevButton.classList.add(this.buttonDisabledClass);
+      } else if (this.activeSlideId === this.slides.length - 1) {
+        this.nextButton.classList.add(this.buttonDisabledClass);
+      }
+    } else if (this.slidesPerView > 1) {
+      const firstSlides = Math.floor(this.slidesPerView / 2);
+      const lastSlides = this.slides.length - firstSlides;
+
+      if (this.activeSlideId <= firstSlides) {
+        this.prevButton.classList.add(this.buttonDisabledClass);
+      } else if (this.activeSlideId >= lastSlides - 1) {
+        this.nextButton.classList.add(this.buttonDisabledClass);
+      }
+    }
   }
 
   getElemCoords(elem) {

@@ -682,8 +682,11 @@ export default function setupCatalog() {
       this.buttonMin = this.rangeBlock.querySelector('#range-btn-min');
       this.buttonMax = this.rangeBlock.querySelector('#range-btn-max');
 
-      this.buttonMin.addEventListener('mousedown', this.onMouseDown.bind(this, 'min'));
-      this.buttonMax.addEventListener('mousedown', this.onMouseDown.bind(this, 'max'));
+      this.buttonMin.addEventListener('mousedown', this.onDownEvent.bind(this, 'min', false));
+      this.buttonMin.addEventListener('touchstart', this.onDownEvent.bind(this, 'min', true));
+
+      this.buttonMax.addEventListener('mousedown', this.onDownEvent.bind(this, 'max', false));
+      this.buttonMax.addEventListener('touchstart', this.onDownEvent.bind(this, 'max', true));
 
       this.setupInput();
 
@@ -723,23 +726,31 @@ export default function setupCatalog() {
       this.renderCardsInstance.sortByRangePriceAndShow();
     }
 
-    onMouseDown(type, e) {
+    onDownEvent(type, isMobile, e) {
       e.preventDefault();
       const button = e.target.closest('.catalog__range-button');
 
-      const shiftX = e.clientX - this.getElementLeftCoord(button);
+      const clientX = isMobile ? e.targetTouches[0].clientX : e.clientX;
+      const shiftX = clientX - this.getElementLeftCoord(button);
 
       button.style.transitionDuration = '0s';
 
-      const onMouseMoveModified = this.onMouseMove.bind(this, type, button, shiftX);
-      document.addEventListener('mousemove', onMouseMoveModified);
-      document.addEventListener('mouseup', this.onMouseUp.bind(this, button, onMouseMoveModified), { once: true });
+      if (isMobile) {
+        const onMouseMoveModified = this.onMoveEvent.bind(this, type, button, shiftX, true);
+        document.addEventListener('touchmove', onMouseMoveModified);
+        document.addEventListener('touchend', this.onUpEvent.bind(this, button, onMouseMoveModified, true), { once: true });
+      } else {
+        const onMouseMoveModified = this.onMoveEvent.bind(this, type, button, shiftX, false);
+        document.addEventListener('mousemove', onMouseMoveModified);
+        document.addEventListener('mouseup', this.onUpEvent.bind(this, button, onMouseMoveModified, false), { once: true });
+      }
     }
 
-    onMouseMove(type, button, shiftX, event) {
+    onMoveEvent(type, button, shiftX, isMobile, event) {
       const rangeLineLeftCoord = this.getElementLeftCoord(this.rangeLine);
+      const clientX = isMobile ? event.targetTouches[0].clientX : event.clientX;
 
-      let buttonShiftLeft = event.clientX - rangeLineLeftCoord - shiftX;
+      let buttonShiftLeft = clientX - rangeLineLeftCoord - shiftX;
       buttonShiftLeft = +((buttonShiftLeft / this.rangeLineWidth) * 100).toFixed(2);
 
       if (type === 'min') {
@@ -763,9 +774,14 @@ export default function setupCatalog() {
       this.calcInputs(buttonShiftLeft, type);
     }
 
-    onMouseUp(button, mouseMoveFunc) {
+    onUpEvent(button, mouseMoveFunc, isMobile) {
       button.style.transitionDuration = '';
-      document.removeEventListener('mousemove', mouseMoveFunc);
+
+      if (isMobile) {
+        document.removeEventListener('touchmove', mouseMoveFunc);
+      } else {
+        document.removeEventListener('mousemove', mouseMoveFunc);
+      }
 
       this.renderCardsInstance.sortByRangePriceAndShow();
     }

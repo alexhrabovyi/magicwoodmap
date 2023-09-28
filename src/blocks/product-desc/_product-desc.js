@@ -178,9 +178,11 @@ export default function setupProductDesc() {
       this.tabButtons[this.selectedId].classList.add(this.tabButtonActiveClass);
       this.tabContents[this.selectedId].classList.add(this.tabContentActiveClass);
 
-      this.tabContentBlock.style.height = `${this.getContentHeight(this.tabContents[this.selectedId])}px`;
-
       this.tabButtonBlock.addEventListener('click', this.toggle.bind(this), { passive: true });
+
+      setTimeout(() => {
+        this.tabContentBlock.style.minHeight = `${this.getContentHeight(this.tabContents[this.selectedId])}px`;
+      });
     }
 
     toggle(e) {
@@ -200,7 +202,7 @@ export default function setupProductDesc() {
       newButton.classList.add(this.tabButtonActiveClass);
 
       this.tabButtonBlock.style.pointerEvents = 'none';
-      this.tabContentBlock.style.height = `${this.getContentHeight(this.tabContents[this.selectedId])}px`;
+      this.tabContentBlock.style.minHeight = `${this.getContentHeight(this.tabContents[this.selectedId])}px`;
 
       oldContent.classList.remove(this.tabContentActiveClass);
       oldContent.addEventListener('transitionend', () => {
