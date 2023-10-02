@@ -61,7 +61,7 @@
     padding-right: 120px;
     padding-bottom: 15px;
     border: none;
-    border-bottom: 1px solid rgb(215 215 215 / 100%);
+    border-bottom: 2px solid rgb(215 215 215 / 100%);
     background-color: transparent;
     color: rgb(122 122 122);
     font-family: Inter, sans-serif;
@@ -85,8 +85,8 @@
 
   &__button {
     position: absolute;
+    top: 0;
     right: 0;
-    bottom: 0;
     padding-bottom: 15px;
     border: none;
     background-color: transparent;

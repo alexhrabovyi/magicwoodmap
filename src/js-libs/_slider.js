@@ -41,7 +41,9 @@ export default class Slider {
 
       for (const breakpoint of this.breakpoints) {
         if (clientWidth <= breakpoint) {
+          this.previousBreakpoint = breakpoint;
           noBreakpoints = false;
+
           const breakpointObject = this.breakpointObjects[`${breakpoint}`];
 
           const newOptions = this.deepClone(options);
@@ -64,6 +66,7 @@ export default class Slider {
       this.setupBreakpoints(options);
 
       if (noBreakpoints) {
+        this.previousBreakpoint = clientWidth;
         this.setup(options);
       }
     } else {
@@ -103,6 +106,7 @@ export default class Slider {
   }
 
   resetup(options, breakpointObject) {
+    console.log('resetup');
     const newOptions = this.deepClone(options);
 
     for (const key in newOptions) {
@@ -234,6 +238,10 @@ export default class Slider {
 
       for (const breakpoint of this.breakpoints) {
         if (clientWidth <= breakpoint) {
+          if (breakpoint === this.previousBreakpoint) return;
+
+          this.previousBreakpoint = breakpoint;
+
           const breakpointObject = this.breakpointObjects[`${breakpoint}`];
           noBreakpoints = false;
           this.resetup(options, breakpointObject);
@@ -241,7 +249,9 @@ export default class Slider {
         }
       }
 
-      if (noBreakpoints) {
+      if (noBreakpoints
+        && this.previousBreakpoint === this.breakpoints[this.breakpoints.length - 1]) {
+        this.previousBreakpoint = clientWidth;
         this.resetup(options, options);
       }
     }

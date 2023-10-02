@@ -12,6 +12,10 @@ export default class SetupPopup {
   }
 
   setup() {
+    this.mobileNavPanel = document.querySelector('.main-nav__mobile-panel');
+    this.desktopNavPanel = document.querySelector('.main-nav__desktop');
+    this.header = document.querySelector('.header');
+
     this.contentWrapper.classList.add(this.contentWrapperClass);
 
     setTimeout(() => {
@@ -62,6 +66,7 @@ export default class SetupPopup {
       this.content.style.overflowY = 'scroll';
     }
 
+    this.createPadding();
     document.body.style.overflow = 'hidden';
     this.contentWrapper.classList.add(this.contentWrapperActiveClass);
   }
@@ -75,8 +80,45 @@ export default class SetupPopup {
     this.content.style.height = '';
     this.content.style.overflowY = '';
 
-    document.body.style.overflow = '';
+    console.log(document.body.dataset.paddingByMenu);
+
+    if (!document.body.dataset.paddingByMenu) {
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
+      this.desktopNavPanel.style.width = '';
+      this.desktopNavPanel.style.paddingRight = '';
+      this.mobileNavPanel.style.width = '';
+      this.mobileNavPanel.style.paddingRight = '';
+      this.header.style.width = '';
+      this.header.style.paddingRight = '';
+    }
     this.contentWrapper.classList.remove(this.contentWrapperActiveClass);
+  }
+
+  createPadding() {
+    const fullWidth = window.innerWidth;
+    const widthWithoutScroll = document.documentElement.clientWidth;
+    const scrollWidth = fullWidth - widthWithoutScroll;
+
+    let desktopNavPanelPaddingRight = parseFloat(getComputedStyle(this.desktopNavPanel)
+      .paddingRight);
+    desktopNavPanelPaddingRight += scrollWidth;
+    this.desktopNavPanel.style.width = `${fullWidth}px`;
+    this.desktopNavPanel.style.paddingRight = `${desktopNavPanelPaddingRight}px`;
+
+    let mobileNavPanelPaddingRight = parseFloat(getComputedStyle(this.mobileNavPanel)
+      .paddingRight);
+    mobileNavPanelPaddingRight += scrollWidth;
+    this.mobileNavPanel.style.width = `${fullWidth}px`;
+    this.mobileNavPanel.style.paddingRight = `${mobileNavPanelPaddingRight}px`;
+
+    let headerPaddingRight = parseFloat(getComputedStyle(this.header)
+      .paddingRight);
+    headerPaddingRight += scrollWidth;
+    this.header.style.width = `${fullWidth}px`;
+    this.header.style.paddingRight = `${headerPaddingRight}px`;
+
+    document.body.style.paddingRight = `${scrollWidth}px`;
   }
 
   get isOpen() {

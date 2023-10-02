@@ -23,6 +23,7 @@ export default class SetupMenu {
   setup() {
     this.mobileNavPanel = document.querySelector('.main-nav__mobile-panel');
     this.desktopNavPanel = document.querySelector('.main-nav__desktop');
+    this.header = document.querySelector('.header');
     this.backdrop = document.querySelector('.backdrop');
 
     if (!this.backdrop) {
@@ -102,6 +103,7 @@ export default class SetupMenu {
       this.content.style.overflowY = '';
     }
 
+    this.createPadding();
     this.backdrop.classList.add(this.backdropActiveClass);
     document.body.style.overflow = 'hidden';
   }
@@ -121,8 +123,44 @@ export default class SetupMenu {
 
     this.content.classList.remove(this.menuActiveClass);
 
+    document.body.style.paddingRight = '';
+    document.body.removeAttribute('data-padding-by-menu');
+    this.desktopNavPanel.style.width = '';
+    this.desktopNavPanel.style.paddingRight = '';
+    this.mobileNavPanel.style.width = '';
+    this.mobileNavPanel.style.paddingRight = '';
+    this.header.style.width = '';
+    this.header.style.paddingRight = '';
+
     this.backdrop.classList.remove(this.backdropActiveClass);
     document.body.style.overflow = '';
+  }
+
+  createPadding() {
+    const fullWidth = window.innerWidth;
+    const widthWithoutScroll = document.documentElement.clientWidth;
+    const scrollWidth = fullWidth - widthWithoutScroll;
+
+    let desktopNavPanelPaddingRight = parseFloat(getComputedStyle(this.desktopNavPanel)
+      .paddingRight);
+    desktopNavPanelPaddingRight += scrollWidth;
+    this.desktopNavPanel.style.width = `${fullWidth}px`;
+    this.desktopNavPanel.style.paddingRight = `${desktopNavPanelPaddingRight}px`;
+
+    let mobileNavPanelPaddingRight = parseFloat(getComputedStyle(this.mobileNavPanel)
+      .paddingRight);
+    mobileNavPanelPaddingRight += scrollWidth;
+    this.mobileNavPanel.style.width = `${fullWidth}px`;
+    this.mobileNavPanel.style.paddingRight = `${mobileNavPanelPaddingRight}px`;
+
+    let headerPaddingRight = parseFloat(getComputedStyle(this.header)
+      .paddingRight);
+    headerPaddingRight += scrollWidth;
+    this.header.style.width = `${fullWidth}px`;
+    this.header.style.paddingRight = `${headerPaddingRight}px`;
+
+    document.body.style.paddingRight = `${scrollWidth}px`;
+    document.body.setAttribute('data-padding-by-menu', true);
   }
 
   onOrientationChange() {

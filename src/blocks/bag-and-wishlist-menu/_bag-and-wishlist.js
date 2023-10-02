@@ -3,6 +3,7 @@ import SetupMenu from '../../js-libs/_SetupMenu';
 import formatPrice from '../../js-libs/_formatPrice';
 import productObjects from '../../js-libs/_productObjects';
 import SetupPopup from '../../js-libs/_SetupPopup';
+import links from '../../js-libs/_links';
 
 import img1 from './images/map_1.png';
 import img2 from './images/map_2.png';
@@ -668,7 +669,7 @@ export class SetupBagMenu {
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price">${formatPrice(product.totalPrice)} ₴</p>
           </div>
           <div class="bag-and-wishlist-menu__button-block">
-            <button class="button bag-and-wishlist-menu__bag-button">Перейти до кошика</button>
+            <a class="button bag-and-wishlist-menu__bag-button" href="${links.productPage}" alt="Перейти до кошика">Перейти до кошика</a>
             <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
           </div>`;
         } else {
@@ -690,7 +691,7 @@ export class SetupBagMenu {
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price">${formatPrice(product.totalPrice)} ₴</p>
           </div>
           <div class="bag-and-wishlist-menu__button-block">
-            <button class="button bag-and-wishlist-menu__bag-button">Перейти до кошика</button>
+            <a class="button bag-and-wishlist-menu__bag-button" href="${links.productPage}" alt="Перейти до кошика">Перейти до кошика</a>
             <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
           </div>`;
         }

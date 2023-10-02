@@ -20,4 +20,29 @@ export default function setupMainNav() {
 
   const form = document.querySelector('.main-nav__search-form');
   new ValidateForm(form);
+
+  function highlightCurrentPageLink() {
+    const desktopLinks = document.querySelectorAll('.main-nav__link');
+    const mobileLink = document.querySelectorAll('.main-nav__mobile-main-link');
+
+    const desktopLinkActiveClass = 'main-nav__link_active';
+    const mobileLinkActiveClass = 'main-nav__mobile-main-link_active';
+
+    const { pathname } = window.location;
+    const regExp = new RegExp(pathname, 'i');
+
+    for (const link of desktopLinks) {
+      if (link.href.match(regExp) && !link.href.match(/#/)) {
+        link.classList.add(desktopLinkActiveClass);
+      }
+    }
+
+    for (const link of mobileLink) {
+      if (link.href.match(regExp) && !link.href.match(/#/)) {
+        link.classList.add(mobileLinkActiveClass);
+      }
+    }
+  }
+
+  highlightCurrentPageLink();
 }

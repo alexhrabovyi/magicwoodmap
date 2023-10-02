@@ -181,6 +181,12 @@
     }
   }
 
+  &__link {
+    &_active {
+      color: rgb(237 85 59);
+    }
+  }
+
   &__long-line {
     width: 1px;
     height: 30px;
@@ -345,6 +351,12 @@
 
     @include media-xs {
       margin-bottom: 65px;
+    }
+  }
+
+  &__mobile-main-link {
+    &_active {
+      color: rgb(237 85 59);
     }
   }
 

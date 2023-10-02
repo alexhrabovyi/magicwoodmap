@@ -92,6 +92,7 @@
     max-width: 200px;
     height: 45px;
     font-size: 18px;
+    text-decoration: none;
 
     @include flex-builder(row, center, center);
   }
