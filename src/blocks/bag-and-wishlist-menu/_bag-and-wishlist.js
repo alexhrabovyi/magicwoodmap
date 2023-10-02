@@ -528,6 +528,8 @@ export class SetupBagMenu {
           changeOptions: false,
         };
       }
+
+      window.location.href = links.bagPage;
     }
 
     if (button.product.changeOptions) {
@@ -575,6 +577,8 @@ export class SetupBagMenu {
     this.popupMenu.close(e);
 
     this.bagMenuGenerateAndAddCards();
+
+    button.product = undefined;
   }
 
   deleteButtonOnClick(e, button) {

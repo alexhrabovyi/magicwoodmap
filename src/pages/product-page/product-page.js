@@ -5,10 +5,11 @@ import setupBagAndWishlistMenu from '../../blocks/bag-and-wishlist-menu/_bag-and
 import setupProductDesc from '../../blocks/product-desc/_product-desc.js';
 import setupCallBackForm from '../../blocks/call-back-form/_call-back-form.js';
 import setupFooterForm from '../../blocks/footer/_footer.js';
+import links from '../../js-libs/_links.js';
 
 setupCopyTelButton();
 setupMainNav();
-setupBreadcrumbs([['Головна', '#'], ['Категорії', '#'], ['Одношарова мапа', '#']]);
+setupBreadcrumbs([['Головна', links.main], ['Категорії', links.categories], ['Одношарова мапа', links.productPage]]);
 setupBagAndWishlistMenu();
 setupProductDesc();
 setupCallBackForm();

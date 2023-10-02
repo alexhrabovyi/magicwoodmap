@@ -2,7 +2,7 @@ export default function setupFaqAccordion() {
   class SetupFaqAccordion {
     constructor() {
       this.contentBlocks = document.querySelector('.faq-main__content-blocks');
-      this.buttonActiveClass = 'faq-main__toggle-button_active';
+      this.iconActiveClass = 'faq-main__button-icon_active';
 
       this.contentBlocks.addEventListener('click', this.toggle.bind(this));
       window.addEventListener('resize', this.resetup.bind(this));
@@ -24,18 +24,16 @@ export default function setupFaqAccordion() {
       const contentBlocks = this.contentBlocks.querySelectorAll('.faq-main__content-block');
 
       contentBlocks.forEach((block) => {
-        const button = block.querySelector('.faq-main__toggle-button');
+        const buttonBlock = block.querySelector('.faq-main__button-block');
+        const buttonBlockHeight = this.getElementHeight(buttonBlock);
 
-        const subtitleBlock = block.querySelector('.faq-main__subtitle-and-button-block');
-        const subtitleBlockHeight = this.getElementHeight(subtitleBlock);
-
-        if (button.classList.contains(this.buttonActiveClass)) {
+        if (block.dataset.isShown) {
           const hiddenText = block.querySelector('.faq-main__text');
           const hiddenTextHeight = this.getElementHeight(hiddenText);
 
-          block.style.height = `${hiddenTextHeight + subtitleBlockHeight}px`;
+          block.style.height = `${hiddenTextHeight + buttonBlockHeight}px`;
         } else {
-          block.style.height = `${subtitleBlockHeight}px`;
+          block.style.height = `${buttonBlockHeight}px`;
         }
       });
     }
@@ -43,21 +41,24 @@ export default function setupFaqAccordion() {
     toggle(e) {
       e.preventDefault();
 
-      const button = e.target.closest('.faq-main__toggle-button');
+      const button = e.target.closest('[data-toggle-button]');
       if (!button) return;
 
       const contentBlock = button.closest('.faq-main__content-block');
       const hiddenText = contentBlock.querySelector('.faq-main__text');
+      const icon = contentBlock.querySelector('.faq-main__button-icon');
 
-      if (button.classList.contains(this.buttonActiveClass)) {
-        this.hide(button, contentBlock, hiddenText);
+      if (contentBlock.dataset.isShown) {
+        this.hide(icon, contentBlock, hiddenText);
       } else {
-        this.show(button, contentBlock, hiddenText);
+        this.show(icon, contentBlock, hiddenText);
       }
     }
 
-    show(button, contentBlock, hiddenText) {
-      button.classList.add(this.buttonActiveClass);
+    show(icon, contentBlock, hiddenText) {
+      icon.classList.add(this.iconActiveClass);
+
+      contentBlock.setAttribute('data-is-shown', true);
 
       const contentBlockHeight = this.getElementHeight(contentBlock);
       const hiddenTextHeight = this.getElementHeight(hiddenText);
@@ -65,8 +66,10 @@ export default function setupFaqAccordion() {
       contentBlock.style.height = `${contentBlockHeight + hiddenTextHeight}px`;
     }
 
-    hide(button, contentBlock, hiddenText) {
-      button.classList.remove(this.buttonActiveClass);
+    hide(icon, contentBlock, hiddenText) {
+      icon.classList.remove(this.iconActiveClass);
+
+      contentBlock.removeAttribute('data-is-shown');
 
       const contentBlockHeight = this.getElementHeight(contentBlock);
       const hiddenTextHeight = this.getElementHeight(hiddenText);

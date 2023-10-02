@@ -4,10 +4,11 @@ import setupBreadcrumbs from '../../blocks/breadcrumbs/_breadcrumbs.js';
 import setupBagAndWishlistMenu from '../../blocks/bag-and-wishlist-menu/_bag-and-wishlist.js';
 import setupCallBackForm from '../../blocks/call-back-form/_call-back-form.js';
 import setupFooterForm from '../../blocks/footer/_footer.js';
+import links from '../../js-libs/_links.js';
 
 setupCopyTelButton();
 setupMainNav();
-setupBreadcrumbs([['Головна', '#'], ['Про нас', '#']]);
+setupBreadcrumbs([['Головна', links.main], ['Про нас', links.aboutUs]]);
 setupBagAndWishlistMenu();
 setupCallBackForm();
 setupFooterForm();

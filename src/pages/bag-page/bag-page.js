@@ -3,9 +3,10 @@ import setupMainNav from '../../blocks/main-nav/_main-nav.js';
 import setupBreadcrumbs from '../../blocks/breadcrumbs/_breadcrumbs.js';
 import setupMainBag from '../../blocks/main-bag/_main-bag.js';
 import setupFooterForm from '../../blocks/footer/_footer.js';
+import links from '../../js-libs/_links.js';
 
 setupCopyTelButton();
 setupMainNav();
-setupBreadcrumbs([['Головна', '#'], ['Кошик', '#']]);
+setupBreadcrumbs([['Головна', links.main], ['Кошик', links.bagPage]]);
 setupMainBag();
 setupFooterForm();

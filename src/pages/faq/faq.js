@@ -5,10 +5,11 @@ import setupBagAndWishlistMenu from '../../blocks/bag-and-wishlist-menu/_bag-and
 import setupFaqAccordion from '../../blocks/faq-main/_faq-main.js';
 import setupCallBackForm from '../../blocks/call-back-form/_call-back-form.js';
 import setupFooterForm from '../../blocks/footer/_footer.js';
+import links from '../../js-libs/_links.js';
 
 setupCopyTelButton();
 setupMainNav();
-setupBreadcrumbs([['Головна', '#'], ['FAQ', '#']]);
+setupBreadcrumbs([['Головна', links.main], ['FAQ', links.faq]]);
 setupBagAndWishlistMenu();
 setupFaqAccordion();
 setupCallBackForm();
