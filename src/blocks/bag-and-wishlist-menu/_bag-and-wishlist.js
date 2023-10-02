@@ -673,7 +673,7 @@ export class SetupBagMenu {
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price">${formatPrice(product.totalPrice)} ₴</p>
           </div>
           <div class="bag-and-wishlist-menu__button-block">
-            <a class="button bag-and-wishlist-menu__bag-button" href="${links.productPage}" alt="Перейти до кошика">Перейти до кошика</a>
+            <a class="button bag-and-wishlist-menu__bag-button" href="${links.bagPage}" alt="Перейти до кошика">Перейти до кошика</a>
             <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
           </div>`;
         } else {
@@ -695,7 +695,7 @@ export class SetupBagMenu {
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price">${formatPrice(product.totalPrice)} ₴</p>
           </div>
           <div class="bag-and-wishlist-menu__button-block">
-            <a class="button bag-and-wishlist-menu__bag-button" href="${links.productPage}" alt="Перейти до кошика">Перейти до кошика</a>
+            <a class="button bag-and-wishlist-menu__bag-button" href="${links.bagPage}" alt="Перейти до кошика">Перейти до кошика</a>
             <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
           </div>`;
         }
