@@ -76,6 +76,7 @@
     &:hover,
     &:focus {
       border-bottom: 2px solid rgb(195 195 195 / 100%);
+      outline: none;
     }
 
     &_incorrect {
@@ -108,7 +109,6 @@
     &:hover,
     &:focus {
       color: rgb(217 65 39);
-      outline: none;
     }
   }
 }

@@ -2,10 +2,6 @@
   border-color: transparent;
   transition: all .05s ease-in-out;
 
-  &:hover, &:focus {
-    outline: none;
-  }
-
   /* stylelint-disable-next-line order/order */
   &:focus::placeholder {
     color: transparent;

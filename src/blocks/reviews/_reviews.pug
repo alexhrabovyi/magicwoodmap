@@ -4,17 +4,17 @@ section(class="reviews container")
   .reviews__content 
     .reviews__text-block 
       p(class="text text_24-px text_c-grey-2 reviews__text") Головним прагненням нашої команди є задоволеність клієнта від співпраці із нашою командою
-      a(class="button reviews__button" href=catalog alt="Замовити") Замовити
+      a(class="button reviews__button" href=catalog alt="Замовити" aria-label="Перейти до каталогу") Замовити
     .reviews__slider-small
       .reviews__slider-small-button-block
-        button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-small-prev")
+        button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-small-prev" aria-hidden="true")
           i.icon-chevron-left
-        button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-small-next")
+        button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-small-next" aria-hidden="true")
           i.icon-chevron-right
       .reviews__slider-small-container
         .reviews__slider-small-wrapper
           .reviews__slider-small-slide
-            a(class="reviews__slide-small-img-link" href=productPage alt="Одношарова мапа")
+            a(class="reviews__slide-small-img-link" href=productPage alt="Одношарова мапа" aria-label="Одношарова мапа")
               img(class="reviews__slide-small-img" src="../../blocks/reviews/images/map_1.png", alt="Дерев'яна мапа")
             a(class="link link_ff-poppins link_23-px link_fw-600 link_c-black-1 reviews__slide-small-link" href=productPage alt="Одношарова мапа") Одношарова мапа
             p(class="text text_ff-poppins text_c-grey-4 reviews__slide-small-text") Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.
@@ -23,7 +23,7 @@ section(class="reviews container")
               p(class="text text_ff-poppins text_18-px text_fw-500 text_c-black reviews__author-name") Андрій
               p(class="text text_ff-poppins text_14-px text_c-grey-5 reviews__comment-date") 20.12.2020
           .reviews__slider-small-slide
-            a(class="reviews__slide-small-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slide-small-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slide-small-img" src="../../blocks/reviews/images/map_2.png", alt="Дерев'яна мапа")
             a(class="link link_ff-poppins link_23-px link_fw-600 link_c-black-1 reviews__slide-small-link" href=productPage alt="Багатошарова мапа") Багатошарова мапа
             p(class="text text_ff-poppins text_c-grey-4 reviews__slide-small-text") Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.
@@ -32,7 +32,7 @@ section(class="reviews container")
               p(class="text text_ff-poppins text_18-px text_fw-500 text_c-black reviews__author-name") Наталя
               p(class="text text_ff-poppins text_14-px text_c-grey-5 reviews__comment-date") 23.12.2020
           .reviews__slider-small-slide
-            a(class="reviews__slide-small-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slide-small-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slide-small-img" src="../../blocks/reviews/images/map_1.png", alt="Дерев'яна мапа")
             a(class="link link_ff-poppins link_23-px link_fw-600 link_c-black-1 reviews__slide-small-link" href=productPage alt="Багатошарова мапа") Багатошарова мапа
             p(class="text text_ff-poppins text_c-grey-4 reviews__slide-small-text") Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the.
@@ -47,13 +47,13 @@ section(class="reviews container")
           |/
           span.reviews__total-slide-number 
         .reviews__slider-big-button-block 
-          button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-big-prev")
+          button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-big-prev" aria-hidden="true")
             i.icon-chevron-left
-          button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-big-next")
+          button(class="reviews__slider-button round-button round-button_with-shadow round-button_medium" id="slider-big-next" aria-hidden="true")
             i.icon-chevron-right
         .reviews__slider-big-wrapper 
           .reviews__slider-big-slide
-            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slider-big-img" src="../../blocks/reviews/images/map_3.png", alt="Дерев'яна мапа")
             .reviews__slider-big-text-block
               .reviews__slider-big-stars-block
@@ -63,11 +63,11 @@ section(class="reviews container")
                 i(class="icon-star-filled reviews__slider-big-star")
                 i(class="icon-star reviews__slider-big-star")
               p(class="text text_ff-inter text_fw-600 text_c-orange reviews__slider-big-orange-text") Хіт продажу
-              p(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
+              h4(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
               p(class="text text_ff-inter text_18-px text_c-grey-6 reviews__slider-big-text") Багатошарова мапа світу буде чудовим подарунком на день народження рідних, річницю родичів, новосілля друзів. Вишукане доповнення декору абсолютно будь-якого приміщення. Рельєфна дерев'яна мапа світу буде привертати увагу всіх своїм стилем і якістю опрацювання
-              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити") Замовити →
+              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити" aria-label="Замовити багатошарову мапу") Замовити →
           .reviews__slider-big-slide
-            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slider-big-img" src="../../blocks/reviews/images/map_3.png", alt="Дерев'яна мапа")
             .reviews__slider-big-text-block
               .reviews__slider-big-stars-block
@@ -77,11 +77,11 @@ section(class="reviews container")
                 i(class="icon-star-filled reviews__slider-big-star")
                 i(class="icon-star reviews__slider-big-star")
               p(class="text text_ff-inter text_fw-600 text_c-orange reviews__slider-big-orange-text") Хіт продажу
-              p(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
+              h4(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
               p(class="text text_ff-inter text_18-px text_c-grey-6 reviews__slider-big-text") Багатошарова мапа світу буде чудовим подарунком на день народження рідних, річницю родичів, новосілля друзів. Вишукане доповнення декору абсолютно будь-якого приміщення. Рельєфна дерев'яна мапа світу буде привертати увагу всіх своїм стилем і якістю опрацювання
-              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити") Замовити →
+              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити" aria-label="Замовити багатошарову мапу") Замовити →
           .reviews__slider-big-slide
-            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slider-big-img" src="../../blocks/reviews/images/map_3.png", alt="Дерев'яна мапа")
             .reviews__slider-big-text-block
               .reviews__slider-big-stars-block
@@ -91,11 +91,11 @@ section(class="reviews container")
                 i(class="icon-star-filled reviews__slider-big-star")
                 i(class="icon-star reviews__slider-big-star")
               p(class="text text_ff-inter text_fw-600 text_c-orange reviews__slider-big-orange-text") Хіт продажу
-              p(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
+              h4(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
               p(class="text text_ff-inter text_18-px text_c-grey-6 reviews__slider-big-text") Багатошарова мапа світу буде чудовим подарунком на день народження рідних, річницю родичів, новосілля друзів. Вишукане доповнення декору абсолютно будь-якого приміщення. Рельєфна дерев'яна мапа світу буде привертати увагу всіх своїм стилем і якістю опрацювання
-              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити") Замовити →
+              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити" aria-label="Замовити багатошарову мапу") Замовити →
           .reviews__slider-big-slide
-            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slider-big-img" src="../../blocks/reviews/images/map_3.png", alt="Дерев'яна мапа")
             .reviews__slider-big-text-block
               .reviews__slider-big-stars-block
@@ -105,11 +105,11 @@ section(class="reviews container")
                 i(class="icon-star-filled reviews__slider-big-star")
                 i(class="icon-star reviews__slider-big-star")
               p(class="text text_ff-inter text_fw-600 text_c-orange reviews__slider-big-orange-text") Хіт продажу
-              p(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
+              h4(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
               p(class="text text_ff-inter text_18-px text_c-grey-6 reviews__slider-big-text") Багатошарова мапа світу буде чудовим подарунком на день народження рідних, річницю родичів, новосілля друзів. Вишукане доповнення декору абсолютно будь-якого приміщення. Рельєфна дерев'яна мапа світу буде привертати увагу всіх своїм стилем і якістю опрацювання
-              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити") Замовити →
+              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити" aria-label="Замовити багатошарову мапу") Замовити →
           .reviews__slider-big-slide
-            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа")
+            a(class="reviews__slider-big-img-link" href=productPage alt="Багатошарова мапа" aria-label="Багатошарова мапа")
               img(class="reviews__slider-big-img" src="../../blocks/reviews/images/map_3.png", alt="Дерев'яна мапа")
             .reviews__slider-big-text-block
               .reviews__slider-big-stars-block
@@ -119,7 +119,7 @@ section(class="reviews container")
                 i(class="icon-star-filled reviews__slider-big-star")
                 i(class="icon-star reviews__slider-big-star")
               p(class="text text_ff-inter text_fw-600 text_c-orange reviews__slider-big-orange-text") Хіт продажу
-              p(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
+              h4(class="title title_ff-inter title_28-px title_c-black reviews__slider-big-title") Багатошарова мапа
               p(class="text text_ff-inter text_18-px text_c-grey-6 reviews__slider-big-text") Багатошарова мапа світу буде чудовим подарунком на день народження рідних, річницю родичів, новосілля друзів. Вишукане доповнення декору абсолютно будь-якого приміщення. Рельєфна дерев'яна мапа світу буде привертати увагу всіх своїм стилем і якістю опрацювання
-              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити") Замовити →
+              a(class="button button_transparent reviews__slider-big-button" href=productPage alt="Замовити" aria-label="Замовити багатошарову мапу") Замовити →
           

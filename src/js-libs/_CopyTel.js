@@ -1,17 +1,26 @@
 export default class CopyTel {
   constructor(options) {
     this.button = document.querySelector(options.buttonSelector);
-    this.textMain = document.querySelector(options.textMainSelector);
-    this.textAdd = document.querySelector(options.textAddSelector);
-    this.textHiddenClass = options.textHiddenClass;
+    this.descText = document.querySelector(options.descTextSelector);
+    this.descTextHiddenClass = options.descTextHiddenClass;
 
-    this.copiedText = document.querySelector(options.telSelector).textContent;
+    this.copiedText = options.copiedText;
+    this.descTextMainContent = options.descTextMainContent;
+    this.descTextAdditionalContent = options.descTextAdditionalContent;
 
-    this.button.addEventListener('click', this.onClick.bind(this));
     this.isActive = false;
+
+    this.setup();
   }
 
-  onClick() {
+  setup() {
+    this.descText.textContent = this.descTextMainContent;
+    this.button.addEventListener('click', this.onClick.bind(this));
+  }
+
+  onClick(e) {
+    e.preventDefault();
+
     navigator.clipboard.writeText(this.copiedText);
 
     if (!this.isActive) {
@@ -21,14 +30,22 @@ export default class CopyTel {
   }
 
   showMessage() {
-    this.textMain.classList.add(this.textHiddenClass);
-    this.textMain.addEventListener('transitionend', () => {
-      this.textAdd.classList.remove(this.textHiddenClass);
+    this.descText.classList.add(this.descTextHiddenClass);
+
+    this.descText.addEventListener('transitionend', () => {
+      this.descText.removeAttribute('aria-hidden');
+      this.descText.setAttribute('aria-live', 'assertive');
+      this.descText.textContent = this.descTextAdditionalContent;
+      this.descText.classList.remove(this.descTextHiddenClass);
 
       setTimeout(() => {
-        this.textAdd.classList.add(this.textHiddenClass);
-        this.textAdd.addEventListener('transitionend', () => {
-          this.textMain.classList.remove(this.textHiddenClass);
+        this.descText.classList.add(this.descTextHiddenClass);
+        this.descText.removeAttribute('aria-live');
+        this.descText.setAttribute('aria-hidden', true);
+
+        this.descText.addEventListener('transitionend', () => {
+          this.descText.textContent = this.descTextMainContent;
+          this.descText.classList.remove(this.descTextHiddenClass);
 
           this.isActive = false;
         }, { once: true });
@@ -38,9 +55,10 @@ export default class CopyTel {
 }
 
 // {
-//   buttonSelector: '',
-//   textMainSelector: '',
-//   textAddSelector: '',
-//   telSelector: '',
-//   textHiddenClass: '',
-// }
+//   buttonSelector: '#copy-button',
+//   copiedText: '+380 (97) 17 033 21',
+//   descTextSelector: '.header__desc-text',
+//   descTextHiddenClass: 'header__desc-text_hidden',
+//   descTextMainContent: 'Натисніть, щоб скопіювати',
+//   descTextAdditionalContent: 'Скопійовано',
+// };

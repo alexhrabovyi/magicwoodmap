@@ -8,8 +8,7 @@ export default class ValidateForm {
   }
 
   formSetup() {
-    this.submitButton = this.form.querySelector('[type="submit"]');
-    this.submitButton.addEventListener('click', this.submit.bind(this));
+    this.form.addEventListener('submit', this.submit.bind(this));
 
     this.inputs = Array.from(this.form.querySelectorAll('.input'));
     this.inputs.forEach((input) => {

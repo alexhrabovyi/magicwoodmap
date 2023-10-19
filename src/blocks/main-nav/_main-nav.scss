@@ -107,7 +107,6 @@
 
     &:hover, &:focus {
       color: rgb(237 85 59);
-      outline: none;
     }
 
     &:active {
@@ -119,7 +118,7 @@
     display: grid;
     align-items: center;
     gap: 20px;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(3, auto);
 
     @include media-l {
       margin-left: 40px;
@@ -174,7 +173,7 @@
     display: grid;
     align-items: center;
     gap: 25px;
-    grid-template-columns: repeat(9, auto);
+    grid-template-columns: repeat(7, auto);
 
     @include media-l {
       gap: 20px;
@@ -197,7 +196,7 @@
     display: grid;
     align-items: center;
     gap: 25px;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(3, auto);
 
     @include media-l {
       gap: 20px;
@@ -426,12 +425,6 @@
 
     &_hidden {
       opacity: 0;
-    }
-
-    &_pos-absolute {
-      position: absolute;
-      right: 0;
-      bottom: 0;
     }
   }
 

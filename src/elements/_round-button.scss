@@ -29,7 +29,6 @@
     border: 1px solid rgb(237 85 59);
     background-color: rgb(255 255 255);
     color: rgb(237 85 59);
-    outline: none;
   }
 
   &:active {
@@ -49,7 +48,6 @@
     &:hover, &:focus {
       border: none;
       box-shadow: 0 4px 14px 0 rgb(0 0 0 / 30%);
-      outline:  none;
     }
 
     @include media-xs {
@@ -69,7 +67,6 @@
       border: 1px solid rgb(237 85 59);
       background-color: rgb(237 85 59);
       color: rgb(255 255 255);
-      outline: none;
     }
 
     &:active {

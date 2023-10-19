@@ -151,6 +151,7 @@ export default class Slider {
 
       button.classList.add(this.paginationButtonClass);
       button.setAttribute('data-slide-id', i);
+      button.setAttribute('aria-hidden', true);
 
       if (i === this.activeSlideId) button.classList.add(this.paginationButtonActiveClass);
 

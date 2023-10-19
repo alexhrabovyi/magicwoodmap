@@ -5,6 +5,7 @@ export default class SetupPopup {
     this.openButtonSelector = options.openButtonSelector;
     this.closeButtonSelector = options.closeButtonSelector;
 
+    this.isAriaToggle = options.ariaToggle;
     this.contentWrapperClass = 'popup';
     this.contentWrapperActiveClass = 'popup_active';
 
@@ -22,6 +23,22 @@ export default class SetupPopup {
       this.contentWrapper.style.transitionProperty = 'all';
       this.contentWrapper.style.transitionDuration = '.5s';
       this.contentWrapper.style.transitionTimingFunction = 'ease-in-out';
+      this.content.style.outline = 'none';
+
+      if (this.isAriaToggle) {
+        this.content.setAttribute('aria-hidden', true);
+
+        const allButton = this.content.querySelectorAll('button');
+        const allLinks = this.content.querySelectorAll('a');
+
+        allButton.forEach((button) => {
+          button.setAttribute('tabindex', '-1');
+        });
+
+        allLinks.forEach((link) => {
+          link.setAttribute('tabindex', '-1');
+        });
+      }
     });
 
     document.addEventListener('click', this.toggle.bind(this));
@@ -60,6 +77,24 @@ export default class SetupPopup {
 
     if (this.isOpen) return;
 
+    if (this.isAriaToggle) {
+      this.content.removeAttribute('aria-hidden');
+
+      const allButton = this.content.querySelectorAll('button');
+      const allLinks = this.content.querySelectorAll('a');
+
+      allButton.forEach((button) => {
+        button.setAttribute('tabindex', 2);
+      });
+
+      allLinks.forEach((link) => {
+        link.setAttribute('tabindex', 2);
+      });
+
+      this.content.setAttribute('tabindex', 1);
+      this.content.focus();
+    }
+
     if (this.isContentOverflow) {
       this.contentWrapper.style.alignItems = 'flex-start';
       this.content.style.height = `${this.clientHeight}px`;
@@ -76,11 +111,25 @@ export default class SetupPopup {
 
     if (!this.isOpen) return;
 
+    if (this.isAriaToggle) {
+      this.content.setAttribute('aria-hidden', true);
+      this.content.removeAttribute('tabindex');
+
+      const allButton = this.content.querySelectorAll('button');
+      const allLinks = this.content.querySelectorAll('a');
+
+      allButton.forEach((button) => {
+        button.setAttribute('tabindex', '-1');
+      });
+
+      allLinks.forEach((link) => {
+        link.setAttribute('tabindex', '-1');
+      });
+    }
+
     this.contentWrapper.style.alignItems = '';
     this.content.style.height = '';
     this.content.style.overflowY = '';
-
-    console.log(document.body.dataset.paddingByMenu);
 
     if (!document.body.dataset.paddingByMenu) {
       document.body.style.paddingRight = '';

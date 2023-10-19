@@ -1,39 +1,39 @@
-div(class="bag-and-wishlist-menu bag-menu")
-  button(class="close-button bag-and-wishlist-menu__close-button" data-button-bag-close) +
+div(class="bag-and-wishlist-menu" id="bag-menu" aria-label="Меню кошика" role="menu")
+  button(class="close-button bag-and-wishlist-menu__close-button" data-button-bag-close aria-label="Закрити меню кошика") +
   p(class="title title_30-px title_fw-400 bag-and-wishlist-menu__title") Кошик
   .bag-and-wishlist-menu__card-block 
   .bag-and-wishlist-menu__total-price-block 
-div(class="bag-and-wishlist-menu wishlist-menu")
-  button(class="close-button bag-and-wishlist-menu__close-button" data-button-wishlist-close) +
+div(class="bag-and-wishlist-menu" id="wishlist-menu" aria-label="Меню листа бажань" role="menu")
+  button(class="close-button bag-and-wishlist-menu__close-button" data-button-wishlist-close data-button-bag-close aria-label="Закрити меню листа бажань") +
   p(class="title title_30-px title_fw-400 bag-and-wishlist-menu__title") Лист бажань
   .bag-and-wishlist-menu__card-block 
 .bag-and-wishlist-menu__option-form-popup-window 
-  form(class="bag-and-wishlist-menu__option-form" data-bag-option-form)
-    button(class="close-button bag-and-wishlist-menu__option-form-close-button") +
+  form(class="bag-and-wishlist-menu__option-form" data-bag-option-form aria-label="Форма вибору опцій товару" role="menu")
+    button(class="close-button bag-and-wishlist-menu__option-form-close-button" aria-label="Закрити форму вибору опцій товару") +
     p(class="title title_16-px title_fw-400 title_c-black bag-and-wishlist-menu__button-title") Розмір мапи
-    div(class="bag-and-wishlist-menu__option-form-button-block")
-      button(class="button bag-and-wishlist-menu__filter-button" data-size-button="M") М: 100х60см
-      button(class="button bag-and-wishlist-menu__filter-button" data-size-button="L") L: 150х90см
-      button(class="button bag-and-wishlist-menu__filter-button" data-size-button="XL") XL: 200х120см
+    div(class="bag-and-wishlist-menu__option-form-button-block" role="radiogroup" aria-label="Виберіть розмір мапи")
+      button(class="button bag-and-wishlist-menu__filter-button" data-size-button="M" role="radio") М: 100х60см
+      button(class="button bag-and-wishlist-menu__filter-button" data-size-button="L" role="radio") L: 150х90см
+      button(class="button bag-and-wishlist-menu__filter-button" data-size-button="XL" role="radio") XL: 200х120см
     p(class="title title_16-px title_fw-400 title_c-black bag-and-wishlist-menu__button-title") Тип мапи
-    div(class="bag-and-wishlist-menu__option-form-button-block") 
-      button(class="button bag-and-wishlist-menu__filter-button" data-type-button="Prime") Prime
-      button(class="button bag-and-wishlist-menu__filter-button" data-type-button="Prime planes") Prime planes
-      button(class="button bag-and-wishlist-menu__filter-button" data-type-button="Prime flags") Prime flags
+    div(class="bag-and-wishlist-menu__option-form-button-block" role="radiogroup" aria-label="Виберіть тип мапи") 
+      button(class="button bag-and-wishlist-menu__filter-button" data-type-button="Prime" role="radio") Prime
+      button(class="button bag-and-wishlist-menu__filter-button" data-type-button="Prime planes" role="radio") Prime planes
+      button(class="button bag-and-wishlist-menu__filter-button" data-type-button="Prime flags" role="radio") Prime flags
     p(class="title title_16-px title_fw-400 title_c-black bag-and-wishlist-menu__button-title") Мова гравіювання
-    div(class="bag-and-wishlist-menu__option-form-button-block") 
-      button(class="button bag-and-wishlist-menu__filter-button" data-lang-button="ukr") Українська
-      button(class="button bag-and-wishlist-menu__filter-button" data-lang-button="en") Англійська
+    div(class="bag-and-wishlist-menu__option-form-button-block" role="radiogroup" aria-label="Виберіть мову гравіювання мапи") 
+      button(class="button bag-and-wishlist-menu__filter-button" data-lang-button="ukr" role="radio") Українська
+      button(class="button bag-and-wishlist-menu__filter-button" data-lang-button="en" role="radio") Англійська
     .bag-and-wishlist-menu__price-block
-      p(class="title title_28-px title_fw-400 title_c-orange bag-and-wishlist-menu__current-price" data-current-price)
+      p(class="title title_28-px title_fw-400 title_c-orange bag-and-wishlist-menu__current-price" data-current-price aria-live="polite")
       p(class="title title_24-px title_fw-400 title_c-grey bag-and-wishlist-menu__old-price" data-old-price) 
     .bag-and-wishlist-menu__amount-block
-      button(class="bag-and-wishlist-menu__amount-button bag-and-wishlist-menu__amount-button_left" data-amount-button="minus") -
-      .bag-and-wishlist-menu__amount-display
-      button(class="bag-and-wishlist-menu__amount-button bag-and-wishlist-menu__amount-button_right" data-amount-button="plus") +
-    .bag-and-wishlist-menu__option-form-total-price-block 
+      button(class="bag-and-wishlist-menu__amount-button bag-and-wishlist-menu__amount-button_left" data-amount-button="minus" aria-label="Зменшити кількість товарів на один") -
+      div(class="bag-and-wishlist-menu__amount-display" aria-live="polite")
+      button(class="bag-and-wishlist-menu__amount-button bag-and-wishlist-menu__amount-button_right" data-amount-button="plus" aria-label="Збільшити кількість товарів на один") +
+    div(class="bag-and-wishlist-menu__option-form-total-price-block") 
       p(class="title title_24-px title_fw-400 title_c-black") Загальна ціна:
-      p(class="title title_28-px title_fw-400 title_c-orange bag-and-wishlist-menu__total-price" data-total-price)
+      p(class="title title_28-px title_fw-400 title_c-orange bag-and-wishlist-menu__total-price" data-total-price aria-live="polite")
     .bag-and-wishlist-menu__checkout-button-block
-      button(class="button bag-and-wishlist-menu__checkout-button" data-button-bag-add) Додати в кошик
+      button(class="button bag-and-wishlist-menu__checkout-button" data-button-bag-add aria-label="Додати товар в кошик") Додати в кошик
  

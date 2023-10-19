@@ -7,6 +7,7 @@ export default class SetupMenu {
 
     this.openButtonActiveClass = options.openButtonActiveClass;
     this.closeButtonActiveClass = options.closeButtonActiveClass;
+    this.isAriaToggle = options.ariaToggle;
     this.backdropActiveClass = 'backdrop_active';
     this.menuClass = 'menu';
     this.menuActiveClass = 'menu_active';
@@ -38,10 +39,26 @@ export default class SetupMenu {
       this.content.style.transitionProperty = 'transform';
       this.content.style.transitionDuration = '.5s';
       this.content.style.transitionTimingFunction = 'ease-in-out';
+      this.content.style.outline = 'none';
 
       this.backdrop.style.transitionProperty = 'all';
       this.backdrop.style.transitionDuration = '.5s';
       this.backdrop.style.transitionTimingFunction = 'ease-in-out';
+
+      if (this.isAriaToggle) {
+        this.content.setAttribute('aria-hidden', true);
+
+        const allButton = this.content.querySelectorAll('button');
+        const allLinks = this.content.querySelectorAll('a');
+
+        allButton.forEach((button) => {
+          button.setAttribute('tabindex', '-1');
+        });
+
+        allLinks.forEach((link) => {
+          link.setAttribute('tabindex', '-1');
+        });
+      }
     });
 
     this.backdrop.addEventListener('click', this.close.bind(this), { passive: true });
@@ -77,6 +94,24 @@ export default class SetupMenu {
   open() {
     if (this.isMenuOpen) return;
 
+    if (this.isAriaToggle) {
+      this.content.removeAttribute('aria-hidden');
+
+      const allButton = this.content.querySelectorAll('button');
+      const allLinks = this.content.querySelectorAll('a');
+
+      allButton.forEach((button) => {
+        button.removeAttribute('tabindex');
+      });
+
+      allLinks.forEach((link) => {
+        link.removeAttribute('tabindex');
+      });
+
+      this.content.setAttribute('tabindex', 0);
+      this.content.focus();
+    }
+
     this.toggleButtons.forEach((button) => {
       button.classList.add(this.openButtonActiveClass);
     });
@@ -110,6 +145,22 @@ export default class SetupMenu {
 
   close() {
     if (!this.isMenuOpen) return;
+
+    if (this.isAriaToggle) {
+      this.content.setAttribute('aria-hidden', true);
+      this.content.removeAttribute('tabindex');
+
+      const allButton = this.content.querySelectorAll('button');
+      const allLinks = this.content.querySelectorAll('a');
+
+      allButton.forEach((button) => {
+        button.setAttribute('tabindex', '-1');
+      });
+
+      allLinks.forEach((link) => {
+        link.setAttribute('tabindex', '-1');
+      });
+    }
 
     this.toggleButtons.forEach((button) => {
       button.classList.remove(this.openButtonActiveClass);

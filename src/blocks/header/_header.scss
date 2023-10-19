@@ -67,7 +67,7 @@
     }
   }
 
-  &__text {
+  &__desc-text {
     color: rgb(132 132 132);
     font-family: Geometria, sans-serif;
     font-size: 14px;
@@ -80,12 +80,6 @@
 
     &_hidden {
       opacity: 0;
-    }
-
-    &_pos-absolute {
-      position: absolute;
-      right: 0;
-      bottom: 0;
     }
   }
 }

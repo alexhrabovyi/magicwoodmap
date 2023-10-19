@@ -8,6 +8,7 @@ export default class AddInputValidation {
     this.input.addEventListener('focusin', () => {
       this.hideErrorClass();
       this.hideErrorMessage();
+      this.removeInvalidAttribute();
     });
   }
 
@@ -21,9 +22,21 @@ export default class AddInputValidation {
     this.input.removeAttribute('aria-invalid');
   }
 
+  addInvalidAttribute() {
+    this.input.setAttribute('aria-invalid', true);
+    this.input.setAttribute('aria-errormessage', Array.from(this.input.classList).join(''));
+  }
+
+  removeInvalidAttribute() {
+    this.input.removeAttribute('aria-invalid');
+    this.input.removeAttribute('aria-errormessage');
+  }
+
   createErrorMessage(message) {
     this.errorMessage = document.createElement('div');
     this.errorMessage.classList.add('input-error-block');
+    this.errorMessage.setAttribute('id', Array.from(this.input.classList).join(''));
+    this.errorMessage.setAttribute('aria-live', 'assertive');
     this.errorMessage.innerHTML = message;
   }
 
@@ -46,6 +59,7 @@ export default class AddInputValidation {
         if (!this.validateTel()) {
           this.showErrorClass();
           this.showErrorMessage('Некоректний номер телефона');
+          this.addInvalidAttribute();
           throw this.createError('Incorrect telephone number');
         }
         return this.input.value;
@@ -53,6 +67,7 @@ export default class AddInputValidation {
         if (!this.validateEmail()) {
           this.showErrorClass();
           this.showErrorMessage('Некоректний email');
+          this.addInvalidAttribute();
           throw this.createError('Incorrect email');
         }
         return this.input.value;
@@ -61,10 +76,19 @@ export default class AddInputValidation {
           if (!this.validateRequiredText()) {
             this.showErrorClass();
             this.showErrorMessage('Поле має бути обов\'язково заповнено');
+            this.addInvalidAttribute();
             throw this.createError('Field is not filled');
           }
 
           return this.input.value;
+        }
+        return this.input.value;
+      case 'search':
+        if (!this.validateRequiredText()) {
+          this.showErrorClass();
+          this.showErrorMessage('Введіть пошуковий запит');
+          this.addInvalidAttribute();
+          throw this.createError('Search field is not filled');
         }
         return this.input.value;
       default:

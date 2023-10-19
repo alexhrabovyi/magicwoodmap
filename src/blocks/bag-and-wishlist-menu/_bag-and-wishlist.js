@@ -16,14 +16,15 @@ const imgs = [img1, img2, img3, img4, img5, img6];
 
 export class SetupWishlistMenu {
   constructor() {
-    this.wishlistMenu = document.querySelector('.wishlist-menu');
+    this.wishlistMenu = document.querySelector('#wishlist-menu');
 
     new SetupMenu({
       toggleButtonsSelector: '[data-button-wishlist]',
       closeButtonsSelector: '[data-button-wishlist-close]',
-      contentSelector: '.wishlist-menu',
+      contentSelector: '#wishlist-menu',
       openButtonActiveClass: 'main-nav__bag-and-wishlist-buttons-active',
       animationFromLeft: true,
+      ariaToggle: true,
     });
 
     this.setup();
@@ -138,8 +139,8 @@ export class SetupWishlistMenu {
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price">${formatPrice(product.basicPrice)} ₴</p>
           </div>
           <div class="bag-and-wishlist-menu__button-block">
-            <button class="button bag-and-wishlist-menu__bag-button" data-button-bag-form-open data-product-id="${product.id}">Додати до кошика</button>
-            <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-wishlist-delete data-product-id="${product.id}">Видалити</button>
+            <button class="button bag-and-wishlist-menu__bag-button" data-button-bag-form-open data-product-id="${product.id}" aria-label="Додати до кошика товар ${product.name}">Додати до кошика</button>
+            <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-wishlist-delete data-product-id="${product.id}" aria-label="Видалити товар ${product.name}">Видалити</button>
           </div>
         `;
 
@@ -187,17 +188,19 @@ export class SetupBagMenu {
       contentSelector: '[data-bag-option-form]',
       openButtonSelector: '[data-button-bag-form-open]',
       closeButtonSelector: '.bag-and-wishlist-menu__option-form-close-button',
+      ariaToggle: true,
     });
 
     this.bagMenuClassInstance = new SetupMenu({
       toggleButtonsSelector: '[data-button-bag]',
       closeButtonsSelector: '[data-button-bag-close]',
-      contentSelector: '.bag-menu',
+      contentSelector: '#bag-menu',
       openButtonActiveClass: 'main-nav__bag-and-wishlist-buttons-active',
+      ariaToggle: true,
     });
 
     this.optionForm = document.querySelector('[data-bag-option-form]');
-    this.bagMenu = document.querySelector('.bag-menu');
+    this.bagMenu = document.querySelector('#bag-menu');
 
     this.setup();
   }
@@ -228,7 +231,7 @@ export class SetupBagMenu {
   }
 
   bagMenuInitialSetup() {
-    this.bagMenu = document.querySelector('.bag-menu');
+    this.bagMenu = document.querySelector('#bag-menu');
     this.bagMenuCardBlock = this.bagMenu.querySelector('.bag-and-wishlist-menu__card-block');
     this.bagMenuTotalPriceBlock = this.bagMenu.querySelector('.bag-and-wishlist-menu__total-price-block');
     this.bagMenuButtonMobile = document.querySelector('.main-nav__bag-button-mobile');
@@ -266,14 +269,17 @@ export class SetupBagMenu {
     } else {
       this.optionFormSizeButtons.forEach((button) => {
         button.classList.remove(this.optionButtonActiveClass);
+        button.setAttribute('aria-checked', false);
         button.style.display = '';
       });
       this.optionFormTypeButtons.forEach((button) => {
         button.classList.remove(this.optionButtonActiveClass);
+        button.setAttribute('aria-checked', false);
         button.style.display = '';
       });
       this.optionFormLangButtons.forEach((button) => {
         button.classList.remove(this.optionButtonActiveClass);
+        button.setAttribute('aria-checked', false);
         button.style.display = '';
       });
       this.optionFormButtonTitles.forEach((title) => {
@@ -284,16 +290,19 @@ export class SetupBagMenu {
         this.optionFormSizeButtons.forEach((button) => {
           if (button.dataset.sizeButton === this.changeOptions.mapSize) {
             button.classList.add(this.optionButtonActiveClass);
+            button.setAttribute('aria-checked', true);
           }
         });
         this.optionFormTypeButtons.forEach((button) => {
           if (button.dataset.typeButton === this.changeOptions.mapType) {
             button.classList.add(this.optionButtonActiveClass);
+            button.setAttribute('aria-checked', true);
           }
         });
         this.optionFormLangButtons.forEach((button) => {
           if (button.dataset.langButton === this.changeOptions.mapLang) {
             button.classList.add(this.optionButtonActiveClass);
+            button.setAttribute('aria-checked', true);
           }
         });
 
@@ -301,23 +310,26 @@ export class SetupBagMenu {
 
         this.optionFormAddToBagButton.product.mapSize = this.changeOptions.mapSize;
         this.optionFormAddToBagButton.product.mapType = this.changeOptions.mapType;
-        this.optionFormAddToBagButton.product.mapLang = this.changeOptions.langType;
+        this.optionFormAddToBagButton.product.mapLang = this.changeOptions.mapLang;
         this.optionFormAddToBagButton.product.amount = this.changeOptions.amount;
         this.optionFormAddToBagButton.product.changeOptions = true;
       } else {
         this.optionFormSizeButtons.forEach((button) => {
           if (button.dataset.sizeButton === 'M') {
             button.classList.add(this.optionButtonActiveClass);
+            button.setAttribute('aria-checked', true);
           }
         });
         this.optionFormTypeButtons.forEach((button) => {
           if (button.dataset.typeButton === 'Prime') {
             button.classList.add(this.optionButtonActiveClass);
+            button.setAttribute('aria-checked', true);
           }
         });
         this.optionFormLangButtons.forEach((button) => {
           if (button.dataset.langButton === 'ukr') {
             button.classList.add(this.optionButtonActiveClass);
+            button.setAttribute('aria-checked', true);
           }
         });
 
@@ -454,12 +466,12 @@ export class SetupBagMenu {
   optionFormSizeButtonOnClick(e, button) {
     e.preventDefault();
 
-    button.blur();
-
     this.optionFormSizeButtons.forEach((button) => {
       button.classList.remove(this.optionButtonActiveClass);
+      button.setAttribute('aria-checked', false);
     });
     button.classList.add(this.optionButtonActiveClass);
+    button.setAttribute('aria-checked', true);
 
     this.optionFormAddToBagButton.product.mapSize = button.dataset.sizeButton;
 
@@ -469,12 +481,12 @@ export class SetupBagMenu {
   optionFormTypeButtonOnClick(e, button) {
     e.preventDefault();
 
-    button.blur();
-
     this.optionFormTypeButtons.forEach((button) => {
       button.classList.remove(this.optionButtonActiveClass);
+      button.setAttribute('aria-checked', false);
     });
     button.classList.add(this.optionButtonActiveClass);
+    button.setAttribute('aria-checked', true);
 
     this.optionFormAddToBagButton.product.mapType = button.dataset.typeButton;
 
@@ -484,20 +496,18 @@ export class SetupBagMenu {
   optionFormLangButtonOnClick(e, button) {
     e.preventDefault();
 
-    button.blur();
-
     this.optionFormLangButtons.forEach((button) => {
       button.classList.remove(this.optionButtonActiveClass);
+      button.setAttribute('aria-checked', false);
     });
     button.classList.add(this.optionButtonActiveClass);
+    button.setAttribute('aria-checked', true);
 
     this.optionFormAddToBagButton.product.mapLang = button.dataset.langButton;
   }
 
   addToBagButtonOnClick(e, button) {
     e.preventDefault();
-
-    button.blur();
 
     const { bagProductsInStorage } = this;
     let duplicate = false;
@@ -662,7 +672,7 @@ export class SetupBagMenu {
           <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
           <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
           <div class="bag-and-wishlist-menu__card-params">
-            <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}">Змінити опції</button>
+            <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}" aria-label="Змінити опції товару ${product.productObj.name}" aria-haspopup="menu">Змінити опції</button>
           </div>
           <div class="bag-and-wishlist-menu__amount-and-price-block">
             <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
@@ -674,7 +684,7 @@ export class SetupBagMenu {
           </div>
           <div class="bag-and-wishlist-menu__button-block">
             <a class="button bag-and-wishlist-menu__bag-button" href="${links.bagPage}" alt="Перейти до кошика">Перейти до кошика</a>
-            <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
+            <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete aria-label="Видалити товар ${product.productObj.name}">Видалити</button>
           </div>`;
         } else {
           inner = `
@@ -684,7 +694,7 @@ export class SetupBagMenu {
             <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Розмір мапи: ${product.mapSize}: ${mapSize}</p>
             <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Тип мапи: ${product.mapType}</p>
             <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Мова гравіювання: ${mapLang}</p>
-            <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}">Змінити опції</button>
+            <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}" aria-label="Змінити опції товару ${product.productObj.name}" aria-haspopup="menu">Змінити опції</button>
           </div>
           <div class="bag-and-wishlist-menu__amount-and-price-block">
             <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
@@ -696,7 +706,7 @@ export class SetupBagMenu {
           </div>
           <div class="bag-and-wishlist-menu__button-block">
             <a class="button bag-and-wishlist-menu__bag-button" href="${links.bagPage}" alt="Перейти до кошика">Перейти до кошика</a>
-            <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete>Видалити</button>
+            <button class="button button_transparent bag-and-wishlist-menu__delete-button" data-button-bag-delete aria-label="Видалити товар ${product.productObj.name}">Видалити</button>
           </div>`;
         }
 
@@ -764,7 +774,7 @@ export class SetupBagMenu {
       .map((product) => product.productObj.id);
 
     buttons.forEach((button) => {
-      if (bagProductsInStorageIds.includes(+button.dataset.productId)) {
+      if (bagProductsInStorageIds.includes(+button.dataset.productId) && button.classList.contains('round-button')) {
         button.classList.add('bag-and-wishlist-menu__round-button-selected');
       } else {
         button.classList.remove('bag-and-wishlist-menu__round-button-selected');

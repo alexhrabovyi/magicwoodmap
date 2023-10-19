@@ -12,10 +12,11 @@ export default function setupMainNav() {
 
   new CopyTel({
     buttonSelector: '.main-nav__tel-button',
-    textMainSelector: '.main-nav__tel-text',
-    textAddSelector: '.main-nav__tel-text_additional',
-    telSelector: '.main-nav__tel-number',
-    textHiddenClass: 'main-nav__tel-text_hidden',
+    copiedText: '+380 (97) 17 033 21',
+    descTextSelector: '.main-nav__tel-text',
+    descTextHiddenClass: 'main-nav__tel-text_hidden',
+    descTextMainContent: 'Натисніть, щоб скопіювати',
+    descTextAdditionalContent: 'Скопійовано',
   });
 
   const form = document.querySelector('.main-nav__search-form');
@@ -29,7 +30,8 @@ export default function setupMainNav() {
     const mobileLinkActiveClass = 'main-nav__mobile-main-link_active';
 
     const { pathname } = window.location;
-    const regExp = new RegExp(pathname, 'i');
+
+    const regExp = new RegExp(`^${pathname}$`, 'i');
 
     for (const link of desktopLinks) {
       if (link.href.match(regExp) && !link.href.match(/#/)) {
