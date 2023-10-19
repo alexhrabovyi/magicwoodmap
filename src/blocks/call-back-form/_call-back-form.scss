@@ -69,6 +69,10 @@
     @include media-xs {
       width: 100%;
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__input-wrapper {

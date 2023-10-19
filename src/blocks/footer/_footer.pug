@@ -1,8 +1,8 @@
 footer(class="footer container")
   .footer__main-content 
     h5(class="title title_32-px footer__title_32-px") Magic Wood Map
-    form.footer__form
-      input(class="input footer__input" type="email" placeholder="Ваш e-mail" name="email" aria-label="Введіть ваш e-mail")
+    form(class="footer__form" novalidate)
+      input(class="input footer__input" type="email" placeholder="Ваш e-mail" name="email" required aria-required="true" aria-label="Введіть ваш e-mail")
       button(class="button footer__button-submit" type="submit") Надіслати
     .footer__social-links-block 
       a(class="round-button footer__round-button" href="https://uk-ua.facebook.com/" alt="Facebook" aria-label="Facebook")

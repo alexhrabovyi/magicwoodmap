@@ -4,8 +4,8 @@ nav(class="main-nav")
     .main-nav__account-and-search-block 
       a(class="main-nav__logo-link" href=main alt="Magic Wood Map")
         img(class="main-nav__logo" src="../../blocks/main-nav/images/logo.svg" alt="Magic Wood Maps логотип")
-      form.main-nav__search-form
-        input(class="input main-nav__input" id="input-search" type="search" placeholder="Знайти..." name="search" aria-label="Пошук по сайту" aria-required="true" )
+      form(class="main-nav__search-form" novalidate)
+        input(class="input main-nav__input" id="input-search" type="search" placeholder="Знайти..." name="search" required aria-label="Пошук по сайту" aria-required="true" )
         button(class="main-nav__icon-loupe" type="submit" aria-label="Знайти")
           i.icon-loupe
       .main-nav__account-buttons-block 
