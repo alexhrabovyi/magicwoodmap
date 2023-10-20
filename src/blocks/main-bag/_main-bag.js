@@ -52,6 +52,7 @@ export default function setupMainBag() {
       this.submitButton = document.querySelector('#order-form-submit');
       this.paymentMethodNotice = document.querySelector('.main-bag__payment-method-notice');
       this.termsAgreeButton = document.querySelector('[data-button-terms-agree]');
+      this.termsAgreeNotice = document.querySelector('.main-bag__terms-agree-notice');
 
       this.inputName = document.querySelector('#input-name');
       this.inputTel = document.querySelector('#input-tel');
@@ -95,7 +96,7 @@ export default function setupMainBag() {
       let button = e.target.closest('[data-button-bag-delete]');
 
       if (button) {
-        this.deleteButtonOnClick(e);
+        this.deleteButtonOnClick(e, button);
       }
 
       button = e.target.closest('[data-card-amount-button]');
@@ -141,9 +142,19 @@ export default function setupMainBag() {
       }
     }
 
-    deleteButtonOnClick(e) {
+    deleteButtonOnClick(e, button) {
       e.preventDefault();
+      const isButtonInsideTable = button.closest('.main-bag__product-table-cards');
+
       this.generateAndAddCards();
+
+      if (isButtonInsideTable) {
+        setTimeout(() => {
+          const deleteButton = this.cardBlock.querySelector('[data-button-bag-delete]');
+
+          if (deleteButton) deleteButton.focus();
+        });
+      }
     }
 
     amountButtonOnClick(e, button) {
@@ -176,6 +187,21 @@ export default function setupMainBag() {
 
       this.generateAndAddCards();
       this.bagMenu.bagMenuGenerateAndAddCards();
+
+      setTimeout(() => {
+        const ogButtonProduct = button.product;
+
+        const buttons = this.cardBlock.querySelectorAll(`[data-card-amount-button="${buttonType}"]`);
+
+        buttons.forEach((button) => {
+          if (ogButtonProduct.id === button.product.id
+            && ogButtonProduct.mapSize === button.product.mapSize
+            && ogButtonProduct.mapType === button.product.mapType
+            && ogButtonProduct.mapLang === button.product.mapLang) {
+            button.focus();
+          }
+        });
+      });
     }
 
     addToBagButtonOnClick(e) {
@@ -200,9 +226,11 @@ export default function setupMainBag() {
 
       this.paymentMethodButtons.forEach((button) => {
         button.classList.remove(this.checkboxActiveClass);
+        button.setAttribute('aria-checked', false);
       });
 
       button.classList.add(this.checkboxActiveClass);
+      button.setAttribute('aria-checked', true);
 
       this.orderFormResults.paymentMethod = button.dataset.paymentMethodButton;
     }
@@ -212,7 +240,9 @@ export default function setupMainBag() {
 
       if (!this.orderFormResults.paymentMethod) {
         this.paymentMethodNotice.innerHTML = 'Необхідно обрати спосіб оплати';
-        this.paymentMethodForm.scrollIntoView({ block: 'center' });
+
+        const paymentMethodButtnon = document.querySelector('[data-payment-method-button]');
+        paymentMethodButtnon.focus();
         return;
       }
 
@@ -221,13 +251,15 @@ export default function setupMainBag() {
           this.orderFormResults[input.name] = validationObj.validate();
         });
       } catch (err) {
-        this.userInfoForm.scrollIntoView({ block: 'center' });
+        const form = document.querySelector('[data-user-info-form]');
+        form.focus();
+
         console.log(err);
         return;
       }
 
       if (!this.orderFormResults.termsAgree) {
-        this.termsAgreeButton.dataset.buttonTermsAgree = 'Необхідно підтвердити, що Ви згодні з умовами';
+        this.termsAgreeNotice.textContent = 'Необхідно підтвердити, що Ви згодні з умовами';
         return;
       }
 
@@ -236,8 +268,9 @@ export default function setupMainBag() {
       this.generateAndAddCards();
       this.bagMenu.bagMenuGenerateAndAddCards();
 
-      const noticeBlock = document.createElement('div');
+      const noticeBlock = document.createElement('tr');
       noticeBlock.classList.add('main-bag__empty-bag-notice-block');
+      noticeBlock.setAttribute('aria-live', 'assertive');
 
       const inner = `
         <p class="title main-bag__grey-title">Дякуємо за замовлення!</p>
@@ -253,7 +286,13 @@ export default function setupMainBag() {
     buttonSubscribeOnClick(e, button) {
       e.preventDefault();
 
-      button.classList.toggle(this.checkboxActiveClass);
+      if (!button.classList.contains(this.checkboxActiveClass)) {
+        button.classList.add(this.checkboxActiveClass);
+        button.setAttribute('aria-checked', true);
+      } else {
+        button.classList.remove(this.checkboxActiveClass);
+        button.setAttribute('aria-checked', false);
+      }
     }
 
     termsAgreeButtonOnClick(e, button) {
@@ -261,10 +300,14 @@ export default function setupMainBag() {
 
       if (!button.classList.contains(this.checkboxActiveClass)) {
         button.classList.add(this.checkboxActiveClass);
+        button.setAttribute('aria-checked', true);
+        this.termsAgreeNotice.textContent = '';
+
         this.orderFormResults.termsAgree = true;
-        button.dataset.buttonTermsAgree = '';
       } else {
         button.classList.remove(this.checkboxActiveClass);
+        button.setAttribute('aria-checked', false);
+
         this.orderFormResults.termsAgree = false;
       }
     }
@@ -282,21 +325,26 @@ export default function setupMainBag() {
 
       this.bagClearButton.style.cssText = '';
       this.bagClearButton.disabled = false;
+      this.bagClearButton.removeAttribute('aria-disabled');
 
       this.submitButton.style.cssText = '';
       this.submitButton.disabled = false;
+      this.submitButton.removeAttribute('aria-disabled');
 
       if (bagProductsInStorage.length === 0) {
         this.bagClearButton.style.opacity = 0.7;
         this.bagClearButton.style.pointerEvents = 'none';
         this.bagClearButton.disabled = true;
+        this.bagClearButton.setAttribute('aria-disabled', 'true');
 
         this.submitButton.style.opacity = 0.7;
         this.submitButton.style.pointerEvents = 'none';
         this.submitButton.disabled = true;
 
-        const noticeBlock = document.createElement('div');
+        const noticeBlock = document.createElement('tr');
         noticeBlock.classList.add('main-bag__empty-bag-notice-block');
+        noticeBlock.setAttribute('aria-live', 'assertive');
+        this.submitButton.setAttribute('aria-disabled', 'true');
 
         const inner = `
           <p class="title main-bag__grey-title">Ваш кошик порожній!</p>
@@ -351,32 +399,32 @@ export default function setupMainBag() {
           return desc;
         }
 
-        const card = document.createElement('div');
-        card.classList.add('main-bag__product-table-card');
+        const card = document.createElement('tr');
+        card.classList.add('main-bag__product-table-row', 'main-bag__product-table-row_for-card');
 
         const inner = `
-          <button class="main-bag__delete-card-button" data-button-bag-delete>+</button>
-          <div class="main-bag__card-desc-block">
-            <a class="main-bag__img-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">
+          <td class="main-bag__product-table-desc-td">
+            <button class="main-bag__delete-card-button" data-button-bag-delete aria-label="Видалити з кошику товар ${product.productObj.name}">+</button>
+            <a class="main-bag__img-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}" aria-label="Перейти на сторінку товару ${product.productObj.name}">
               <img class="main-bag__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
             </a>
-            <a class="link link_ff-poppins link_14-px link_fw-600 link_c-black-1 main-bag__card-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
+            <a class="link link_ff-poppins link_14-px link_fw-600 link_c-black-1 main-bag__card-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}" aria-label="Перейти на сторінку товару ${product.productObj.name}">${product.productObj.name}</a>
             ${generateDesc()}
-          </div>
-          <div class="main-bag__card-price-block">
+          </td>
+          <td class="main-bag__product-table-price-td">
             <p class="text text_poppins text_14-px text_fw-600 text_c-orange main-bag__card-price">${formatPrice(product.basicPrice)} ₴</p>
             <p class="text text_poppins text_14-px text_fw-600 text_c-grey-12 main-bag__card-old-price">${basicOldPrice}</p>
-          </div>
-          <div class="main-bag__card-amount-block">
+          </td>
+          <td class="main-bag__product-table-amount-td">
             <div class="main-bag__card-amount-buttons">
-              <button class="main-bag__card-amount-button" data-card-amount-button="minus">-</button>
-              <div class="main-bag__card-amount-display">${product.amount}</div>
-              <button class="main-bag__card-amount-button" data-card-amount-button="plus">+</button>
+              <button class="main-bag__card-amount-button" data-card-amount-button="minus" aria-label="Зменшити кількість товару ${product.productObj.name} на один">-</button>
+              <div class="main-bag__card-amount-display" aria-live="polite">${product.amount}</div>
+              <button class="main-bag__card-amount-button" data-card-amount-button="plus" aria-label="Збільшити кількість товару ${product.productObj.name} на один">+</button>
             </div>
-          </div>
-          <div class="main-bag__card-total-price-block">
+          </td>
+          <td class="main-bag__product-table-total-price-td">
             <p class="text text_poppins text_14-px text_fw-600 text_c-orange main-bag__card-total-price">${formatPrice(product.totalPrice)} ₴</p>
-          </div>
+          </td>
         `;
 
         card.innerHTML = inner;

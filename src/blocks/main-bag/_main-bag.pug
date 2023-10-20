@@ -1,35 +1,40 @@
 main(class="main-bag container")
-  .main-bag__product-table
-    .main-bag__product-table-column-titles
-      p(class="title title_20-px title_c-black main-bag__product-table-column-title") Назва товару
-      p(class="title title_20-px title_c-black main-bag__product-table-column-title") Ціна
-      p(class="title title_20-px title_c-black main-bag__product-table-column-title") Кількість
-      p(class="title title_20-px title_c-black main-bag__product-table-column-title") Всього
-    .main-bag__product-table-cards
+  table.main-bag__product-table
+    thead.main-bag__product-table-thead
+      tr.main-bag__product-table-row
+        th(class="main-bag__product-table-th" scope="col")
+          p(class="title title_20-px title_c-black main-bag__product-table-column-title") Назва товару
+        th(class="main-bag__product-table-th" scope="col")
+          p(class="title title_20-px title_c-black main-bag__product-table-column-title") Ціна
+        th(class="main-bag__product-table-th" scope="col")
+          p(class="title title_20-px title_c-black main-bag__product-table-column-title") Кількість
+        th(class="main-bag__product-table-th" scope="col")
+          p(class="title title_20-px title_c-black main-bag__product-table-column-title") Всього
+    tbody.main-bag__product-table-cards
   .main-bag__button-block
-    a(class="button main-bag__button" href=main alt="На головну") На головну
-    button(class="button main-bag__button" data-button-bag-clear) Очистити
+    a(class="button main-bag__button" href=main alt="На головну" aria-label="Перейти на головну сторінку") На головну
+    button(class="button main-bag__button" data-button-bag-clear aria-label="Видалити усі товари з кошику") Очистити
   .main-bag__form-block
-    form(class="main-bag__form" data-payment-method-form)
+    form(class="main-bag__form" data-payment-method-form role="radiogroup" aria-label="Виберіть спосіб оплати")
       p(class="text text_18-px text_fw-600 text_c-black-1 main-bag__form-title") Спосіб оплати
       span(class="main-bag__grey-line")
-      button(class="main-bag__payment-method-checkbox" data-payment-method-button="non-cash")
+      button(class="main-bag__payment-method-checkbox" data-payment-method-button="non-cash" role="radio" aria-checked="false")
         i(class="icon-check main-bag__check-icon")
         | Безготівковий розрахунок
-      button(class="main-bag__payment-method-checkbox" data-payment-method-button="p.o.d")
+      button(class="main-bag__payment-method-checkbox" data-payment-method-button="p.o.d" role="radio" aria-checked="false")
         i(class="icon-check main-bag__check-icon")
         | Накладений платіж
-      p(class="text text_16-px text_fw-600 main-bag__payment-method-notice")
-    form(class="main-bag__form" data-user-info-form)
+      p(class="text text_16-px text_fw-600 main-bag__payment-method-notice" aria-live="assertive")
+    form(class="main-bag__form" data-user-info-form tabindex="-1" aria-label="Введіть Ваші дані" novalidate)
       p(class="text text_18-px text_fw-600 text_c-black-1 main-bag__form-title") Ваші дані
       span(class="main-bag__grey-line")
       label(class="text text_ff-poppins text_14-px text_fw-500 text_c-grey-10 main-bag__label" for="input-name") Ім’я*
-      input(class="input main-bag__input" id="input-name" type="text" name="name" required)
+      input(class="input main-bag__input" id="input-name" type="text" name="name" required aria-required="true" aria-label="Введіть Ваше ім'я")
       label(class="text text_ff-poppins text_14-px text_fw-500 text_c-grey-10 main-bag__label" for="input-tel") Контактний телефон*
-      input(class="input main-bag__input" id="input-tel" type="tel" name="tel")
+      input(class="input main-bag__input" id="input-tel" type="tel" name="tel" required aria-required="true" aria-label="Введіть Ваш номер телефон")
       label(class="text text_ff-poppins text_14-px text_fw-500 text_c-grey-10 main-bag__label" for="input-email") Електронна пошта*
-      input(class="input main-bag__input" id="input-email" type="email" name="email")
-      button(class="main-bag__subscribe-button" data-button-subscribe)
+      input(class="input main-bag__input" id="input-email" type="email" name="email" required aria-required="true" aria-label="Введіть Вашу електронну пошту")
+      button(class="main-bag__subscribe-button" data-button-subscribe role="checkbox" aria-checked="false" aria-label="Натисніть, щоб отримувати ексклюзивні пропозиції в SMS-розсилці від Magic Woods Maps")
         i(class="icon-check main-bag__check-icon")
         | Надсилати ексклюзивні пропозиції в SMS-розсилці від Magic Woods Maps
   .main-bag__order-form-block 
@@ -44,7 +49,8 @@ main(class="main-bag container")
         p(class="text text_fw-500 text_c-grey main-bag__order-form-total-old-price")
         p(class="text text_fw-500 text_c-grey main-bag__order-form-text") Знижка
         p(class="text text_fw-500 text_c-grey main-bag__order-form-total-discount")
-      button(class="button main-bag__button main-bag__button_big" id="order-form-submit" type="submit") Замовити
-      button(class="main-bag__subscribe-button main-bag__terms-agree-button" data-button-terms-agree="")
-          i(class="icon-check main-bag__check-icon")
-          | Згоден з умовами Правил користування тогрівельним майданчиком та правилами повернення
+      button(class="main-bag__subscribe-button main-bag__terms-agree-button" data-button-terms-agree aria-live="assertive" role="checkbox" aria-checked="false" aria-label="Натисніть, щоб підтвердити, що Ви згодні з умовами Правил користування тогрівельним майданчиком та правилами повернення")
+        i(class="icon-check main-bag__check-icon")
+        | Згоден з умовами Правил користування тогрівельним майданчиком та правилами повернення
+      button(class="button main-bag__button main-bag__button_big" id="order-form-submit" type="submit" aria-label="Оформити замовлення") Замовити
+      p(class="text text_16-px text_fw-600 main-bag__terms-agree-notice" aria-live="assertive")

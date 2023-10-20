@@ -53,6 +53,12 @@ export class SetupWishlistMenu {
     if (button) {
       this.addToWishlistButtonOnClick(e, button);
     }
+
+    button = e.target.closest('[data-button-bag-form-open]');
+
+    if (button) {
+      this.bagFormOpenButtonOnClick(e, button);
+    }
   }
 
   deleteButtonOnClick(e, button) {
@@ -67,6 +73,12 @@ export class SetupWishlistMenu {
     localStorage.setItem('wishlistProducts', wishlistProductsInStorage);
 
     this.generateAndAddCards();
+
+    setTimeout(() => {
+      const nextCardLink = this.wishlistMenu.querySelector('.bag-and-wishlist-menu__card-title-link');
+
+      if (nextCardLink) nextCardLink.focus();
+    });
   }
 
   addToWishlistButtonOnClick(e, button) {
@@ -96,9 +108,37 @@ export class SetupWishlistMenu {
     this.generateAndAddCards();
   }
 
+  bagFormOpenButtonOnClick(e, button) {
+    e.preventDefault();
+
+    const clickObserverFunc = (e) => {
+      const popup = document.querySelector('.bag-and-wishlist-menu__option-form-popup-window');
+
+      const target = e.target.closest('.bag-and-wishlist-menu__option-form-close-button')
+        || e.target.closest('[data-button-bag-add]') || e.target === popup;
+
+      if (target) {
+        button.focus();
+        document.removeEventListener('click', clickObserverFunc);
+      }
+    };
+
+    document.addEventListener('click', clickObserverFunc);
+  }
+
   onStorageEvent(e) {
     if (e.key === 'wishlistProducts') {
       this.generateAndAddCards();
+
+      setTimeout(() => {
+        if (!this.isOpen) {
+          const buttons = this.cardBlock.querySelectorAll('button');
+          buttons.forEach((button) => button.setAttribute('tabindex', '-1'));
+
+          const links = this.cardBlock.querySelectorAll('a');
+          links.forEach((link) => link.setAttribute('tabindex', '-1'));
+        }
+      });
     }
   }
 
@@ -174,6 +214,10 @@ export class SetupWishlistMenu {
         button.classList.remove('bag-and-wishlist-menu__round-button-selected');
       }
     });
+  }
+
+  get isOpen() {
+    return this.wishlistMenu.classList.contains('menu_active');
   }
 
   get wishlistProductsInStorage() {
@@ -435,6 +479,37 @@ export class SetupBagMenu {
 
   bagFormOpenButtonOnClick(e, button) {
     e.preventDefault();
+
+    const clickObserverFunc = (e) => {
+      const popup = document.querySelector('.bag-and-wishlist-menu__option-form-popup-window');
+
+      const target = e.target.closest('.bag-and-wishlist-menu__option-form-close-button')
+        || e.target.closest('[data-button-bag-add]') || e.target === popup;
+
+      if (target) {
+        setTimeout(() => {
+          const buttons = this.bagMenuCardBlock.querySelectorAll('[data-button-bag-form-open]');
+
+          console.log(this.optionFormAddToBagButton);
+          const addToBagButtonProduct = this.optionFormAddToBagButton.product;
+
+          buttons.forEach((button) => {
+            if (button.changeOptions.id === addToBagButtonProduct.productObj.id
+              && button.changeOptions.amount === addToBagButtonProduct.amount
+              && button.changeOptions.mapLang === addToBagButtonProduct.mapLang
+              && button.changeOptions.mapSize === addToBagButtonProduct.mapSize
+              && button.changeOptions.mapType === addToBagButtonProduct.mapType) {
+              button.focus();
+            }
+          });
+        });
+
+        document.removeEventListener('click', clickObserverFunc);
+      }
+    };
+
+    document.addEventListener('click', clickObserverFunc);
+
     this.optionFormAddToBagButton.product = {};
 
     const productId = +button.dataset.productId;
@@ -587,12 +662,12 @@ export class SetupBagMenu {
     this.popupMenu.close(e);
 
     this.bagMenuGenerateAndAddCards();
-
-    button.product = undefined;
   }
 
   deleteButtonOnClick(e, button) {
     e.preventDefault();
+
+    const isButtonInsideBagMenu = button.closest('#bag-menu');
 
     let { bagProductsInStorage } = this;
     const index = bagProductsInStorage.findIndex((product) => {
@@ -610,6 +685,14 @@ export class SetupBagMenu {
 
     this.bagMenuGenerateAndAddCards();
     this.bagMenuClassInstance.content.scrollTop = 0;
+
+    if (isButtonInsideBagMenu) {
+      setTimeout(() => {
+        const nextCardLink = this.bagMenu.querySelector('.bag-and-wishlist-menu__card-title-link');
+
+        if (nextCardLink) nextCardLink.focus();
+      });
+    }
   }
 
   onStorageEvent(e) {
@@ -622,6 +705,16 @@ export class SetupBagMenu {
     const cards = this.bagMenuGenerateCards();
     this.bagMenuCardBlock.innerHTML = '';
     this.bagMenuCardBlock.append(cards);
+
+    setTimeout(() => {
+      if (!this.isOpen) {
+        const buttons = this.bagMenuCardBlock.querySelectorAll('button');
+        buttons.forEach((button) => button.setAttribute('tabindex', '-1'));
+
+        const links = this.bagMenuCardBlock.querySelectorAll('a');
+        links.forEach((link) => link.setAttribute('tabindex', '-1'));
+      }
+    });
 
     this.bagMenuAddCircleToButton();
     this.bagMenuGenerateTotalPriceBlock();
@@ -780,6 +873,10 @@ export class SetupBagMenu {
         button.classList.remove('bag-and-wishlist-menu__round-button-selected');
       }
     });
+  }
+
+  get isOpen() {
+    return this.bagMenu.classList.contains('menu_active');
   }
 
   get bagProductsInStorage() {
