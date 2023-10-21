@@ -50,12 +50,22 @@ export default class SetupMenu {
 
         const allButton = this.content.querySelectorAll('button');
         const allLinks = this.content.querySelectorAll('a');
+        const allInputs = this.content.querySelectorAll('input');
+        const allFocusable = this.content.querySelectorAll('[tabindex]');
 
         allButton.forEach((button) => {
           button.setAttribute('tabindex', '-1');
         });
 
         allLinks.forEach((link) => {
+          link.setAttribute('tabindex', '-1');
+        });
+
+        allInputs.forEach((link) => {
+          link.setAttribute('tabindex', '-1');
+        });
+
+        allFocusable.forEach((link) => {
           link.setAttribute('tabindex', '-1');
         });
       }
@@ -99,12 +109,22 @@ export default class SetupMenu {
 
       const allButton = this.content.querySelectorAll('button');
       const allLinks = this.content.querySelectorAll('a');
+      const allInputs = this.content.querySelectorAll('input');
+      const allFocusable = this.content.querySelectorAll('[tabindex]');
 
       allButton.forEach((button) => {
         button.removeAttribute('tabindex');
       });
 
       allLinks.forEach((link) => {
+        link.removeAttribute('tabindex');
+      });
+
+      allInputs.forEach((button) => {
+        button.removeAttribute('tabindex');
+      });
+
+      allFocusable.forEach((link) => {
         link.removeAttribute('tabindex');
       });
 
@@ -152,12 +172,22 @@ export default class SetupMenu {
 
       const allButton = this.content.querySelectorAll('button');
       const allLinks = this.content.querySelectorAll('a');
+      const allInputs = this.content.querySelectorAll('input');
+      const allFocusable = this.content.querySelectorAll('[tabindex]');
 
       allButton.forEach((button) => {
         button.setAttribute('tabindex', '-1');
       });
 
       allLinks.forEach((link) => {
+        link.setAttribute('tabindex', '-1');
+      });
+
+      allInputs.forEach((button) => {
+        button.setAttribute('tabindex', '-1');
+      });
+
+      allFocusable.forEach((link) => {
         link.setAttribute('tabindex', '-1');
       });
     }

@@ -36,6 +36,8 @@ export default function setupCatalog() {
       this.catalog = document.querySelector('.catalog');
       this.cardAmount = document.querySelector('#card-amount');
 
+      this.cardBlock.addEventListener('click', this.buttonBagFormOpenOnClick.bind(this));
+
       this.initialSetupRange();
       this.initialSetupButtons();
 
@@ -44,6 +46,40 @@ export default function setupCatalog() {
       this.cardBlock.append(cards);
 
       this.updateCardAmount();
+    }
+
+    buttonBagFormOpenOnClick(e) {
+      e.preventDefault();
+
+      let clickedButton = e.target.closest('[data-button-bag-form-open]');
+
+      if (!clickedButton) return;
+
+      const card = clickedButton.closest('.catalog__card');
+      const productName = card.querySelector('.catalog__card-title-link').textContent;
+
+      const clickObserverFunc = (e) => {
+        const popup = document.querySelector('.bag-and-wishlist-menu__option-form-popup-window');
+
+        const target = e.target.closest('.bag-and-wishlist-menu__option-form-close-button')
+          || e.target.closest('[data-button-bag-add]') || e.target === popup;
+
+        if (target) {
+          setTimeout(() => {
+            const allCards = this.cardBlock.querySelectorAll('.catalog__card');
+            allCards.forEach((card) => {
+              if (card.querySelector('.catalog__card-title-link').textContent === productName) {
+                clickedButton = card.querySelector('[data-button-bag-form-open]');
+                clickedButton.focus();
+              }
+            });
+          });
+
+          document.removeEventListener('click', clickObserverFunc);
+        }
+      };
+
+      document.addEventListener('click', clickObserverFunc);
     }
 
     hideAndShowCards(productObjects) {
@@ -77,11 +113,11 @@ export default function setupCatalog() {
         card.classList.add('catalog__card');
 
         const inner = `
-        <a class="catalog__card-img-link" href="${productObj.pageLink}" alt="${productObj.name}">
+        <a class="catalog__card-img-link" href="${productObj.pageLink}" alt="${productObj.name}" aria-label="Перейти на сторінку товару ${productObj.name}">
           <img class="catalog__card-img" src="${imgs[productObj.id]}" alt="${productObj.imgAlt}">
         </a>
         <div class="catalog__card-desc-block">
-          <a class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="${productObj.pageLink}" alt="${productObj.name}">
+          <a class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="${productObj.pageLink}" alt="${productObj.name}" aria-label="Перейти на сторінку товару ${productObj.name}">
             ${productObj.name}
           </a>
           <div class="catalog__card-price-and-rate-block">
@@ -91,14 +127,14 @@ export default function setupCatalog() {
           </div>
           <p class="text text_c-grey-14 catalog__card-desc">${productObj.descText}</p>
           <div class="catalog__card-button-block">
-            <button class="button button_transparent catalog__card-buy-button" data-button-bag-add data-product-id="${productObj.id}">Купити в 1 клік</button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-form-open data-product-id="${productObj.id}">
+            <button class="button button_transparent catalog__card-buy-button" data-button-bag-add data-product-id="${productObj.id}" aria-label="Купити товар ${productObj.name} в 1 клік">Купити в 1 клік</button>
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-bag-form-open data-product-id="${productObj.id}" aria-label="Відкрити меню вибору параметрів товару ${productObj.name}">
               <i class="icon-bag"></i>
             </button>
-            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add data-product-id="${productObj.id}">
+            <button class="round-button round-button_with-shadow round-button_small catalog__card-round-button" data-button-wishlist-add data-product-id="${productObj.id}" aria-label="Додати товар ${productObj.name} в список бажань">
               <i class="icon-like"></i>
             </button>
-            <a class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="${productObj.pageLink}" alt="Переглянути →">
+            <a class="link link_ff-poppins link_c-blue catalog__card-more-info-link" href="${productObj.pageLink}" alt="Переглянути →" aria-label="Перейти на сторінку товару ${productObj.name}">
               Переглянути →
             </a>
           </div>
@@ -239,12 +275,22 @@ export default function setupCatalog() {
       this.rangeBlock = document.querySelector('.catalog__range-block');
       this.rangeInputMin = document.querySelector('#range-input-min');
       this.rangeInputMax = document.querySelector('#range-input-max');
+      this.rangeBtnMin = document.querySelector('#range-btn-min');
+      this.rangeBtnMax = document.querySelector('#range-btn-max');
 
       this.setupRange();
     }
 
     setupRange() {
       this.rangeBlock.classList.remove('catalog__range-block_disabled');
+      this.rangeInputMin.removeAttribute('disabled');
+      this.rangeInputMax.removeAttribute('disabled');
+      this.rangeBtnMin.removeAttribute('disabled');
+      this.rangeBtnMax.removeAttribute('disabled');
+      this.rangeInputMin.removeAttribute('aria-disabled');
+      this.rangeInputMax.removeAttribute('aria-disabled');
+      this.rangeBtnMin.removeAttribute('aria-disabled');
+      this.rangeBtnMax.removeAttribute('aria-disabled');
 
       if (!this.modifiedArr.length) return;
 
@@ -258,11 +304,33 @@ export default function setupCatalog() {
       this.rangeInputMin.max = maxValue;
       this.rangeInputMax.max = maxValue;
 
+      this.rangeBtnMin.setAttribute('aria-valuemin', minValue);
+      this.rangeBtnMax.setAttribute('aria-valuemin', minValue);
+      this.rangeBtnMin.setAttribute('aria-valuemax', maxValue);
+      this.rangeBtnMax.setAttribute('aria-valuemax', maxValue);
+
       if (this.setMinValue === undefined && this.setMaxValue === undefined) {
         this.rangeInputMin.value = minValue;
-        this.rangeInputMax.value = maxValue;
+        this.rangeInputMin.setAttribute('value', minValue);
 
-        if (minValue === maxValue) this.rangeBlock.classList.add('catalog__range-block_disabled');
+        this.rangeInputMax.value = maxValue;
+        this.rangeInputMax.setAttribute('value', maxValue);
+
+        this.rangeBtnMin.setAttribute('aria-valuenow', minValue);
+        this.rangeBtnMax.setAttribute('aria-valuenow', maxValue);
+
+        if (minValue === maxValue) {
+          this.rangeBlock.classList.add('catalog__range-block_disabled');
+          this.rangeInputMin.setAttribute('disabled', true);
+          this.rangeInputMax.setAttribute('disabled', true);
+          this.rangeBtnMin.setAttribute('disabled', true);
+          this.rangeBtnMax.setAttribute('disabled', true);
+          this.rangeInputMin.setAttribute('aria-disabled', true);
+          this.rangeInputMax.setAttribute('aria-disabled', true);
+          this.rangeBtnMin.setAttribute('aria-disabled', true);
+          this.rangeBtnMax.setAttribute('aria-disabled', true);
+        }
+
         return;
       }
 
@@ -271,31 +339,61 @@ export default function setupCatalog() {
         this.rangeInputMax.min = this.setMinValue;
         this.rangeInputMin.max = maxValue;
         this.rangeInputMax.max = maxValue;
+
+        this.rangeBtnMin.setAttribute('aria-valuemin', this.setMinValue);
+        this.rangeBtnMax.setAttribute('aria-valuemin', this.setMinValue);
+        this.rangeBtnMin.setAttribute('aria-valuemax', maxValue);
+        this.rangeBtnMax.setAttribute('aria-valuemax', maxValue);
       } else if (this.setMinValue > maxValue && this.setMaxValue > maxValue) {
         this.rangeInputMin.min = minValue;
         this.rangeInputMax.min = minValue;
         this.rangeInputMin.max = this.setMaxValue;
         this.rangeInputMax.max = this.setMaxValue;
+
+        this.rangeBtnMin.setAttribute('aria-valuemin', minValue);
+        this.rangeBtnMax.setAttribute('aria-valuemin', minValue);
+        this.rangeBtnMin.setAttribute('aria-valuemax', this.setMaxValue);
+        this.rangeBtnMax.setAttribute('aria-valuemax', this.setMaxValue);
       } else if (this.setMinValue < minValue && this.setMaxValue > maxValue) {
         this.rangeInputMin.min = this.setMinValue;
         this.rangeInputMax.min = this.setMinValue;
         this.rangeInputMin.max = this.setMaxValue;
         this.rangeInputMax.max = this.setMaxValue;
+
+        this.rangeBtnMin.setAttribute('aria-valuemin', this.setMinValue);
+        this.rangeBtnMax.setAttribute('aria-valuemin', this.setMinValue);
+        this.rangeBtnMin.setAttribute('aria-valuemax', this.setMaxValue);
+        this.rangeBtnMax.setAttribute('aria-valuemax', this.setMaxValue);
       } else if (this.setMinValue < minValue) {
         this.rangeInputMin.min = this.setMinValue;
         this.rangeInputMax.min = this.setMinValue;
         this.rangeInputMin.max = maxValue;
         this.rangeInputMax.max = maxValue;
+
+        this.rangeBtnMin.setAttribute('aria-valuemin', this.setMinValue);
+        this.rangeBtnMax.setAttribute('aria-valuemin', this.setMinValue);
+        this.rangeBtnMin.setAttribute('aria-valuemax', maxValue);
+        this.rangeBtnMax.setAttribute('aria-valuemax', maxValue);
       } else if (this.setMaxValue > maxValue) {
         this.rangeInputMin.min = minValue;
         this.rangeInputMax.min = minValue;
         this.rangeInputMin.max = this.setMaxValue;
         this.rangeInputMax.max = this.setMaxValue;
+
+        this.rangeBtnMin.setAttribute('aria-valuemin', minValue);
+        this.rangeBtnMax.setAttribute('aria-valuemin', minValue);
+        this.rangeBtnMin.setAttribute('aria-valuemax', this.setMaxValue);
+        this.rangeBtnMax.setAttribute('aria-valuemax', this.setMaxValue);
       } else {
         this.rangeInputMin.min = minValue;
         this.rangeInputMax.min = minValue;
         this.rangeInputMin.max = maxValue;
         this.rangeInputMax.max = maxValue;
+
+        this.rangeBtnMin.setAttribute('aria-valuemin', minValue);
+        this.rangeBtnMax.setAttribute('aria-valuemin', minValue);
+        this.rangeBtnMin.setAttribute('aria-valuemax', maxValue);
+        this.rangeBtnMax.setAttribute('aria-valuemax', maxValue);
       }
 
       rangeInstance.renderButton(this.setMinValue, 'min');
@@ -357,6 +455,7 @@ export default function setupCatalog() {
         button.classList.add('catalog__pagination-button');
         button.dataset.paginationId = i;
         button.innerHTML = i;
+        button.setAttribute('aria-label', `Перейти на сторінку товарів номер ${i}`);
 
         return button;
       }
@@ -368,8 +467,10 @@ export default function setupCatalog() {
 
         if (type === 'left') {
           overflowButton.dataset.overflowLeft = true;
+          overflowButton.setAttribute('aria-label', `Перейти на ${this.buttonsPerView} сторінок назад`);
         } else if (type === 'right') {
           overflowButton.dataset.overflowRight = true;
+          overflowButton.setAttribute('aria-label', `Перейти на ${this.buttonsPerView} сторінок вперед`);
         }
         return overflowButton;
       }
@@ -572,13 +673,23 @@ export default function setupCatalog() {
 
       for (let i = 0; i < this.selectButtons.length; i += 1) {
         this.selectButtons[i].setAttribute('data-select-btn-id', i);
+        this.selectButtons[i].setAttribute('tabindex', -1);
+        this.selectButtons[i].setAttribute('aria-hidden', true);
+        this.selectButtons[i].setAttribute('role', 'option');
+        this.selectButtons[i].setAttribute('aria-selected', false);
+        this.selectButtons[i].setAttribute('id', `selectopt${i}`);
         if (i === this.selectedId) {
           this.selectButtons[i].classList.add(this.selectedButtonClass);
           this.selectChosenText.textContent = this.selectButtons[i].textContent;
+          this.selectButtons[i].setAttribute('aria-selected', true);
         }
       }
 
+      this.selectButtonBlock.setAttribute('aria-activedescendant', this.selectButtons[this.selectedId].id);
+      this.selectChosenButton.setAttribute('aria-label', `Вибрана опція: Сортувати ${this.selectChosenText.textContent}. Натисніть щоб відкрити меню опцій`);
+
       this.select.addEventListener('click', this.clickHandle.bind(this), { passive: true });
+      document.addEventListener('keydown', this.onKeyDown.bind(this));
       window.addEventListener('resize', this.onOrientationChange.bind(this));
     }
 
@@ -601,12 +712,21 @@ export default function setupCatalog() {
       this.isOpen = true;
       this.select.style.height = `${this.selectHeight + this.selectButtonBlockHeight}px`;
       this.selectArrowIcon.classList.add(this.rotatedIconClass);
+      this.selectButtons.forEach((button) => {
+        button.setAttribute('tabindex', 0);
+        button.setAttribute('aria-hidden', false);
+      });
+      this.selectButtons[0].focus();
     }
 
     close() {
       this.isOpen = false;
       this.select.style.height = `${this.selectHeight - this.selectButtonBlockHeight}px`;
       this.selectArrowIcon.classList.remove(this.rotatedIconClass);
+      this.selectButtons.forEach((button) => {
+        button.setAttribute('tabindex', -1);
+        button.setAttribute('aria-hidden', true);
+      });
     }
 
     chooseOption(target) {
@@ -614,15 +734,74 @@ export default function setupCatalog() {
       const oldButton = this.selectButtons[this.selectedId];
 
       oldButton.classList.remove(this.selectedButtonClass);
+      oldButton.setAttribute('aria-selected', false);
       newButton.classList.add(this.selectedButtonClass);
+      newButton.setAttribute('aria-selected', true);
 
       this.selectChosenText.textContent = newButton.textContent;
       this.selectedId = +newButton.dataset.selectBtnId;
+
+      this.selectButtonBlock.setAttribute('aria-activedescendant', this.selectButtons[this.selectedId].id);
+      this.selectChosenButton.setAttribute('aria-label', `Вибрана опція: Сортувати ${this.selectChosenText.textContent}. Натисніть щоб відкрити меню опцій`);
 
       const { selectType } = newButton.dataset;
       this.renderCardsInstance.sortAndShowCards(selectType);
 
       this.close();
+      this.selectChosenButton.focus();
+    }
+
+    onKeyDown(e) {
+      if (!this.isOpen) return;
+
+      if (e.code === 'ArrowDown') {
+        e.preventDefault();
+
+        if (!document.activeElement.classList.contains('catalog__select-button')) {
+          this.selectButtons[0].focus();
+          return;
+        }
+
+        let currentFocusedButtonId = +document.activeElement.dataset.selectBtnId;
+        const lastButtonId = this.selectButtons.length - 1;
+
+        if (currentFocusedButtonId === lastButtonId) {
+          this.selectButtons[0].focus();
+        } else {
+          currentFocusedButtonId += 1;
+          this.selectButtons[currentFocusedButtonId].focus();
+        }
+      }
+
+      if (e.code === 'ArrowUp') {
+        e.preventDefault();
+
+        if (!document.activeElement.classList.contains('catalog__select-button')) {
+          this.selectButtons[this.selectButtons.length - 1].focus();
+          return;
+        }
+
+        let currentFocusedButtonId = +document.activeElement.dataset.selectBtnId;
+
+        if (currentFocusedButtonId === 0) {
+          this.selectButtons[this.selectButtons.length - 1].focus();
+        } else {
+          currentFocusedButtonId -= 1;
+          this.selectButtons[currentFocusedButtonId].focus();
+        }
+      }
+
+      if (e.code === 'Home') {
+        e.preventDefault();
+
+        this.selectButtons[0].focus();
+      }
+
+      if (e.code === 'End') {
+        e.preventDefault();
+
+        this.selectButtons[this.selectButtons.length - 1].focus();
+      }
     }
 
     onOrientationChange() {
@@ -650,6 +829,12 @@ export default function setupCatalog() {
     setup() {
       this.checkboxName = this.checkboxBlock.dataset.checkboxName;
       this.checkboxBlock.addEventListener('click', this.toggle.bind(this), { passive: true });
+
+      const checkboxBtns = this.checkboxBlock.querySelectorAll('.catalog__checkbox-button');
+      checkboxBtns.forEach((button) => {
+        button.setAttribute('role', 'checkbox');
+        button.setAttribute('aria-checked', false);
+      });
     }
 
     toggle(e) {
@@ -662,9 +847,11 @@ export default function setupCatalog() {
       if (!button.classList.contains(this.buttonActiveClass)) {
         this.renderCardsInstance.addFilter(filter);
         button.classList.add(this.buttonActiveClass);
+        button.setAttribute('aria-checked', true);
       } else {
         this.renderCardsInstance.deleteFilter(filter);
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
       }
     }
   }
@@ -682,11 +869,18 @@ export default function setupCatalog() {
       this.buttonMin = this.rangeBlock.querySelector('#range-btn-min');
       this.buttonMax = this.rangeBlock.querySelector('#range-btn-max');
 
+      this.buttonMin.setAttribute('role', 'slider');
+      this.buttonMax.setAttribute('role', 'slider');
+      this.buttonMin.setAttribute('aria-orientation', 'horizontal');
+      this.buttonMax.setAttribute('aria-orientation', 'horizontal');
+
       this.buttonMin.addEventListener('mousedown', this.onDownEvent.bind(this, 'min', false));
       this.buttonMin.addEventListener('touchstart', this.onDownEvent.bind(this, 'min', true));
 
       this.buttonMax.addEventListener('mousedown', this.onDownEvent.bind(this, 'max', false));
       this.buttonMax.addEventListener('touchstart', this.onDownEvent.bind(this, 'max', true));
+
+      document.addEventListener('keydown', this.onKeyDown.bind(this));
 
       this.setupInput();
 
@@ -700,11 +894,23 @@ export default function setupCatalog() {
       this.inputMin = this.rangeBlock.querySelector('#range-input-min');
       this.inputMax = this.rangeBlock.querySelector('#range-input-max');
 
-      this.inputMin.addEventListener('focusout', this.onFocusOut.bind(this, 'min'), { passive: true });
-      this.inputMax.addEventListener('focusout', this.onFocusOut.bind(this, 'max'), { passive: true });
+      this.inputMin.addEventListener('focusout', this.onSubmit.bind(this, 'min'), { passive: true });
+      this.inputMax.addEventListener('focusout', this.onSubmit.bind(this, 'max'), { passive: true });
+
+      document.addEventListener('keydown', (e) => {
+        if (!document.activeElement.classList.contains('catalog__range-input')) return;
+
+        if (e.code === 'Enter') {
+          const button = document.activeElement.closest('.catalog__range-input');
+          button.target = button;
+          const type = button.id === 'range-input-min' ? 'min' : 'max';
+
+          this.onSubmit(type, button);
+        }
+      });
     }
 
-    onFocusOut(inputType, e) {
+    onSubmit(inputType, e) {
       const input = e.target.closest('input');
 
       if (input.value.length === 0) {
@@ -721,6 +927,14 @@ export default function setupCatalog() {
 
       input.value = (+input.value).toFixed(0);
       const { value } = input;
+
+      input.setAttribute('value', value);
+
+      if (inputType === 'min') {
+        this.buttonMin.setAttribute('aria-valuenow', value);
+      } else if (inputType === 'max') {
+        this.buttonMax.setAttribute('aria-valuenow', value);
+      }
 
       this.renderButton(value, inputType);
       this.renderCardsInstance.sortByRangePriceAndShow();
@@ -752,24 +966,8 @@ export default function setupCatalog() {
 
       let buttonShiftLeft = clientX - rangeLineLeftCoord - shiftX;
       buttonShiftLeft = +((buttonShiftLeft / this.rangeLineWidth) * 100).toFixed(2);
+      buttonShiftLeft = this.calcButtonShift(buttonShiftLeft, type);
 
-      if (type === 'min') {
-        const buttonMaxLeftShift = this.getElementStyleLeft(this.buttonMax);
-
-        if (buttonShiftLeft < 0) {
-          buttonShiftLeft = 0;
-        } else if (buttonShiftLeft > buttonMaxLeftShift - this.buttonWidth) {
-          buttonShiftLeft = buttonMaxLeftShift - this.buttonWidth;
-        }
-      } else if (type === 'max') {
-        const buttonMinLeftShift = this.getElementStyleLeft(this.buttonMin);
-
-        if (buttonShiftLeft > 100 - this.buttonWidth) {
-          buttonShiftLeft = 100 - this.buttonWidth;
-        } else if (buttonShiftLeft < buttonMinLeftShift + this.buttonWidth) {
-          buttonShiftLeft = buttonMinLeftShift + this.buttonWidth;
-        }
-      }
       button.style.left = `${buttonShiftLeft}%`;
       this.calcInputs(buttonShiftLeft, type);
     }
@@ -784,6 +982,72 @@ export default function setupCatalog() {
       }
 
       this.renderCardsInstance.sortByRangePriceAndShow();
+    }
+
+    onKeyDown(e) {
+      if (!document.activeElement.classList.contains('catalog__range-button')) return;
+
+      const button = e.target.closest('.catalog__range-button');
+      const buttonType = button.id === 'range-btn-min' ? 'min' : 'max';
+
+      let buttonStyleLeft;
+
+      if (e.code === 'ArrowUp' || e.code === 'ArrowRight') {
+        e.preventDefault();
+        buttonStyleLeft = this.getElementStyleLeft(button) + 1;
+      } else if (e.code === 'ArrowDown' || e.code === 'ArrowLeft') {
+        e.preventDefault();
+        buttonStyleLeft = this.getElementStyleLeft(button) - 1;
+      } else if (e.code === 'PageUp') {
+        e.preventDefault();
+        buttonStyleLeft = this.getElementStyleLeft(button) + 10;
+      } else if (e.code === 'PageDown') {
+        e.preventDefault();
+        buttonStyleLeft = this.getElementStyleLeft(button) - 10;
+      } else if (e.code === 'Home') {
+        e.preventDefault();
+        buttonStyleLeft = 0;
+      } else if (e.code === 'End') {
+        e.preventDefault();
+        buttonStyleLeft = 100;
+      }
+
+      if (buttonStyleLeft !== undefined) {
+        buttonStyleLeft = this.calcButtonShift(buttonStyleLeft, buttonType);
+        button.style.left = `${buttonStyleLeft}%`;
+        this.calcInputs(buttonStyleLeft, buttonType);
+
+        if (!this.buttonIsPressed) {
+          document.addEventListener('keyup', () => {
+            this.renderCardsInstance.sortByRangePriceAndShow();
+            this.buttonIsPressed = false;
+          }, { once: true });
+
+          this.buttonIsPressed = true;
+        }
+      }
+    }
+
+    calcButtonShift(shiftLeft, type) {
+      if (type === 'min') {
+        const buttonMaxLeftShift = this.getElementStyleLeft(this.buttonMax);
+
+        if (shiftLeft < 0) {
+          shiftLeft = 0;
+        } else if (shiftLeft > buttonMaxLeftShift - this.buttonWidth) {
+          shiftLeft = buttonMaxLeftShift - this.buttonWidth;
+        }
+      } else if (type === 'max') {
+        const buttonMinLeftShift = this.getElementStyleLeft(this.buttonMin);
+
+        if (shiftLeft > 100 - this.buttonWidth) {
+          shiftLeft = 100 - this.buttonWidth;
+        } else if (shiftLeft < buttonMinLeftShift + this.buttonWidth) {
+          shiftLeft = buttonMinLeftShift + this.buttonWidth;
+        }
+      }
+
+      return shiftLeft;
     }
 
     calcInputs(shiftLeft, type) {
@@ -803,8 +1067,12 @@ export default function setupCatalog() {
 
       if (type === 'min') {
         this.inputMin.value = inputValue;
+        this.inputMin.setAttribute('value', inputValue);
+        this.buttonMin.setAttribute('aria-valuenow', inputValue);
       } else if (type === 'max') {
         this.inputMax.value = inputValue;
+        this.inputMax.setAttribute('value', inputValue);
+        this.buttonMax.setAttribute('aria-valuenow', inputValue);
       }
     }
 
@@ -850,11 +1118,24 @@ export default function setupCatalog() {
         closeButtonsSelector: '.catalog__filter-close-button',
         contentSelector: '.catalog__filter-blocks',
         animationFromLeft: false,
+        ariaToggle: true,
       });
-    } else {
-      content.classList.remove('menu', 'menu_animationRight', 'menu_animationLeft');
-      content.style.cssText = '';
     }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 1024 && !content.classList.contains('menu')) {
+        new SetupMenu({
+          openButtonsSelector: '.catalog__open-filters-button',
+          closeButtonsSelector: '.catalog__filter-close-button',
+          contentSelector: '.catalog__filter-blocks',
+          animationFromLeft: false,
+          ariaToggle: true,
+        });
+      } else if (window.innerWidth > 1024 && content.classList.contains('menu')) {
+        content.classList.remove('menu', 'menu_animationRight', 'menu_animationLeft');
+        content.style.cssText = '';
+      }
+    });
   }
 
   const renderCardsInstance = new RenderCards(productObjects, 5);

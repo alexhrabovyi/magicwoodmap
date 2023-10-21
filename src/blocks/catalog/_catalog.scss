@@ -57,7 +57,6 @@
     transition: all .05s ease-in-out;
 
     &:hover, &:focus {
-      outline: none;
       text-decoration: underline;
     }
 
@@ -146,8 +145,7 @@
     @include flex-builder(row, space-between, center);
 
     &:hover, &:focus {
-      color: rgb(237 85 59 / 100%);
-      outline: none;
+      color: rgb(237 85 59 / 100%);;
     }
 
     &:active {
@@ -187,7 +185,6 @@
 
     &:hover, &:focus {
       color: rgb(237 85 59 / 100%);
-      outline: none;
     }
 
     &:active {
@@ -295,7 +292,6 @@
 
     &:hover, &:focus {
       color: rgb(237 85 59 / 100%);
-      outline: none;
     }
 
     &:active {
@@ -352,7 +348,6 @@
     transition: .05s all ease-in-out;
 
     &:hover, &:focus {
-      outline: none;
       transform: scale(1.2);
     }
 
@@ -553,7 +548,6 @@
 
     &:hover, &:focus {
       color: rgb(237 85 59 / 100%);
-      outline: none;
     }
 
     &:active {

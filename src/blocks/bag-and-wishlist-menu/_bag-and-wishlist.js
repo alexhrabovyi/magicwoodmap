@@ -481,6 +481,8 @@ export class SetupBagMenu {
     e.preventDefault();
 
     const clickObserverFunc = (e) => {
+      if (!e.target.closest('#bag-menu')) return;
+
       const popup = document.querySelector('.bag-and-wishlist-menu__option-form-popup-window');
 
       const target = e.target.closest('.bag-and-wishlist-menu__option-form-close-button')
@@ -489,8 +491,6 @@ export class SetupBagMenu {
       if (target) {
         setTimeout(() => {
           const buttons = this.bagMenuCardBlock.querySelectorAll('[data-button-bag-form-open]');
-
-          console.log(this.optionFormAddToBagButton);
           const addToBagButtonProduct = this.optionFormAddToBagButton.product;
 
           buttons.forEach((button) => {

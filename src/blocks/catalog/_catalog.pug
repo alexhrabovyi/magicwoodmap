@@ -1,15 +1,15 @@
 main(class="catalog container")
   .catalog__amount-and-select-block
-    button(class="catalog__open-filters-button") Відкрити фільтр
-    p(class="text text_12-px text_c-grey-13 catalog__amount") Всього позицій:
+    button(class="catalog__open-filters-button" aria-label="Відкрити панель фільтрів" aria-haspopup="menu") Відкрити фільтри
+    p(class="text text_12-px text_c-grey-13 catalog__amount" aria-atomic="true" aria-live="assertive") Всього позицій:
       span(id='card-amount')
     .catalog__select-block
       p(class="text text_14-px text_c-black-1 catalog__select-name") Сортувати:
-      .catalog__select
+      div(class="catalog__select")
         button(class="catalog__select-chosen-block")
           p(class="catalog__select-chosen-text") 
           i(class="icon-chevron-left catalog__select-chosen-icon")
-        .catalog__select-button-block 
+        div(class="catalog__select-button-block" role="listbox" aria-label="Опції селекту") 
           button(class="catalog__select-button" data-select-type="default") За замовчуванням
           button(class="catalog__select-button" data-select-type="name-A-Z") За назвою (А - Я)
           button(class="catalog__select-button" data-select-type="name-Z-A") За назвою (Я - А)
@@ -20,8 +20,8 @@ main(class="catalog container")
   .catalog__filter-and-card-block 
     .catalog__filter-blocks
       p(class='title title_30-px catalog__filter-title') Фільтр
-      button(class="close-button catalog__filter-close-button") +
-      .catalog__filter-block 
+      button(class="close-button catalog__filter-close-button" aria-label="Закрити панель фільтрів") +
+      div(class="catalog__filter-block" tabindex="0" aria-label="Виберіть категорії товарів")
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Категорія
         span.catalog__line
         div(class="catalog__checkbox-block" data-checkbox-name="categories")
@@ -37,7 +37,7 @@ main(class="catalog container")
           button(class="catalog__checkbox-button" data-checkbox-value="Додатки до мап")
             i(class="icon-check catalog__checkbox-icon")
             | Додатки до мап
-      .catalog__filter-block 
+      div(class="catalog__filter-block" tabindex="0" aria-label="Виберіть наявні акції")
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Акції
         span.catalog__line
         div(class="catalog__checkbox-block" data-checkbox-name="discount")
@@ -50,21 +50,21 @@ main(class="catalog container")
           button(class="catalog__checkbox-button" data-checkbox-value="20")
             i(class="icon-check catalog__checkbox-icon")
             | Знижка 20%
-      .catalog__filter-block 
+      div(class="catalog__filter-block" tabindex="0" aria-label="Виберіть діапазон цін")
         p(class="text text_ff-poppins text_20-px text_fw-500 text_c-black-1 catalog__filter-name") Ціновий діапазон
         span.catalog__line
         div(class="catalog__range-block")
           .catalog__range-line-block
-            button(class="catalog__range-button" id="range-btn-min")
+            button(class="catalog__range-button" id="range-btn-min" aria-label="Повзунок регулювання мінімальної ціни")
             span(class="catalog__range-line")
-            button(class="catalog__range-button" id="range-btn-max")
+            button(class="catalog__range-button" id="range-btn-max" aria-label="Повзунок регулювання максимальної ціни")
           .catalog__range-input-block
-            input(class="input catalog__range-input" id="range-input-min" type="number" min="" max="" value="")
-            input(class="input catalog__range-input" id="range-input-max" type="number" min="" max="" value="")
+            input(class="input catalog__range-input" id="range-input-min" type="number" aria-label="Введіть  мінімальну ціну")
+            input(class="input catalog__range-input" id="range-input-max" type="number" aria-label="Введіть  максимальну ціну")
     .catalog__card-block
     .catalog__pagination-block
-      button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-prev")
+      button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-prev" aria-label="Перейти на попередню сторінку товарів")
         i.icon-chevron-left
       .catalog__pagination-buttons
-      button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-next")
+      button(class="round-button round-button_with-shadow round-button_small catalog__pagination-round-button" id="pagination-next" aria-label="Перейти на наступну сторінку товарів")
         i.icon-chevron-right
