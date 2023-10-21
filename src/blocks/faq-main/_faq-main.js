@@ -15,8 +15,23 @@ export default function setupFaqAccordion() {
     setup() {
       const contentBlocks = this.contentBlocks.querySelectorAll('.faq-main__content-block');
 
-      contentBlocks.forEach((block) => {
+      contentBlocks.forEach((block, i) => {
         block.style.height = `${this.getElementHeight(block)}px`;
+
+        const buttonDesc = block.querySelector('.faq-main__subtitle').textContent;
+
+        const content = block.querySelector('.faq-main__text');
+        content.setAttribute('role', 'tabpanel');
+        content.setAttribute('id', `tabcontent${i}`);
+
+        const buttons = block.querySelectorAll('button');
+        buttons.forEach((button) => {
+          button.setAttribute('role', 'tab');
+          button.setAttribute('aria-selected', false);
+          button.setAttribute('aria-expanded', false);
+          button.setAttribute('aria-controls', `tabcontent${i}`);
+          button.setAttribute('aria-label', `Розкрити вкладку ${buttonDesc}`);
+        });
       });
     }
 
@@ -49,13 +64,13 @@ export default function setupFaqAccordion() {
       const icon = contentBlock.querySelector('.faq-main__button-icon');
 
       if (contentBlock.dataset.isShown) {
-        this.hide(icon, contentBlock, hiddenText);
+        this.hide(button, icon, contentBlock, hiddenText);
       } else {
-        this.show(icon, contentBlock, hiddenText);
+        this.show(button, icon, contentBlock, hiddenText);
       }
     }
 
-    show(icon, contentBlock, hiddenText) {
+    show(button, icon, contentBlock, hiddenText) {
       icon.classList.add(this.iconActiveClass);
 
       contentBlock.setAttribute('data-is-shown', true);
@@ -64,9 +79,27 @@ export default function setupFaqAccordion() {
       const hiddenTextHeight = this.getElementHeight(hiddenText);
 
       contentBlock.style.height = `${contentBlockHeight + hiddenTextHeight}px`;
+      contentBlock.style.pointerEvents = 'none';
+
+      const onTransitionEndFunc = (e) => {
+        if (e.propertyName === 'height') {
+          contentBlock.style.pointerEvents = 'all';
+
+          contentBlock.removeEventListener('transitionend', onTransitionEndFunc);
+        }
+      };
+
+      contentBlock.addEventListener('transitionend', onTransitionEndFunc);
+
+      const ariaControlsValue = button.getAttribute('aria-controls');
+      const buttons = contentBlock.querySelectorAll(`[aria-controls="${ariaControlsValue}"]`);
+      buttons.forEach((button) => {
+        button.setAttribute('aria-selected', true);
+        button.setAttribute('aria-expanded', true);
+      });
     }
 
-    hide(icon, contentBlock, hiddenText) {
+    hide(button, icon, contentBlock, hiddenText) {
       icon.classList.remove(this.iconActiveClass);
 
       contentBlock.removeAttribute('data-is-shown');
@@ -75,6 +108,24 @@ export default function setupFaqAccordion() {
       const hiddenTextHeight = this.getElementHeight(hiddenText);
 
       contentBlock.style.height = `${contentBlockHeight - hiddenTextHeight}px`;
+      contentBlock.style.pointerEvents = 'none';
+
+      const onTransitionEndFunc = (e) => {
+        if (e.propertyName === 'height') {
+          contentBlock.style.pointerEvents = 'all';
+
+          contentBlock.removeEventListener('transitionend', onTransitionEndFunc);
+        }
+      };
+
+      contentBlock.addEventListener('transitionend', onTransitionEndFunc);
+
+      const ariaControlsValue = button.getAttribute('aria-controls');
+      const buttons = contentBlock.querySelectorAll(`[aria-controls="${ariaControlsValue}"]`);
+      buttons.forEach((button) => {
+        button.setAttribute('aria-selected', false);
+        button.setAttribute('aria-expanded', false);
+      });
     }
 
     getElementHeight(el) {
