@@ -8,43 +8,43 @@ main(class="product-desc container")
           .product-desc__img-slider-slide
             img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_2.png" alt="Дерев'яна мапа")
           .product-desc__img-slider-slide
-            img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_3.png" alt="Дерев'яна мапаp")
+            img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_3.png" alt="Дерев'яна мапа")
           .product-desc__img-slider-slide
             img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_4.png" alt="Дерев'яна мапа")
-      button(class="round-button round-button_with-shadow round-button_medium product-desc__img-slider-button-prev")
+      button(class="round-button round-button_with-shadow round-button_medium product-desc__img-slider-button-prev" aria-hidden="true")
         i.icon-chevron-left
-      button(class="round-button round-button_with-shadow round-button_medium product-desc__img-slider-button-next")
+      button(class="round-button round-button_with-shadow round-button_medium product-desc__img-slider-button-next" aria-hidden="true")
         i.icon-chevron-right
       .product-desc__img-slider-pagination-block
     .product-desc__checkout-block
       div(class="product-desc__rate-block product-desc__rate-block_mobile")
         .product-desc__rate-star-block-mobile
         p(class="text text_ff-poppins text_18-px text_c-blue product-desc__review-amount") 6 відгуків
-      h1(class="title title_36-px title_fw-500 title_c-black product-desc__title") Одношарова мапа
+      h2(class="title title_36-px title_fw-500 title_c-black product-desc__title") Одношарова мапа
       p(class="text text_ff-poppins text_c-grey-15 product-desc__vendor-code") Модель: 3DMBL
-      form(class="product-desc__checkout-form")
+      form(class="product-desc__checkout-form" aria-label="Форма вибору опцій товару")
         p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Розмір мапи
-        .product-desc__button-block 
-          button(class="button product-desc__filter-button" data-checkout-size-button="M") М: 100х60см
-          button(class="button product-desc__filter-button" data-checkout-size-button="L") L: 150х90см
-          button(class="button product-desc__filter-button" data-checkout-size-button="XL") XL: 200х120см
+        div(class="product-desc__button-block" role="radiogroup" aria-label="Виберіть розмір мапи") 
+          button(class="button product-desc__filter-button" data-checkout-size-button="M" role="radio") М: 100х60см
+          button(class="button product-desc__filter-button" data-checkout-size-button="L" role="radio") L: 150х90см
+          button(class="button product-desc__filter-button" data-checkout-size-button="XL" role="radio") XL: 200х120см
         p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Тип мапи
-        .product-desc__button-block 
-          button(class="button product-desc__filter-button" data-checkout-type-button="Prime") Prime
-          button(class="button product-desc__filter-button" data-checkout-type-button="Prime planes") Prime planes
-          button(class="button product-desc__filter-button" data-checkout-type-button="Prime flags") Prime flags
+        div(class="product-desc__button-block" role="radiogroup" aria-label="Виберіть тип мапи") 
+          button(class="button product-desc__filter-button" data-checkout-type-button="Prime" role="radio") Prime
+          button(class="button product-desc__filter-button" data-checkout-type-button="Prime planes" role="radio") Prime planes
+          button(class="button product-desc__filter-button" data-checkout-type-button="Prime flags" role="radio") Prime flags
         p(class="title title_16-px title_fw-400 title_c-black product-desc__button-title") Мова гравіювання
-        .product-desc__button-block 
-          button(class="button product-desc__filter-button" data-checkout-lang-button="ukr") Українська
-          button(class="button product-desc__filter-button" data-checkout-lang-button="en") Англійська
+        div(class="product-desc__button-block" role="radiogroup" aria-label="Виберіть мову гравіювання мапи") 
+          button(class="button product-desc__filter-button" data-checkout-lang-button="ukr" role="radio") Українська
+          button(class="button product-desc__filter-button" data-checkout-lang-button="en" role="radio") Англійська
         .product-desc__price-block
-          p(class="title title_28-px title_fw-400 title_c-orange product-desc__current-price" data-checkout-current-price) 1 000 ₴
+          p(class="title title_28-px title_fw-400 title_c-orange product-desc__current-price" data-checkout-current-price aria-live="polite") 1 000 ₴
           p(class="title title_24-px title_fw-400 title_c-grey product-desc__old-price" data-checkout-old-price) 2 000 ₴ 
           button(class="product-desc__discount-notificate-button") Сповістити про знижки
         .product-desc__checkout-button-block
           button(class="button product-desc__checkout-button" data-button-bag-add) Додати в кошик
           button(class="button button_transparent product-desc__checkout-button" data-button-bag-add data-product-id="0") Купити в 1 клік
-          button(class="round-button round-button_with-shadow round-button_medium" data-button-wishlist-add data-product-id="0")
+          button(class="round-button round-button_with-shadow round-button_medium" data-button-wishlist-add data-product-id="0" aria-label="Додати в лист бажань")
             i.icon-like
       .product-desc__payment-methods-block 
         img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/mastercard.svg" alt="Mastercard")
@@ -55,29 +55,30 @@ main(class="product-desc container")
     .product-desc__rate-block
       .product-desc__rate-star-block
       p(class="text text_ff-poppins text_18-px text_c-blue product-desc__review-amount") 6 відгуків
-  .product-desc__tab-button-block 
-    button(class="product-desc__tab-button") Опис
-    button(class="product-desc__tab-button") Характеристики
-    button(class="product-desc__tab-button") Термін доставки
-    button(class="product-desc__tab-button") Як встановити
-    button(class="product-desc__tab-button") Оплата
-    button(class="product-desc__tab-button") Доставка
-    button(class="product-desc__tab-button") FAQ
-  .product-desc__tab-content-block 
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Багатошарова дерев'яна мапа на стіну стане прекрасним подарунком для близьких на річницю, порадує керівника на його день народження та здивує Ваших друзів і знайомих мандрівників. Мапа світу з дерева чудово поєднається з будь-яким інтер'єром, де б Ви її не встановлювали. Відмінно впишеться в офісні приміщення, студії, домівки, готельні холи. Висока якість матеріалів та уважність до деталей, робить продукцію Enjoy The Wood унікальною і стильною для кожного!<br><br>Enjoy The Wood: Натхнення поруч!❤
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil laborum minus maxime! Blanditiis, perspiciatis quo. Eaque incidunt cum commodi consequuntur tempore vel, et praesentium culpa voluptate explicabo earum dolorum molestias!Omnis distinctio alias adipisci error recusandae nihil, sapiente asperiores officia at aliquid quaerat, quod excepturi perspiciatis saepe! Voluptates, consectetur voluptatem, aspernatur vero sapiente praesentium veniam voluptas commodi fugiat dolorem sit.
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic id quidem sit voluptates veniam. Ipsum unde architecto reprehenderit aut reiciendis, esse vitae aliquid voluptatem id corrupti! Iure vitae dicta porro.
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam aliquam earum minus beatae neque cum, aspernatur, voluptatum dolorum iure, officiis iste dolore et. Fuga ratione incidunt voluptatem perspiciatis distinctio nesciunt!
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, accusantium veniam amet saepe magnam quibusdam minima! Molestiae aut doloremque deserunt iure error illum quaerat, consectetur, consequatur ex eveniet earum neque!
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur alias perferendis vero, temporibus recusandae libero? Eligendi quos dolorem est odio, inventore laudantium! Qui delectus, tempora perspiciatis cum veritatis ad nobis.
-    .product-desc__tab-content
-      p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit totam vel obcaecati unde, nesciunt quam nam voluptates debitis pariatur beatae sapiente sunt eveniet harum sint tenetur enim nisi ut odit.
+  div(class="product-desc__tab-block" role="tablist" aria-orientation="horizontal")
+    .product-desc__tab-button-block 
+      button(class="product-desc__tab-button") Опис
+      button(class="product-desc__tab-button") Характеристики
+      button(class="product-desc__tab-button") Термін доставки
+      button(class="product-desc__tab-button") Як встановити
+      button(class="product-desc__tab-button") Оплата
+      button(class="product-desc__tab-button") Доставка
+      button(class="product-desc__tab-button") FAQ
+    .product-desc__tab-content-block 
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Багатошарова дерев'яна мапа на стіну стане прекрасним подарунком для близьких на річницю, порадує керівника на його день народження та здивує Ваших друзів і знайомих мандрівників. Мапа світу з дерева чудово поєднається з будь-яким інтер'єром, де б Ви її не встановлювали. Відмінно впишеться в офісні приміщення, студії, домівки, готельні холи. Висока якість матеріалів та уважність до деталей, робить продукцію Enjoy The Wood унікальною і стильною для кожного!<br><br>Enjoy The Wood: Натхнення поруч!❤
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil laborum minus maxime! Blanditiis, perspiciatis quo. Eaque incidunt cum commodi consequuntur tempore vel, et praesentium culpa voluptate explicabo earum dolorum molestias!Omnis distinctio alias adipisci error recusandae nihil, sapiente asperiores officia at aliquid quaerat, quod excepturi perspiciatis saepe! Voluptates, consectetur voluptatem, aspernatur vero sapiente praesentium veniam voluptas commodi fugiat dolorem sit.
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic id quidem sit voluptates veniam. Ipsum unde architecto reprehenderit aut reiciendis, esse vitae aliquid voluptatem id corrupti! Iure vitae dicta porro.
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam aliquam earum minus beatae neque cum, aspernatur, voluptatum dolorum iure, officiis iste dolore et. Fuga ratione incidunt voluptatem perspiciatis distinctio nesciunt!
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, accusantium veniam amet saepe magnam quibusdam minima! Molestiae aut doloremque deserunt iure error illum quaerat, consectetur, consequatur ex eveniet earum neque!
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur alias perferendis vero, temporibus recusandae libero? Eligendi quos dolorem est odio, inventore laudantium! Qui delectus, tempora perspiciatis cum veritatis ad nobis.
+      .product-desc__tab-content
+        p(class="text text_ff-poppins text_18-px text_fw-500 text_c-grey-2 product-desc__tab-text") Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit totam vel obcaecati unde, nesciunt quam nam voluptates debitis pariatur beatae sapiente sunt eveniet harum sint tenetur enim nisi ut odit.
   .product-desc__text-blocks
     .product-desc__text-block 
       h5(class="title title_20-px product-desc__text-block-title") Опис
@@ -173,7 +174,7 @@ main(class="product-desc container")
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 5130 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5700 ₴
       .product-desc__recommendation-button-block
-        button(class="round-button round-button_with-shadow round-button_medium product-desc__recommendation-slider-button-prev")
+        button(class="round-button round-button_with-shadow round-button_medium product-desc__recommendation-slider-button-prev" aria-hidden="true")
           i.icon-chevron-left
-        button(class="round-button round-button_with-shadow round-button_medium product-desc__recommendation-slider-button-next")
+        button(class="round-button round-button_with-shadow round-button_medium product-desc__recommendation-slider-button-next" aria-hidden="true")
           i.icon-chevron-right

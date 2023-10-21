@@ -106,7 +106,6 @@ export default class Slider {
   }
 
   resetup(options, breakpointObject) {
-    console.log('resetup');
     const newOptions = this.deepClone(options);
 
     for (const key in newOptions) {

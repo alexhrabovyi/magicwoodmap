@@ -38,20 +38,26 @@ export default function setupProductDesc() {
 
       this.sizeButtons.forEach((button) => {
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
         if (button.dataset.checkoutSizeButton === 'M') {
           button.classList.add(this.buttonActiveClass);
+          button.setAttribute('aria-checked', true);
         }
       });
       this.typeButtons.forEach((button) => {
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
         if (button.dataset.checkoutTypeButton === 'Prime') {
           button.classList.add(this.buttonActiveClass);
+          button.setAttribute('aria-checked', true);
         }
       });
       this.langButtons.forEach((button) => {
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
         if (button.dataset.checkoutLangButton === 'ukr') {
           button.classList.add(this.buttonActiveClass);
+          button.setAttribute('aria-checked', true);
         }
       });
 
@@ -111,12 +117,12 @@ export default function setupProductDesc() {
     sizeButtonOnClick(e, button) {
       e.preventDefault();
 
-      button.blur();
-
       this.sizeButtons.forEach((button) => {
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
       });
       button.classList.add(this.buttonActiveClass);
+      button.setAttribute('aria-checked', true);
 
       this.addToBagButton.product.mapSize = button.dataset.checkoutSizeButton;
 
@@ -126,12 +132,12 @@ export default function setupProductDesc() {
     typeButtonOnClick(e, button) {
       e.preventDefault();
 
-      button.blur();
-
       this.typeButtons.forEach((button) => {
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
       });
       button.classList.add(this.buttonActiveClass);
+      button.setAttribute('aria-checked', true);
 
       this.addToBagButton.product.mapType = button.dataset.checkoutTypeButton;
 
@@ -141,12 +147,12 @@ export default function setupProductDesc() {
     langButtonOnClick(e, button) {
       e.preventDefault();
 
-      button.blur();
-
       this.langButtons.forEach((button) => {
         button.classList.remove(this.buttonActiveClass);
+        button.setAttribute('aria-checked', false);
       });
       button.classList.add(this.buttonActiveClass);
+      button.setAttribute('aria-checked', true);
 
       this.addToBagButton.product.mapLang = button.dataset.checkoutLangButton;
 
@@ -172,7 +178,12 @@ export default function setupProductDesc() {
     setup() {
       for (let i = 0; i < this.tabButtons.length; i += 1) {
         this.tabButtons[i].dataset.tabButtonId = i;
+        this.tabButtons[i].setAttribute('role', 'tab');
+        this.tabButtons[i].setAttribute('aria-selected', false);
+        this.tabButtons[i].setAttribute('aria-controls', `tabcontent${i}`);
         this.tabContents[i].dataset.tabContentId = i;
+        this.tabContents[i].setAttribute('role', 'tabpanel');
+        this.tabContents[i].setAttribute('id', `tabcontent${i}`);
       }
 
       this.tabButtons[this.selectedId].classList.add(this.tabButtonActiveClass);
@@ -199,7 +210,9 @@ export default function setupProductDesc() {
       this.selectedId = newId;
 
       oldButton.classList.remove(this.tabButtonActiveClass);
+      oldButton.setAttribute('aria-selected', false);
       newButton.classList.add(this.tabButtonActiveClass);
+      newButton.setAttribute('aria-selected', true);
 
       this.tabButtonBlock.style.pointerEvents = 'none';
       this.tabContentBlock.style.minHeight = `${this.getContentHeight(this.tabContents[this.selectedId])}px`;
