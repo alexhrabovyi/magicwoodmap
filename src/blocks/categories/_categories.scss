@@ -43,7 +43,10 @@
 
   &__link-button {
     &_1 {
-      background-image: url('images/map_1.png');
+      background-image: image-set(
+        url('images/map_1.webp') type("image/webp"),
+        url('images/map_1.png') type("image/png")
+      );
 
       &::before {
         content: "Одношарові мапи →";
@@ -91,7 +94,10 @@
     }
 
     &_3 {
-      background-image: url('images/map_2.png');
+      background-image: image-set(
+        url('images/map_2.webp') type("image/webp"),
+        url('images/map_2.png') type("image/png")
+      );
 
       &::before {
         content: "Додатки до мап →";
@@ -99,7 +105,10 @@
     }
 
     &_4 {
-      background-image: url('images/map_3.png');
+      background-image: image-set(
+        url('images/map_3.webp') type("image/webp"),
+        url('images/map_3.png') type("image/png")
+      );
 
       &::before {
         content: "Багатошарові мапи →";
@@ -107,7 +116,10 @@
     }
 
     &_5 {
-      background-image: url('images/map_4.png');
+      background-image: image-set(
+        url('images/map_4.webp') type("image/webp"),
+        url('images/map_4.png') type("image/png")
+      );
 
       @include media-m {
         width: 70%;
@@ -128,7 +140,10 @@
     }
 
     &_6 {
-      background-image: url('images/map_1.png');
+      background-image: image-set(
+        url('images/map_1.webp') type("image/webp"),
+        url('images/map_1.png') type("image/png")
+      );
 
       &::before {
         content: "Додаткова категорія →";

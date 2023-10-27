@@ -221,7 +221,7 @@ export default function setupProductDesc() {
       oldContent.addEventListener('transitionend', () => {
         newContent.classList.add(this.tabContentActiveClass);
         this.tabButtonBlock.style.pointerEvents = 'all';
-      }, { once: true });
+      }, { once: true, passive: true });
     }
 
     getContentHeight(el) {

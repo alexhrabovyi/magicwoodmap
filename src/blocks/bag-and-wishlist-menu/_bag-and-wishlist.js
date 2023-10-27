@@ -1,18 +1,28 @@
 /* eslint-disable max-classes-per-file */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import loadingAttributePolyfill from 'loading-attribute-polyfill/dist/loading-attribute-polyfill.module.js';
 import SetupMenu from '../../js-libs/_SetupMenu';
 import formatPrice from '../../js-libs/_formatPrice';
 import productObjects from '../../js-libs/_productObjects';
 import SetupPopup from '../../js-libs/_SetupPopup';
 import links from '../../js-libs/_links';
 
-import img1 from './images/map_1.png';
-import img2 from './images/map_2.png';
-import img3 from './images/map_3.png';
-import img4 from './images/map_4.png';
-import img5 from './images/map_5.png';
-import img6 from './images/map_6.png';
+import img1WEBP from './images/map_1.webp';
+import img2WEBP from './images/map_2.webp';
+import img3WEBP from './images/map_3.webp';
+import img4WEBP from './images/map_4.webp';
+import img5WEBP from './images/map_5.webp';
+import img6WEBP from './images/map_6.webp';
 
-const imgs = [img1, img2, img3, img4, img5, img6];
+import img1PNG from './images/map_1.png';
+import img2PNG from './images/map_2.png';
+import img3PNG from './images/map_3.png';
+import img4PNG from './images/map_4.png';
+import img5PNG from './images/map_5.png';
+import img6PNG from './images/map_6.png';
+
+const webpImgs = [img1WEBP, img2WEBP, img3WEBP, img4WEBP, img5WEBP, img6WEBP];
+const pngImgs = [img1PNG, img2PNG, img3PNG, img4PNG, img5PNG, img6PNG];
 
 export class SetupWishlistMenu {
   constructor() {
@@ -37,7 +47,7 @@ export class SetupWishlistMenu {
     window.addEventListener('storage', this.onStorageEvent.bind(this), { passive: true });
     document.addEventListener('click', this.toggle.bind(this));
 
-    this.generateAndAddCards();
+    document.addEventListener('DOMContentLoaded', this.generateAndAddCards.bind(this), { passive: true });
   }
 
   toggle(e) {
@@ -119,11 +129,11 @@ export class SetupWishlistMenu {
 
       if (target) {
         button.focus();
-        document.removeEventListener('click', clickObserverFunc);
+        document.removeEventListener('click', clickObserverFunc, { passive: true });
       }
     };
 
-    document.addEventListener('click', clickObserverFunc);
+    document.addEventListener('click', clickObserverFunc, { passive: true });
   }
 
   onStorageEvent(e) {
@@ -172,7 +182,12 @@ export class SetupWishlistMenu {
         card.classList.add('bag-and-wishlist-menu__card');
 
         const inner = `
-          <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.id]}" alt="${product.imgAlt}"}>
+          <noscript class="loading-lazy">
+            <picture>
+              <source type="image/webp" srcset="${webpImgs[product.id]}"/>
+              <img class="bag-and-wishlist-menu__card-img" loading="lazy" src="${pngImgs[product.id]}" width="284" height="197" alt="${product.imgAlt}"}>
+            </picture>
+          </noscript>
           <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.pageLink}" alt="${product.name}">${product.name}</a>
           <div class="bag-and-wishlist-menu__amount-and-price-block">
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price-name">Ціна</p>
@@ -185,6 +200,9 @@ export class SetupWishlistMenu {
         `;
 
         card.innerHTML = inner;
+
+        loadingAttributePolyfill.prepareElement(card.querySelector('.loading-lazy'));
+
         cards.append(card);
       });
     }
@@ -281,7 +299,8 @@ export class SetupBagMenu {
     this.bagMenuButtonMobile = document.querySelector('.main-nav__bag-button-mobile');
 
     window.addEventListener('storage', this.onStorageEvent.bind(this), { passive: true });
-    this.bagMenuGenerateAndAddCards();
+
+    document.addEventListener('DOMContentLoaded', this.bagMenuGenerateAndAddCards.bind(this), { passive: true });
   }
 
   optionFormSetup() {
@@ -504,11 +523,11 @@ export class SetupBagMenu {
           });
         });
 
-        document.removeEventListener('click', clickObserverFunc);
+        document.removeEventListener('click', clickObserverFunc, { passive: true });
       }
     };
 
-    document.addEventListener('click', clickObserverFunc);
+    document.addEventListener('click', clickObserverFunc, { passive: true });
 
     this.optionFormAddToBagButton.product = {};
 
@@ -762,14 +781,19 @@ export class SetupBagMenu {
 
         if (product.productObj.productType === 'accessories') {
           inner = `
-          <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
+          <noscript class="loading-lazy">
+            <picture>
+              <source type="image/webp" srcset="${webpImgs[product.productObj.id]}"/>
+              <img class="bag-and-wishlist-menu__card-img" loading="lazy" src="${pngImgs[product.productObj.id]}" width="284" height="197" alt="${product.productObj.imgAlt}"}>
+            </picture>
+          </noscript>
           <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
           <div class="bag-and-wishlist-menu__card-params">
             <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}" aria-label="Змінити опції товару ${product.productObj.name}" aria-haspopup="menu">Змінити опції</button>
           </div>
           <div class="bag-and-wishlist-menu__amount-and-price-block">
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-amount">x ${product.amount}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-amount">x ${product.amount}</p>
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price-name">Сума</p>
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price">${formatPrice(product.basicPrice)} ₴</p>
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price-name">Разом</p>
@@ -781,17 +805,22 @@ export class SetupBagMenu {
           </div>`;
         } else {
           inner = `
-          <img class="bag-and-wishlist-menu__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
+          <noscript class="loading-lazy">
+            <picture>
+              <source type="image/webp" srcset="${webpImgs[product.productObj.id]}"/>
+              <img class="bag-and-wishlist-menu__card-img" loading="lazy" src="${pngImgs[product.productObj.id]}" width="284" height="197" alt="${product.productObj.imgAlt}"}>
+            </picture>
+          </noscript>
           <a class="link link_ff-poppins link_20-px link_fw-600 link_c-black-1 bag-and-wishlist-menu__card-title-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}">${product.productObj.name}</a>
           <div class="bag-and-wishlist-menu__card-params">
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Розмір мапи: ${product.mapSize}: ${mapSize}</p>
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Тип мапи: ${product.mapType}</p>
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-param">Мова гравіювання: ${mapLang}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-param">Розмір мапи: ${product.mapSize}: ${mapSize}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-param">Тип мапи: ${product.mapType}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-param">Мова гравіювання: ${mapLang}</p>
             <button class="button button_transparent bag-and-wishlist-menu__options-button" data-button-bag-form-open data-product-id="${product.productObj.id}" aria-label="Змінити опції товару ${product.productObj.name}" aria-haspopup="menu">Змінити опції</button>
           </div>
           <div class="bag-and-wishlist-menu__amount-and-price-block">
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
-            <p class="text text_ff-poppins text_fw-300 bag-and-wishlist-menu__card-amount">x ${product.amount}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-name">${product.productObj.name}</p>
+            <p class="text text_ff-poppins text_fw-400 bag-and-wishlist-menu__card-amount">x ${product.amount}</p>
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price-name">Сума</p>
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-price">${formatPrice(product.basicPrice)} ₴</p>
             <p class="text text_ff-poppins text_fw-600 bag-and-wishlist-menu__card-total-price-name">Разом</p>
@@ -804,6 +833,8 @@ export class SetupBagMenu {
         }
 
         card.innerHTML = inner;
+
+        loadingAttributePolyfill.prepareElement(card.querySelector('.loading-lazy'));
 
         const deleteButton = card.querySelector('[data-button-bag-delete]');
 

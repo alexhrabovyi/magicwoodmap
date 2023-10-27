@@ -9,7 +9,7 @@ export default class AddInputValidation {
       this.hideErrorClass();
       this.hideErrorMessage();
       this.removeInvalidAttribute();
-    });
+    }, { passive: true });
   }
 
   showErrorClass() {

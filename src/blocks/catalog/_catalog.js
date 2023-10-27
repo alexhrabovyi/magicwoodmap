@@ -75,11 +75,11 @@ export default function setupCatalog() {
             });
           });
 
-          document.removeEventListener('click', clickObserverFunc);
+          document.removeEventListener('click', clickObserverFunc, { passive: true });
         }
       };
 
-      document.addEventListener('click', clickObserverFunc);
+      document.addEventListener('click', clickObserverFunc, { passive: true });
     }
 
     hideAndShowCards(productObjects) {
@@ -98,7 +98,7 @@ export default function setupCatalog() {
         this.cardBlock.style.opacity = 1;
         this.cardBlock.style.height = '';
         this.cardBlock.style.pointerEvents = '';
-      }, { once: true });
+      }, { once: true, passive: true });
     }
 
     createCards(productObjects) {
@@ -442,8 +442,8 @@ export default function setupCatalog() {
 
       this.paginationButtonBlock.addEventListener('click', this.paginationButtonOnClick.bind(this));
 
-      this.buttonPrev.addEventListener('click', this.buttonOnClick.bind(this, 'prev'));
-      this.buttonNext.addEventListener('click', this.buttonOnClick.bind(this, 'next'));
+      this.buttonPrev.addEventListener('click', this.buttonOnClick.bind(this, 'prev'), { passive: true });
+      this.buttonNext.addEventListener('click', this.buttonOnClick.bind(this, 'next'), { passive: true });
 
       this.setupButtons(1, 1);
       this.checkButtons();
@@ -505,7 +505,7 @@ export default function setupCatalog() {
           buttons.prepend(firstButton);
         } else if (firstButtonId > 3) {
           const overflowButtonLeft = createOverflowButton('left');
-          overflowButtonLeft.addEventListener('click', this.overflowButtonOnClick.bind(this, 'left'));
+          overflowButtonLeft.addEventListener('click', this.overflowButtonOnClick.bind(this, 'left'), { passive: true });
           buttons.prepend(overflowButtonLeft);
 
           const firstButton = createButton(1);
@@ -523,7 +523,7 @@ export default function setupCatalog() {
           buttons.append(lastButton);
         } else if (buttonAmount - firstButtonId >= this.buttonsPerView) {
           const overflowButtonRight = createOverflowButton('right');
-          overflowButtonRight.addEventListener('click', this.overflowButtonOnClick.bind(this, 'right'));
+          overflowButtonRight.addEventListener('click', this.overflowButtonOnClick.bind(this, 'right'), { passive: true });
 
           const lastButton = createButton(buttonAmount);
 
@@ -690,7 +690,7 @@ export default function setupCatalog() {
 
       this.select.addEventListener('click', this.clickHandle.bind(this), { passive: true });
       document.addEventListener('keydown', this.onKeyDown.bind(this));
-      window.addEventListener('resize', this.onOrientationChange.bind(this));
+      window.addEventListener('resize', this.onOrientationChange.bind(this), { passive: true });
     }
 
     clickHandle(e) {
@@ -907,7 +907,7 @@ export default function setupCatalog() {
 
           this.onSubmit(type, button);
         }
-      });
+      }, { passive: true });
     }
 
     onSubmit(inputType, e) {
@@ -951,12 +951,12 @@ export default function setupCatalog() {
 
       if (isMobile) {
         const onMouseMoveModified = this.onMoveEvent.bind(this, type, button, shiftX, true);
-        document.addEventListener('touchmove', onMouseMoveModified);
-        document.addEventListener('touchend', this.onUpEvent.bind(this, button, onMouseMoveModified, true), { once: true });
+        document.addEventListener('touchmove', onMouseMoveModified, { passive: true });
+        document.addEventListener('touchend', this.onUpEvent.bind(this, button, onMouseMoveModified, true), { once: true, passive: true });
       } else {
         const onMouseMoveModified = this.onMoveEvent.bind(this, type, button, shiftX, false);
-        document.addEventListener('mousemove', onMouseMoveModified);
-        document.addEventListener('mouseup', this.onUpEvent.bind(this, button, onMouseMoveModified, false), { once: true });
+        document.addEventListener('mousemove', onMouseMoveModified, { passive: true });
+        document.addEventListener('mouseup', this.onUpEvent.bind(this, button, onMouseMoveModified, false), { once: true, passive: true });
       }
     }
 
@@ -976,9 +976,9 @@ export default function setupCatalog() {
       button.style.transitionDuration = '';
 
       if (isMobile) {
-        document.removeEventListener('touchmove', mouseMoveFunc);
+        document.removeEventListener('touchmove', mouseMoveFunc, { passive: true });
       } else {
-        document.removeEventListener('mousemove', mouseMoveFunc);
+        document.removeEventListener('mousemove', mouseMoveFunc, { passive: true });
       }
 
       this.renderCardsInstance.sortByRangePriceAndShow();
@@ -1021,7 +1021,7 @@ export default function setupCatalog() {
           document.addEventListener('keyup', () => {
             this.renderCardsInstance.sortByRangePriceAndShow();
             this.buttonIsPressed = false;
-          }, { once: true });
+          }, { once: true, passive: true });
 
           this.buttonIsPressed = true;
         }
@@ -1135,7 +1135,7 @@ export default function setupCatalog() {
         content.classList.remove('menu', 'menu_animationRight', 'menu_animationLeft');
         content.style.cssText = '';
       }
-    });
+    }, { passive: true });
   }
 
   const renderCardsInstance = new RenderCards(productObjects, 5);

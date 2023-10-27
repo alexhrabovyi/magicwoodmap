@@ -41,9 +41,9 @@ export default class SetupPopup {
       }
     });
 
-    document.addEventListener('click', this.toggle.bind(this));
-    this.contentWrapper.addEventListener('click', this.wrapperOnClick.bind(this));
-    window.addEventListener('resize', this.onResize.bind(this));
+    document.addEventListener('click', this.toggle.bind(this), { passive: true });
+    this.contentWrapper.addEventListener('click', this.wrapperOnClick.bind(this), { passive: true });
+    window.addEventListener('resize', this.onResize.bind(this), { passive: true });
   }
 
   toggle(e) {

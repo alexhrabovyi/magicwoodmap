@@ -82,6 +82,7 @@
 
   &__img {
     width: 100%;
+    height: auto;
 
     @include media-s {
       order: -1;

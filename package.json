@@ -55,5 +55,8 @@
     "stylelint-order": "^6.0.3",
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "loading-attribute-polyfill": "^2.1.1"
   }
 }

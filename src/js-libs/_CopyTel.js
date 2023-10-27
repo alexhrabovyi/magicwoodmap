@@ -48,9 +48,9 @@ export default class CopyTel {
           this.descText.classList.remove(this.descTextHiddenClass);
 
           this.isActive = false;
-        }, { once: true });
+        }, { once: true, passive: true });
       }, 3000);
-    }, { once: true });
+    }, { once: true, passive: true });
   }
 }
 
