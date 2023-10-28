@@ -10,7 +10,7 @@ import links from '../../js-libs/_links.js';
 setupCopyTelButton();
 setupMainNav();
 setupBreadcrumbs([['Головна', links.main], ['Блог', links.ourBlog]]);
-setupBagAndWishlistMenu();
 setupNewsAccordion();
+setupBagAndWishlistMenu();
 setupCallBackForm();
 setupFooterForm();

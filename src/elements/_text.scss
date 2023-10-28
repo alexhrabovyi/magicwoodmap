@@ -7,18 +7,6 @@
     font-family: Poppins, sans-serif;
   }
 
-  &_ff-inter {
-    font-family: Inter, sans-serif;
-  }
-
-  &_ff-lato {
-    font-family: Lato, sans-serif;
-  }
-
-  &_ff-josefin {
-    font-family: JosefinSans, sans-serif;
-  }
-
   &_11-px {
     font-size: 11px;
   }
@@ -73,10 +61,6 @@
     @include media-xs {
       font-size: 18px;
     }
-  }
-
-  &_fw-300 {
-    font-weight: 300;
   }
 
   &_fw-500 {

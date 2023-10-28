@@ -1,12 +1,23 @@
 /* eslint-disable max-classes-per-file */
+// eslint-disable-next-line import/no-extraneous-dependencies, no-unused-vars
+import loadingAttributePolyfill from 'loading-attribute-polyfill/dist/loading-attribute-polyfill.module.js';
 import Slider from '../../js-libs/_Slider';
 import generateRateStars from '../../js-libs/_generateRateStars';
 import productObjects from '../../js-libs/_productObjects';
 import formatPrice from '../../js-libs/_formatPrice';
-import smallImg1 from './images/small-img_1.png';
-import smallImg2 from './images/small-img_2.png';
-import smallImg3 from './images/small-img_3.png';
-import smallImg4 from './images/small-img_4.png';
+
+import smallWEBPImg1 from './images/small-img_1.webp';
+import smallWEBPImg2 from './images/small-img_2.webp';
+import smallWEBPImg3 from './images/small-img_3.webp';
+import smallWEBPImg4 from './images/small-img_4.webp';
+
+import smallPNGImg1 from './images/small-img_1.png';
+import smallPNGImg2 from './images/small-img_2.png';
+import smallPNGImg3 from './images/small-img_3.png';
+import smallPNGImg4 from './images/small-img_4.png';
+
+const smallWEBPImgs = [smallWEBPImg1, smallWEBPImg2, smallWEBPImg3, smallWEBPImg4];
+const smallPNGImgs = [smallPNGImg1, smallPNGImg2, smallPNGImg3, smallPNGImg4];
 
 export default function setupProductDesc() {
   class SetupOptionForm {
@@ -221,7 +232,7 @@ export default function setupProductDesc() {
       oldContent.addEventListener('transitionend', () => {
         newContent.classList.add(this.tabContentActiveClass);
         this.tabButtonBlock.style.pointerEvents = 'all';
-      }, { once: true });
+      }, { once: true, passive: true });
     }
 
     getContentHeight(el) {
@@ -231,14 +242,26 @@ export default function setupProductDesc() {
 
   function createImgSliderPaginationButtons() {
     const paginationButtons = document.querySelectorAll('.product-desc__img-slider-pagination-button');
-    const smallImgs = [smallImg1, smallImg2, smallImg3, smallImg4];
 
     for (let i = 0; i < paginationButtons.length; i += 1) {
-      const img = document.createElement('img');
-      img.classList.add('product-desc__img-slider-pagination-img');
-      img.src = smallImgs[i];
+      const documentFragment = new DocumentFragment();
 
-      paginationButtons[i].append(img);
+      const inner = `
+        <picture>
+          <source type="image/webp" srcset="${smallWEBPImgs[i]}">
+          <img class="product-desc__img-slider-pagination-img" loading="lazy" src="${smallPNGImgs[i]}" width="150" height="150" alt="Дерев'яна мапа">
+        </picture>
+      `;
+
+      const noscript = document.createElement('noscript');
+      noscript.classList.add('loading-lazy');
+      noscript.innerHTML = inner;
+
+      documentFragment.append(noscript);
+
+      loadingAttributePolyfill.prepareElement(documentFragment.querySelector('.loading-lazy'));
+
+      paginationButtons[i].append(documentFragment);
     }
   }
 

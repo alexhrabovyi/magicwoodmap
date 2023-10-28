@@ -123,7 +123,7 @@ export default class Slider {
 
     if (options.pagination) {
       this.paginationBlock.innerHTML = '';
-      this.paginationBlock.removeEventListener('click', this.paginationHandleModified);
+      this.paginationBlock.removeEventListener('click', this.paginationHandleModified, { passive: true });
     }
 
     if (options.setupAutoTranslate) {
@@ -131,8 +131,8 @@ export default class Slider {
     }
 
     if (options.buttons) {
-      this.prevButton.removeEventListener('click', this.prevNextButtonOnClick);
-      this.nextButton.removeEventListener('click', this.prevNextButtonOnClick);
+      this.prevButton.removeEventListener('click', this.prevNextButtonOnClick, { passive: true });
+      this.nextButton.removeEventListener('click', this.prevNextButtonOnClick, { passive: true });
     }
 
     this.setup(newOptions);
@@ -160,7 +160,7 @@ export default class Slider {
     this.paginationBlock.append(paginationsButtons);
 
     this.paginationHandleModified = this.paginationHandle.bind(this);
-    this.paginationBlock.addEventListener('click', this.paginationHandleModified);
+    this.paginationBlock.addEventListener('click', this.paginationHandleModified, { passive: true });
   }
 
   setupAutoTranslate(options) {
@@ -218,8 +218,8 @@ export default class Slider {
       button.blur();
     };
 
-    this.prevButton.addEventListener('click', this.prevNextButtonOnClick);
-    this.nextButton.addEventListener('click', this.prevNextButtonOnClick);
+    this.prevButton.addEventListener('click', this.prevNextButtonOnClick, { passive: true });
+    this.nextButton.addEventListener('click', this.prevNextButtonOnClick, { passive: true });
   }
 
   setupCounter(options) {
@@ -256,7 +256,7 @@ export default class Slider {
       }
     }
 
-    window.addEventListener('resize', onresize.bind(this));
+    window.addEventListener('resize', onresize.bind(this), { passive: true });
   }
 
   setupDragNDrop() {
@@ -362,7 +362,7 @@ export default class Slider {
       };
 
       e.preventDefault();
-      document.removeEventListener(isMobile ? 'touchmove' : 'mousemove', moveEvent);
+      document.removeEventListener(isMobile ? 'touchmove' : 'mousemove', moveEvent, { passive: true });
 
       this.wrapper.style.transition = this.transition;
       this.wrapper.style.cursor = '';
@@ -398,7 +398,7 @@ export default class Slider {
       this.translateAndToggle(this.activeSlideId);
     };
 
-    document.addEventListener(isMobile ? 'touchmove' : 'mousemove', moveEvent);
+    document.addEventListener(isMobile ? 'touchmove' : 'mousemove', moveEvent, { passive: true });
     document.addEventListener(isMobile ? 'touchend' : 'mouseup', upEvent, { once: true });
   }
 

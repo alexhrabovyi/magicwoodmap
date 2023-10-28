@@ -41,7 +41,7 @@
     height: 100%;
 
     @include media-m {
-      width: 65px;
+      width: 74px;
       height: 74px;
     }
 
@@ -76,7 +76,7 @@
     border-radius: 3px;
     background: rgb(239 239 239);
     color: rgb(188 188 188);
-    font-family: Inter, sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1.68px;
@@ -133,7 +133,7 @@
     background: transparent;
     color: rgb(31 31 31);
     cursor: pointer;
-    font-family: Graphik, sans-serif;
+    font-family: Inter, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -393,7 +393,7 @@
 
   &__tel-number {
     color: rgb(16 16 16);
-    font-family: Geometria, sans-serif;
+    font-family: Poppins, sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -414,7 +414,7 @@
 
   &__tel-text {
     color: rgb(132 132 132);
-    font-family: Geometria, sans-serif;
+    font-family: Poppins, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;

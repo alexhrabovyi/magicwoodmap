@@ -1,19 +1,29 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-classes-per-file */
+// eslint-disable-next-line no-unused-vars
+import loadingAttributePolyfill from 'loading-attribute-polyfill/dist/loading-attribute-polyfill.module.js';
 import formatPrice from '../../js-libs/_formatPrice';
 import generateRateStars from '../../js-libs/_generateRateStars';
 import SetupMenu from '../../js-libs/_SetupMenu';
 import productObjects from '../../js-libs/_productObjects';
 
-import img1 from './images/map_1.png';
-import img2 from './images/map_2.png';
-import img3 from './images/map_3.png';
-import img4 from './images/map_4.png';
-import img5 from './images/map_5.png';
-import img6 from './images/map_6.png';
+import img1WEBP from './images/map_1.webp';
+import img2WEBP from './images/map_2.webp';
+import img3WEBP from './images/map_3.webp';
+import img4WEBP from './images/map_4.webp';
+import img5WEBP from './images/map_5.webp';
+import img6WEBP from './images/map_6.webp';
 
-const imgs = [img1, img2, img3, img4, img5, img6];
+import img1PNG from './images/map_1.png';
+import img2PNG from './images/map_2.png';
+import img3PNG from './images/map_3.png';
+import img4PNG from './images/map_4.png';
+import img5PNG from './images/map_5.png';
+import img6PNG from './images/map_6.png';
+
+const webpImgs = [img1WEBP, img2WEBP, img3WEBP, img4WEBP, img5WEBP, img6WEBP];
+const pngImgs = [img1PNG, img2PNG, img3PNG, img4PNG, img5PNG, img6PNG];
 
 export default function setupCatalog() {
   class RenderCards {
@@ -75,11 +85,11 @@ export default function setupCatalog() {
             });
           });
 
-          document.removeEventListener('click', clickObserverFunc);
+          document.removeEventListener('click', clickObserverFunc, { passive: true });
         }
       };
 
-      document.addEventListener('click', clickObserverFunc);
+      document.addEventListener('click', clickObserverFunc, { passive: true });
     }
 
     hideAndShowCards(productObjects) {
@@ -98,7 +108,7 @@ export default function setupCatalog() {
         this.cardBlock.style.opacity = 1;
         this.cardBlock.style.height = '';
         this.cardBlock.style.pointerEvents = '';
-      }, { once: true });
+      }, { once: true, passive: true });
     }
 
     createCards(productObjects) {
@@ -108,14 +118,12 @@ export default function setupCatalog() {
       let bagIds = JSON.parse(localStorage.getItem('bagProducts')) || [];
       bagIds = bagIds.map((product) => product.productObj.id);
 
-      function createCard(productObj) {
+      function createCard(productObj, addLazyLoading) {
         const card = document.createElement('div');
         card.classList.add('catalog__card');
 
         const inner = `
-        <a class="catalog__card-img-link" href="${productObj.pageLink}" alt="${productObj.name}" aria-label="Перейти на сторінку товару ${productObj.name}">
-          <img class="catalog__card-img" src="${imgs[productObj.id]}" alt="${productObj.imgAlt}">
-        </a>
+        <a class="catalog__card-img-link" href="${productObj.pageLink}" alt="${productObj.name}" aria-label="Перейти на сторінку товару ${productObj.name}"></a>
         <div class="catalog__card-desc-block">
           <a class="link link_ff-poppins link_18-px link_fw-500 link_c-black catalog__card-title-link" href="${productObj.pageLink}" alt="${productObj.name}" aria-label="Перейти на сторінку товару ${productObj.name}">
             ${productObj.name}
@@ -142,6 +150,31 @@ export default function setupCatalog() {
         `;
         card.innerHTML = inner;
 
+        let imgCode;
+        if (addLazyLoading) {
+          imgCode = `
+          <noscript class="loading-lazy">
+            <picture>
+              <source type="image/webp" srcset="${webpImgs[productObj.id]}">
+              <img class="catalog__card-img" loading="lazy" src="${pngImgs[productObj.id]}" width="284" height="197" alt="${productObj.imgAlt}">
+            </picture>
+          </noscript>
+          `;
+        } else {
+          imgCode = `
+          <picture>
+            <source type="image/webp" srcset="${webpImgs[productObj.id]}">
+            <img class="catalog__card-img" src="${pngImgs[productObj.id]}" width="284" height="197" alt="${productObj.imgAlt}">
+          </picture>
+          `;
+        }
+
+        card.querySelector('.catalog__card-img-link').innerHTML = imgCode;
+
+        if (addLazyLoading) {
+          loadingAttributePolyfill.prepareElement(card.querySelector('.loading-lazy'));
+        }
+
         if (wishlistIds.includes(productObj.id)) {
           const wishlistButton = card.querySelector('[data-button-wishlist-add]');
           wishlistButton.classList.add('bag-and-wishlist-menu__round-button-selected');
@@ -156,8 +189,10 @@ export default function setupCatalog() {
       }
       const cards = new DocumentFragment();
 
-      productObjects.forEach((productObj) => {
-        const card = createCard(productObj);
+      productObjects.forEach((productObj, index) => {
+        let addLazyLoading;
+        if (index > 0) addLazyLoading = true;
+        const card = createCard(productObj, addLazyLoading);
 
         const cardRateBlock = card.querySelector('.catalog__card-rate-block');
         const { rate } = productObj;
@@ -442,8 +477,8 @@ export default function setupCatalog() {
 
       this.paginationButtonBlock.addEventListener('click', this.paginationButtonOnClick.bind(this));
 
-      this.buttonPrev.addEventListener('click', this.buttonOnClick.bind(this, 'prev'));
-      this.buttonNext.addEventListener('click', this.buttonOnClick.bind(this, 'next'));
+      this.buttonPrev.addEventListener('click', this.buttonOnClick.bind(this, 'prev'), { passive: true });
+      this.buttonNext.addEventListener('click', this.buttonOnClick.bind(this, 'next'), { passive: true });
 
       this.setupButtons(1, 1);
       this.checkButtons();
@@ -505,7 +540,7 @@ export default function setupCatalog() {
           buttons.prepend(firstButton);
         } else if (firstButtonId > 3) {
           const overflowButtonLeft = createOverflowButton('left');
-          overflowButtonLeft.addEventListener('click', this.overflowButtonOnClick.bind(this, 'left'));
+          overflowButtonLeft.addEventListener('click', this.overflowButtonOnClick.bind(this, 'left'), { passive: true });
           buttons.prepend(overflowButtonLeft);
 
           const firstButton = createButton(1);
@@ -523,7 +558,7 @@ export default function setupCatalog() {
           buttons.append(lastButton);
         } else if (buttonAmount - firstButtonId >= this.buttonsPerView) {
           const overflowButtonRight = createOverflowButton('right');
-          overflowButtonRight.addEventListener('click', this.overflowButtonOnClick.bind(this, 'right'));
+          overflowButtonRight.addEventListener('click', this.overflowButtonOnClick.bind(this, 'right'), { passive: true });
 
           const lastButton = createButton(buttonAmount);
 
@@ -690,7 +725,7 @@ export default function setupCatalog() {
 
       this.select.addEventListener('click', this.clickHandle.bind(this), { passive: true });
       document.addEventListener('keydown', this.onKeyDown.bind(this));
-      window.addEventListener('resize', this.onOrientationChange.bind(this));
+      window.addEventListener('resize', this.onOrientationChange.bind(this), { passive: true });
     }
 
     clickHandle(e) {
@@ -907,7 +942,7 @@ export default function setupCatalog() {
 
           this.onSubmit(type, button);
         }
-      });
+      }, { passive: true });
     }
 
     onSubmit(inputType, e) {
@@ -951,12 +986,12 @@ export default function setupCatalog() {
 
       if (isMobile) {
         const onMouseMoveModified = this.onMoveEvent.bind(this, type, button, shiftX, true);
-        document.addEventListener('touchmove', onMouseMoveModified);
-        document.addEventListener('touchend', this.onUpEvent.bind(this, button, onMouseMoveModified, true), { once: true });
+        document.addEventListener('touchmove', onMouseMoveModified, { passive: true });
+        document.addEventListener('touchend', this.onUpEvent.bind(this, button, onMouseMoveModified, true), { once: true, passive: true });
       } else {
         const onMouseMoveModified = this.onMoveEvent.bind(this, type, button, shiftX, false);
-        document.addEventListener('mousemove', onMouseMoveModified);
-        document.addEventListener('mouseup', this.onUpEvent.bind(this, button, onMouseMoveModified, false), { once: true });
+        document.addEventListener('mousemove', onMouseMoveModified, { passive: true });
+        document.addEventListener('mouseup', this.onUpEvent.bind(this, button, onMouseMoveModified, false), { once: true, passive: true });
       }
     }
 
@@ -976,9 +1011,9 @@ export default function setupCatalog() {
       button.style.transitionDuration = '';
 
       if (isMobile) {
-        document.removeEventListener('touchmove', mouseMoveFunc);
+        document.removeEventListener('touchmove', mouseMoveFunc, { passive: true });
       } else {
-        document.removeEventListener('mousemove', mouseMoveFunc);
+        document.removeEventListener('mousemove', mouseMoveFunc, { passive: true });
       }
 
       this.renderCardsInstance.sortByRangePriceAndShow();
@@ -1021,7 +1056,7 @@ export default function setupCatalog() {
           document.addEventListener('keyup', () => {
             this.renderCardsInstance.sortByRangePriceAndShow();
             this.buttonIsPressed = false;
-          }, { once: true });
+          }, { once: true, passive: true });
 
           this.buttonIsPressed = true;
         }
@@ -1135,7 +1170,7 @@ export default function setupCatalog() {
         content.classList.remove('menu', 'menu_animationRight', 'menu_animationLeft');
         content.style.cssText = '';
       }
-    });
+    }, { passive: true });
   }
 
   const renderCardsInstance = new RenderCards(productObjects, 5);

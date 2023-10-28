@@ -5,14 +5,22 @@ import formatPrice from '../../js-libs/_formatPrice';
 import TelMask from '../../js-libs/_TelMask';
 import AddInputValidation from '../../js-libs/_AddInputValidation';
 
-import img1 from './images/map_1.png';
-import img2 from './images/map_2.png';
-import img3 from './images/map_3.png';
-import img4 from './images/map_4.png';
-import img5 from './images/map_5.png';
-import img6 from './images/map_6.png';
+import img1WEBP from './images/map_1.webp';
+import img2WEBP from './images/map_2.webp';
+import img3WEBP from './images/map_3.webp';
+import img4WEBP from './images/map_4.webp';
+import img5WEBP from './images/map_5.webp';
+import img6WEBP from './images/map_6.webp';
 
-const imgs = [img1, img2, img3, img4, img5, img6];
+import img1PNG from './images/map_1.png';
+import img2PNG from './images/map_2.png';
+import img3PNG from './images/map_3.png';
+import img4PNG from './images/map_4.png';
+import img5PNG from './images/map_5.png';
+import img6PNG from './images/map_6.png';
+
+const webpImgs = [img1WEBP, img2WEBP, img3WEBP, img4WEBP, img5WEBP, img6WEBP];
+const pngImgs = [img1PNG, img2PNG, img3PNG, img4PNG, img5PNG, img6PNG];
 
 export default function setupMainBag() {
   class SetupMainBag {
@@ -406,7 +414,10 @@ export default function setupMainBag() {
           <td class="main-bag__product-table-desc-td">
             <button class="main-bag__delete-card-button" data-button-bag-delete aria-label="Видалити з кошику товар ${product.productObj.name}">+</button>
             <a class="main-bag__img-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}" aria-label="Перейти на сторінку товару ${product.productObj.name}">
-              <img class="main-bag__card-img" src="${imgs[product.productObj.id]}" alt="${product.productObj.imgAlt}">
+              <picture>
+                <source type="image/webp" srcset="${webpImgs[product.productObj.id]}">
+                <img class="main-bag__card-img" src="${pngImgs[product.productObj.id]}" width="87" height="87" alt="${product.productObj.imgAlt}">
+              </picture>
             </a>
             <a class="link link_ff-poppins link_14-px link_fw-600 link_c-black-1 main-bag__card-link" href="${product.productObj.pageLink}" alt="${product.productObj.name}" aria-label="Перейти на сторінку товару ${product.productObj.name}">${product.productObj.name}</a>
             ${generateDesc()}

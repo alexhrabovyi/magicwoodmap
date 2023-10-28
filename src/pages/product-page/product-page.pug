@@ -4,12 +4,14 @@ html(lang="uk")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Одношарова мапа
+    include ../../blocks/preload/_preload
+    link(rel="preload" as="image" type="image/webp" href="../../blocks/product-desc/images/img_1.webp")
   body
     include ../../blocks/header/_header
     include ../../blocks/main-nav/_main-nav
     include ../../blocks/breadcrumbs/_breadcrumbs
     +breadcrumbs("Одношарова мапа")
-    include ../../blocks/bag-and-wishlist-menu/_bag-and-wishlist
     include ../../blocks/product-desc/_product-desc
+    include ../../blocks/bag-and-wishlist-menu/_bag-and-wishlist
     include ../../blocks/call-back-form/_call-back-form
     include ../../blocks/footer/_footer

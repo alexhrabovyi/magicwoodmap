@@ -1,6 +1,8 @@
 main(class="blog-article container")
-  .blog-article__article 
-    img(class="blog-article__img" src="../../blocks/blog-article/images/map_1.png", alt="Дерев'яна мапа світу")
+  .blog-article__article
+    picture
+      source(type="image/webp" srcset="../../blocks/blog-article/images/map_1.webp")
+      img(class="blog-article__img" src="../../blocks/blog-article/images/map_1.png" width="870" height="453" alt="Дерев'яна мапа світу")
     .blog-article__author-and-date 
       p(class="text text_14-px text_c-grey-12 blog-article__author-name")
         i(class="icon-pen blog-article__icon" aria-hidden="true")
@@ -8,35 +10,45 @@ main(class="blog-article container")
       p(class="text text_14-px text_c-grey-12 blog-article__article-date")
         i(class="icon-calendar blog-article__icon blog-article__icon_light-orange" aria-hidden="true")
         | 19.02.2022
-    h2(class="title title_ff-josefin title_30-px title_fw-700 title_c-black blog-article__title") Однашарова мапа та її використання
+    h2(class="title title_30-px title_fw-600 title_c-black blog-article__title") Однашарова мапа та її використання
     p(class="text text_c-grey-2 blog-article__text blog-article__text_mb") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit facilisis quis auctor pretium ipsum, eu rutrum. Condimentum eu malesuada vitae ultrices in in neque, porta dignissim. Adipiscing purus, cursus vulputate id id dictum at.
     p(class="text text_c-grey-2 blog-article__text blog-article__text_mb") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, 
     blockquote(class="text text_18-px text_c-grey-2 blog-article__blockquote") “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dictum sapien, amet, consequat. toamk risusu,  dolor sit amet, consectetur adipiscing elit.”
-    .blog-article__gallery-block 
-      <iframe class="blog-article__gallery-block-element" src="https://www.youtube.com/embed/zJCAqKR0pno" title="Деревянная карта мира на стену с подсветкой" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      img(class="blog-article__gallery-block-element" src="../../blocks/blog-article/images/map_2.png", alt="Дерев'яна мапа світу")
-    p(class="text text_ff-lato text_c-grey-13 blog-article__text") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, 
+    .blog-article__gallery-block
+      lite-youtube(videoid="zJCAqKR0pno")
+      picture
+        source(type="image/webp" srcset="../../blocks/blog-article/images/map_2.webp")
+        img(class="blog-article__gallery-block-element" loading="lazy" src="../../blocks/blog-article/images/map_2.png" width="418" height="245" alt="Дерев'яна мапа світу")
+    p(class="text text_c-grey-13 blog-article__text") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, 
   .blog-article__additional-blocks
     .blog-article__additional-block
       p(class="title title_22-px title_fw-400 title_c-black blog-article__subtitle") Останні записи
       a(class="blog-article__card-link" href=blogPage alt="It is a long established fact" aria-label="Перейти на сторінку блогу 'It is a long established fact'")
-        img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_2.png", alt="Дерев'яна мапа світу") 
-        p(class="text text_ff-josefin text_14-px text_c-orange blog-article__card-desc") It is a long established fact
-        p(class="text text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
+        picture(class="blog-article__card-img")
+          source(type="image/webp" srcset="../../blocks/blog-article/images/map_4.webp")
+          img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_4.png" width="70" height="51" alt="Дерев'яна мапа світу") 
+        p(class="text text_ff-poppins text_13-px text_c-orange blog-article__card-desc") It is a long established fact
+        p(class="text text_ff-poppins text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
       a(class="blog-article__card-link" href=blogPage alt="It is a long established fact" aria-label="Перейти на сторінку блогу 'It is a long established fact'")
-        img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_1.png", alt="Дерев'яна мапа світу") 
-        p(class="text text_ff-josefin text_14-px text_c-orange blog-article__card-desc") It is a long established fact
-        p(class="text text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
+        picture(class="blog-article__card-img") 
+          source(type="image/webp" srcset="../../blocks/blog-article/images/map_3.webp")
+          img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_3.png" width="70" height="51" alt="Дерев'яна мапа світу") 
+        p(class="text text_ff-poppins text_13-px text_c-orange blog-article__card-desc") It is a long established fact
+        p(class="text text_ff-poppins text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
     .blog-article__additional-block
       p(class="title title_22-px title_fw-400 title_c-black blog-article__subtitle") Товари в продажі
       a(class="blog-article__card-link" href=productPage alt="It is a long established fact" aria-label="Перейти на сторінку товару 'Одношарова мапа'")
-        img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_2.png", alt="Дерев'яна мапа світу") 
-        p(class="text text_ff-josefin text_14-px text_c-orange blog-article__card-desc") It is a long established fact
-        p(class="text text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
+        picture(class="blog-article__card-img")
+          source(type="image/webp" srcset="../../blocks/blog-article/images/map_4.webp")
+          img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_4.png" width="70" height="51" alt="Дерев'яна мапа світу") 
+        p(class="text text_ff-poppins text_13-px text_c-orange blog-article__card-desc") It is a long established fact
+        p(class="text text_ff-poppins text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
       a(class="blog-article__card-link" href=productPage alt="It is a long established fact" aria-label="Перейти на сторінку товару 'Одношарова мапа'")
-        img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_1.png", alt="Дерев'яна мапа світу") 
-        p(class="text text_ff-josefin text_14-px text_c-orange blog-article__card-desc") It is a long established fact
-        p(class="text text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
+        picture(class="blog-article__card-img")
+          source(type="image/webp" srcset="../../blocks/blog-article/images/map_3.webp")
+          img(class="blog-article__card-img" src="../../blocks/blog-article/images/map_3.png" width="70" height="51" alt="Дерев'яна мапа світу")  
+        p(class="text text_ff-poppins text_13-px text_c-orange blog-article__card-desc") It is a long established fact
+        p(class="text text_ff-poppins text_11-px text_fw-600 text_c-grey-12 blog-article__card-date") Aug 09<br>2022
     .blog-article__additional-block
       p(class="title title_22-px title_fw-400 title_c-black blog-article__subtitle") Підписуйся
       .blog-article__social-links-block 

@@ -57,11 +57,19 @@
   }
 
   &__img-slider-container {
+    overflow: hidden;
     pointer-events: none;
+  }
+
+  &__img-slider-wrapper {
+    display: grid; 
+    column-gap: 2%; 
+    grid-template-columns: repeat(4, 100%);
   }
 
   &__img-slider-img {
     width: 100%;
+    height: auto;
   }
 
   &__img-slider-button-prev {
@@ -101,6 +109,7 @@
 
   &__img-slider-pagination-img {
     width: 100%;
+    height: auto;
   }
 
   &__checkout-block {
@@ -277,6 +286,7 @@
 
   &__payment-method-img {
     width: 100%;
+    height: auto;
   }
 
   &__leave-comment-button {
@@ -511,6 +521,7 @@
 
   &__recommendation-slider-img {
     width: 100%;
+    height: auto;
     border-radius: 11px;
     margin-bottom: 15px;
   }

@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
+import loadingAttributePolyfill from 'loading-attribute-polyfill/dist/loading-attribute-polyfill.module.js';
 import setupCopyTelButton from '../../blocks/header/_header.js';
 import setupMainNav from '../../blocks/main-nav/_main-nav.js';
 import setupBagAndWishlistMenu from '../../blocks/bag-and-wishlist-menu/_bag-and-wishlist.js';
@@ -9,9 +11,9 @@ import setupFooterForm from '../../blocks/footer/_footer.js';
 
 setupCopyTelButton();
 setupMainNav();
+setupMainSliderBlock();
 setupBagAndWishlistMenu();
 setupFashionableSolutionForm();
-setupMainSliderBlock();
 createSliders();
 setupSubscribeForm();
 setupFooterForm();

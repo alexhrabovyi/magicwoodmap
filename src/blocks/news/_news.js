@@ -13,10 +13,10 @@ export default function setupNewsAccordion() {
     setup() {
       setTimeout(() => this.setupHeight(), 0);
 
-      this.button.addEventListener('click', this.toggle.bind(this));
+      this.button.addEventListener('click', this.toggle.bind(this), { passive: true });
       window.addEventListener('resize', () => {
         setTimeout(this.close.bind(this), 0);
-      });
+      }, { passive: true });
     }
 
     setupHeight() {

@@ -5,7 +5,7 @@ export default function setupFaqAccordion() {
       this.iconActiveClass = 'faq-main__button-icon_active';
 
       this.contentBlocks.addEventListener('click', this.toggle.bind(this));
-      window.addEventListener('resize', this.resetup.bind(this));
+      window.addEventListener('resize', this.resetup.bind(this), { passive: true });
 
       setTimeout(() => {
         this.setup();
@@ -85,11 +85,11 @@ export default function setupFaqAccordion() {
         if (e.propertyName === 'height') {
           contentBlock.style.pointerEvents = 'all';
 
-          contentBlock.removeEventListener('transitionend', onTransitionEndFunc);
+          contentBlock.removeEventListener('transitionend', onTransitionEndFunc, { passive: true });
         }
       };
 
-      contentBlock.addEventListener('transitionend', onTransitionEndFunc);
+      contentBlock.addEventListener('transitionend', onTransitionEndFunc, { passive: true });
 
       const ariaControlsValue = button.getAttribute('aria-controls');
       const buttons = contentBlock.querySelectorAll(`[aria-controls="${ariaControlsValue}"]`);
@@ -114,11 +114,11 @@ export default function setupFaqAccordion() {
         if (e.propertyName === 'height') {
           contentBlock.style.pointerEvents = 'all';
 
-          contentBlock.removeEventListener('transitionend', onTransitionEndFunc);
+          contentBlock.removeEventListener('transitionend', onTransitionEndFunc, { passive: true });
         }
       };
 
-      contentBlock.addEventListener('transitionend', onTransitionEndFunc);
+      contentBlock.addEventListener('transitionend', onTransitionEndFunc, { passive: true });
 
       const ariaControlsValue = button.getAttribute('aria-controls');
       const buttons = contentBlock.querySelectorAll(`[aria-controls="${ariaControlsValue}"]`);

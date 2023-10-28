@@ -18,7 +18,7 @@ export default class TelMask {
       if (e.target.value.length < 3) {
         e.target.value = '+38';
       }
-    }, { once: true });
+    }, { once: true, passive: true });
 
     this.input.addEventListener('input', (e) => {
       if (e.target.value.length < 3) {
@@ -33,7 +33,7 @@ export default class TelMask {
 
         e.target.value = createTel(nums);
       }
-    });
+    }, { passive: true });
 
     this.input.addEventListener('paste', (e) => {
       e.preventDefault();
