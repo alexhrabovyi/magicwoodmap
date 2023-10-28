@@ -5,12 +5,13 @@ html(lang="uk")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Про нашу команду
     include ../../blocks/preload/_preload
+    link(rel="preload" as="image" type="image/svg+xml" href="../../blocks/about-us-main/images/map.svg")
   body
     include ../../blocks/header/_header
     include ../../blocks/main-nav/_main-nav
     include ../../blocks/breadcrumbs/_breadcrumbs
     +breadcrumbs("Про нашу команду")
-    include ../../blocks/bag-and-wishlist-menu/_bag-and-wishlist
     include ../../blocks/about-us-main/_about-us-main
+    include ../../blocks/bag-and-wishlist-menu/_bag-and-wishlist
     include ../../blocks/call-back-form/_call-back-form
     include ../../blocks/footer/_footer

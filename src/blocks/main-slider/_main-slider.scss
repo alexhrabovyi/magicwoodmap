@@ -23,6 +23,16 @@
     padding-bottom: 70px;
   }
 
+  &__slider-container {
+    overflow: hidden;
+  }
+
+  &__slider-wrapper {
+    display: grid; 
+    column-gap: 5%;
+    grid-template-columns: repeat(4, 100%); 
+  }
+
   &__slide_1 {
     display: grid;
     justify-content: space-between;

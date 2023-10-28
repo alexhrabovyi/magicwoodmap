@@ -5,12 +5,15 @@ html(lang="uk")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Наш блог
     include ../../blocks/preload/_preload
+    link(rel="preload" as="image" type="image/webp" href="../../blocks/news/images/map_1.webp")
+    link(rel="preload" as="image" type="image/webp" href="../../blocks/news/images/map_2.webp")
+    link(rel="preload" as="image" type="image/webp" href="../../blocks/news/images/map_3.webp")
   body
     include ../../blocks/header/_header
     include ../../blocks/main-nav/_main-nav
     include ../../blocks/breadcrumbs/_breadcrumbs
     +breadcrumbs("Наш блог")
-    include ../../blocks/bag-and-wishlist-menu/_bag-and-wishlist
     include ../../blocks/news/_news
+    include ../../blocks/bag-and-wishlist-menu/_bag-and-wishlist
     include ../../blocks/call-back-form/_call-back-form
     include ../../blocks/footer/_footer

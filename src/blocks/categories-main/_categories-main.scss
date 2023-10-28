@@ -70,7 +70,10 @@
 
   &__categories-button {
     &_1 {
-      background-image: url("images/map-1.png");
+      background-image: image-set(
+        url("./images/map-1.webp") type("image/webp"), 
+        url("./images/map-1.png") type("image/png")
+      );
 
       &::before {
         content: "Одношарові мапи →";
@@ -78,7 +81,11 @@
     }
 
     &_2 {
-      background-image: url("images/map-2.png");
+      background-image: image-set(
+        url("./images/map-2.webp") type("image/webp"), 
+        url("./images/map-2.png") type("image/png")
+      );
+
 
       &::before {
         content: "Коричнева з підсвідкою →";
@@ -86,7 +93,11 @@
     }
 
     &_3 {
-      background-image: url("images/map-1.png");
+      background-image: image-set(
+        url("./images/map-3.webp") type("image/webp"), 
+        url("./images/map-3.png") type("image/png")
+      );
+
 
       &::before {
         content: "Додатки до мап →";
@@ -94,7 +105,11 @@
     }
 
     &_4 {
-      background-image: url("images/map-3.png");
+      background-image: image-set(
+        url("./images/map-1.webp") type("image/webp"), 
+        url("./images/map-1.png") type("image/png")
+      );
+
 
       &::before {
         content: "Багатошарові мапи →";

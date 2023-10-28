@@ -4,13 +4,24 @@ main(class="product-desc container")
       .product-desc__img-slider-container
         .product-desc__img-slider-wrapper
           .product-desc__img-slider-slide
-            img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_1.png" alt="Родина сидить на дивані, а позаду них висить дерев'яна мапа на стіні")
+            picture 
+              source(type="image/webp" srcset="../../blocks/product-desc/images/img_1.webp")
+              img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_1.png" width="610" height="610" alt="Родина сидить на дивані, а позаду них висить дерев'яна мапа на стіні")
           .product-desc__img-slider-slide
-            img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_2.png" alt="Дерев'яна мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/img_2.webp")
+                img(class="product-desc__img-slider-img" loading="lazy" src="../../blocks/product-desc/images/img_2.png" width="610" height="610" alt="Дерев'яна мапа")
           .product-desc__img-slider-slide
-            img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_3.png" alt="Дерев'яна мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/img_3.webp")
+                img(class="product-desc__img-slider-img" loading="lazy" src="../../blocks/product-desc/images/img_3.png" width="610" height="610" alt="Дерев'яна мапа")
           .product-desc__img-slider-slide
-            img(class="product-desc__img-slider-img" src="../../blocks/product-desc/images/img_4.png" alt="Дерев'яна мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/img_4.webp")
+                img(class="product-desc__img-slider-img" loading="lazy" src="../../blocks/product-desc/images/img_4.png" width="610" height="610" alt="Дерев'яна мапа")
       button(class="round-button round-button_with-shadow round-button_medium product-desc__img-slider-button-prev" aria-hidden="true")
         i.icon-chevron-left
       button(class="round-button round-button_with-shadow round-button_medium product-desc__img-slider-button-next" aria-hidden="true")
@@ -47,10 +58,14 @@ main(class="product-desc container")
           button(class="round-button round-button_with-shadow round-button_medium" data-button-wishlist-add data-product-id="0" aria-label="Додати в лист бажань")
             i.icon-like
       .product-desc__payment-methods-block 
-        img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/mastercard.svg" alt="Mastercard")
-        img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/visa.svg" alt="Visa")
-        img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/gpay.svg" alt="Google Pay")
-        img(class="product-desc__payment-method-img" src="../../blocks/product-desc/images/applepay.svg" alt="Apple Pay")
+        noscript(class="loading-lazy")
+          img(class="product-desc__payment-method-img" loading="lazy" src="../../blocks/product-desc/images/mastercard.svg" width="69" height="44" alt="Mastercard")
+        noscript(class="loading-lazy")
+          img(class="product-desc__payment-method-img" loading="lazy" src="../../blocks/product-desc/images/visa.svg" width="69" height="44" alt="Visa")
+        noscript(class="loading-lazy")
+          img(class="product-desc__payment-method-img" loading="lazy" src="../../blocks/product-desc/images/gpay.svg" width="69" height="44" alt="Google Pay")
+        noscript(class="loading-lazy")
+          img(class="product-desc__payment-method-img" loading="lazy" src="../../blocks/product-desc/images/applepay.svg" width="69" height="44" alt="Apple Pay")
       button(class="product-desc__leave-comment-button") Написати відгук
     .product-desc__rate-block
       .product-desc__rate-star-block
@@ -94,7 +109,7 @@ main(class="product-desc container")
       span.product-desc__grey-line 
       h3(class="title title_fw-400 title_c-black product-desc__title-with-lines") Як приклеїти мапу на стіну
       span.product-desc__grey-line 
-    <iframe class="product-desc__video" src="https://www.youtube.com/embed/5vAr1MUUcaU" title="Instructions for installing a wooden world map with backlight" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    lite-youtube(class="product-desc__video" videoid="5vAr1MUUcaU")
   .product-desc__recommendation-block 
     .product-desc__title-block
       span.product-desc__grey-line 
@@ -104,70 +119,100 @@ main(class="product-desc container")
       .product-desc__recommendation-slider-container
         .product-desc__recommendation-slider-wrapper 
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png" alt="Одношарова мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_1.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_1.png" width="275" height="197" alt="Одношарова мапа")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Одношарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3000 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price")
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_2.png" alt="Двошарова мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_2.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_2.png" width="275" height="197" alt="Двошарова мапа")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Двошарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3515 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 3700 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_3.png" alt="Двошарова мапа з підсвічуванням")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_3.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_3.png" width="275" height="197" alt="Двошарова мапа з підсвічуванням")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Двошарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4050 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 4500 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_4.png" alt="Тришарова мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_4.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_4.png" width="275" height="197" alt="Тришарова мапа")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Тришарова мапа 
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4500 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5000 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png" alt="Тришарова мапа з підсвічуванням")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_1.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_1.png" width="275" height="197" alt="Тришарова мапа з підсвічуванням")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Тришарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 5130 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5700 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png" alt="Одношарова мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_1.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_1.png" width="275" height="197" alt="Одношарова мапа")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Одношарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3000 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price")
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_2.png" alt="Двошарова мапа")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_2.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_2.png" width="275" height="197" alt="Двошарова мапа")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Двошарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 3515 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 3700 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_3.png" alt="Двошарова мапа з підсвічуванням")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_3.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_3.png" width="275" height="197" alt="Двошарова мапа з підсвічуванням")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Двошарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4050 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 4500 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_4.png" alt="Тришарова мапа ")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_4.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_4.png" width="275" height="197" alt="Тришарова мапа ")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Тришарова мапа
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 
               p(class="text text_ff-poppins text_c-orange product-desc__recommendation-slider-current-price") 4500 ₴
               p(class="text text_ff-poppins text_c-grey-12 product-desc__recommendation-slider-old-price") 5000 ₴
           div(class="product-desc__recommendation-slider-slide")
-            img(class="product-desc__recommendation-slider-img" src="../../blocks/product-desc/images/rec-img_1.png" alt="Тришарова мапа з підсвічуванням")
+            noscript(class="loading-lazy")
+              picture 
+                source(type="image/webp" srcset="../../blocks/product-desc/images/rec-img_1.webp")
+                img(class="product-desc__recommendation-slider-img" loading="lazy" src="../../blocks/product-desc/images/rec-img_1.png" width="275" height="197" alt="Тришарова мапа з підсвічуванням")
             a(class="link link_ff-poppins link_20-px link_c-black-1 product-desc__recommendation-slider-title-link" href=productPage alt="Дерев'яна мапа") Тришарова мапа з підсвічуванням
             .product-desc__recommendation-slider-stars-block 
             .product-desc__recommendation-slider-price-block 

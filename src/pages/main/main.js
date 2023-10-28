@@ -9,13 +9,11 @@ import createSliders from '../../blocks/reviews/_reviews.js';
 import setupSubscribeForm from '../../blocks/subscribe/_subscribe.js';
 import setupFooterForm from '../../blocks/footer/_footer.js';
 
-setTimeout(() => { setupCopyTelButton(); });
-setTimeout(() => { setupMainNav(); });
-setTimeout(() => { setupBagAndWishlistMenu(); });
-setTimeout(() => { setupFashionableSolutionForm(); });
-setTimeout(() => { setupMainSliderBlock(); });
-setTimeout(() => { createSliders(); });
-setTimeout(() => { setupSubscribeForm(); });
-setTimeout(() => {
-  setupFooterForm();
-});
+setupCopyTelButton();
+setupMainNav();
+setupMainSliderBlock();
+setupBagAndWishlistMenu();
+setupFashionableSolutionForm();
+createSliders();
+setupSubscribeForm();
+setupFooterForm();
