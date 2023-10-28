@@ -29,9 +29,9 @@ export default function setupMainNav() {
     const desktopLinkActiveClass = 'main-nav__link_active';
     const mobileLinkActiveClass = 'main-nav__mobile-main-link_active';
 
-    const { pathname } = window.location;
+    const { href } = window.location;
 
-    const regExp = new RegExp(`^${pathname}$`, 'i');
+    const regExp = new RegExp(`^${href}$`, 'i');
 
     for (const link of desktopLinks) {
       if (link.href.match(regExp) && !link.href.match(/#/)) {
